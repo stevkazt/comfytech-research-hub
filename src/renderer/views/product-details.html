@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Detalles del Producto</title>
+  <link rel="stylesheet" href="../styles/product-details.css">
+  <link rel="stylesheet" href="../styles/findings-form.css">
+</head>
+
+<body>
+  <div class="main-container">
+    <!-- Left Column -->
+    <div class="content-column">
+      <div id="product-info" class="product-info-section">
+        <div class="product-info-columns">
+          <div class="product-details-column">
+            <h2 id="title">Cargando...</h2>
+            <p>
+              <strong>ID:</strong> <a href="#" id="product-id-link" data-id=""><span id="product-id">...</span></a> |
+              <strong>Precio:</strong> <span id="price">...</span> (Dropi)
+            </p>
+            <div class="price-suggestions">
+              <strong>Precios sugeridos:</strong><br />
+              <span id="price-high" class="price-high"></span> |
+              <span id="price-standard" class="price-standard"></span> |
+              <span id="price-low" class="price-low"></span>
+            </div>
+          </div>
+          <div class="product-status-column">
+            <div class="status-select-container">
+              <label for="product-status">Product Status:</label>
+              <select id="product-status" class="status-select" onchange="updateProductStatus(this.value)">
+                <option value="">Select Status...</option>
+                <option value="Worth Selling" class="status-worth-selling">✅ Worth Selling</option>
+                <option value="Skip" class="status-skip">❌ Skip</option>
+                <option value="Not Sure" class="status-not-sure">❓ Not Sure</option>
+              </select>
+              <button id="generate-prompt-btn" class="generate-prompt-btn" onclick="generateAndCopyPrompt()">
+                🤖 Generate AI Prompt
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="image-slider">
+      </div>
+      <div class="findings-columns-container">
+        <div id="saved-findings">
+          <h3>Saved Findings</h3>
+          <ul id="findings-list"></ul>
+        </div>
+        <div id="trend-validation">
+          <h3>Saved Trend Data</h3>
+          <div id="saved-trend-validations">
+            <!-- Saved trend validation data will be displayed here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="sidebar">
+      <div class="button-group">
+        <button class="action-btn" onclick="searchGoogle()">🔍 Google</button>
+        <button class="action-btn" onclick="searchML()">🛒 MercadoLibre</button>
+        <button class="action-btn" onclick="searchAmazon()">📦 Amazon</button>
+        <button class="action-btn" onclick="searchImage()">🖼️ Image Search</button>
+        <button class="action-btn" onclick="updateDetails()">🔄 Update Dropi details</button>
+      </div>
+
+      <div class="trend-search-section">
+        <div class="trend-search-buttons">
+          <button class="trend-btn" onclick="searchGoogleTrends()">📈 Google Trends</button>
+          <button class="trend-btn" onclick="searchTikTokAds()">🎵 TikTok Ads</button>
+          <button class="trend-btn" onclick="searchFacebookAds()">📘 Facebook Ads</button>
+          <button class="trend-btn" onclick="searchInstagram()">📷 Instagram</button>
+          <button class="trend-btn" onclick="searchYouTube()">▶️ YouTube</button>
+        </div>
+      </div>
+      <div class="findings-section">
+        <div class="form-tabs">
+          <button class="tab-button active" onclick="switchTab('findings')">📋 Product Findings</button>
+          <button class="tab-button" onclick="switchTab('trends')">📈 Trend Validation</button>
+        </div>
+
+        <div class="tab-content">
+          <div id="findings-tab" class="tab-panel active">
+            <div id="findings-container"></div>
+          </div>
+          <div id="trends-tab" class="tab-panel">
+            <div id="trend-validation-form-container"></div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button id="save-findings-btn" onclick="saveFindings()" style="display: block;">💾 Save Findings</button>
+          <button id="save-trends-btn" onclick="saveTrendValidation()" style="display: none;">💾 Save Trend
+            Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Modal HTML structure right after body tag -->
+  <div class="image-modal" id="imageModal">
+    <div class="modal-content">
+      <img src="" alt="Product Image" class="modal-image" id="modalImage">
+      <div class="modal-nav">
+        <button class="modal-button" id="prevButton">❮</button>
+        <button class="modal-button" id="nextButton">❯</button>
+      </div>
+      <button class="modal-close" id="closeModal">✕</button>
+      <div class="image-counter" id="imageCounter"></div>
+    </div>
+  </div>
+
+  <script>require('../scripts/product-details/index.js');</script>
+</body>
+
+</html>

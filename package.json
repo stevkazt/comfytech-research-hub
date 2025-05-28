@@ -1,0 +1,101 @@
+{
+  "name": "dropi-app",
+  "version": "1.0.0",
+  "description": "Dropi Product Research Desktop App",
+  "main": "src/main/index.js",
+  "author": "ComfyTech",
+  "license": "MIT",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron src/main/index.js",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux",
+    "dist": "npm run build",
+    "pack": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "com.comfytech.dropi-app",
+    "productName": "Dropi Research App",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "data/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "data",
+        "to": "data"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.ico"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.icns"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "axios": "^1.9.0",
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "playwright": "^1.52.0",
+    "tesseract.js": "^6.0.1",
+    "tesseract.js-node": "^0.1.0",
+    "trash": "^9.0.0"
+  },
+  "devDependencies": {
+    "electron": "^36.3.0",
+    "electron-builder": "^25.1.8"
+  }
+}

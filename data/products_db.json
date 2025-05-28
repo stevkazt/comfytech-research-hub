@@ -1,0 +1,954 @@
+[
+  {
+    "id": 64830,
+    "name": "BOLSA TERMICA LUNCH BAG BRIVILAS 2019227",
+    "price": 12500,
+    "categories": "Otro, Hogar, Cocina",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/64830/17030222771703022277PCEZOtRZURCLmJaeRDgGZ4foPUAsv7v8tIIGXOeb.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 498316,
+    "name": "POLO BLUE",
+    "price": 45000,
+    "categories": "Moda, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/498316/1722890987WhatsApp Image 2024-08-05 at 5.42.53 AM.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": "Not Sure",
+    "description_html": "<p><strong>POLO BLUE 120 ML MAS PERFUMERO RECARGABLE</strong></p><p><strong>FRAGANCIA AROMATICA ACUATICA CITRICA (CABALLERO ) 120ML &nbsp; &nbsp;</strong></p><p><strong>EN CAJA SELOFAN PIN Y SELLO</strong></p><p>¡BIENVENIDOS A PERFUMERIA GLOW FRAGANCE💕! TE OFRECEMOS PRODUCTOS DE LA MAS ALTA CALIDAD🏆 ¡EMPRENDE CON NOSOTROS! EXCELENTE AROMA Y PERDURABILIDAD. SOMOS DISTRIBUIDORES DIRECTOS CONTAMOS CON LOS MEJORES PRECIOS🤑🤯 ASESORIA PERSONALIZADA, ENFOCADOS EN CALIDAD EXCLUSIVIDAD Y SERVICIO! LLEVA TUS COMBOS Y PROMOCIONES.</p><p>CONTAMOS CON UN ALTO STOCK EN TODOS LOS PRODUCTOS, REALIZAMOS DESPACHOS RAPIDOS, EFICACES Y SEGUROS 🚚</p><p>💎PERFUMERIA PREMIUM CALIDAD 1.1</p><p>💎CONTRAENTREGA</p><p>💎MAS DE 400 REFERENCIAS</p><p>💎 FRAGANCIA DURADERA</p><p>💎 EXCELENTE PRESENTACIÓN</p><p>💎 TODOS LOS PERFUMES VIENEN CON CAJA SELOFAN PIN Y SELLO</p><p>💎 GRANDES PROMOCIONES CONTACTANOS ESTAMOS PARA ASESORARTE</p><p>📲 +57 3208499508-+57 3143908367</p><p>¡ GLOW FRAGANCE PERFUMES QUE ENAMORAN 💕!</p>",
+    "attributes": [],
+    "images": [
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/498316/1722890987WhatsApp Image 2024-08-05 at 5.42.53 AM.jpeg"
+    ],
+    "findings": [
+      {
+        "id": "1748471322353-23607",
+        "price": "22",
+        "match": "exact",
+        "store": "",
+        "stock": "",
+        "variant": "",
+        "link": "",
+        "rating": "",
+        "review_count": "",
+        "origin": "",
+        "deliveryTime": "",
+        "shippingCost": "",
+        "sellerType": "",
+        "listingType": "",
+        "badges": "",
+        "notes": "",
+        "imageQuality": "",
+        "imageMatch": ""
+      }
+    ]
+  },
+  {
+    "id": 348781,
+    "name": "ROTULO ADHESIVO 16MM",
+    "price": 2500,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/348781/170187680917018768098385b56f-a6c7-486c-aae2-807f869f14c2-img_0535-(2).jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1078439,
+    "name": "Combo máquina profesional + máquina buda",
+    "price": 46000,
+    "categories": "Moda, Tecnologia, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1078439/1740600865combo maquinas.PNG",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 82999,
+    "name": "Cargador Celular Carga Rapida 3.0 CC01-T",
+    "price": 14499,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/82999/17030193331703019333Cargador Celular Tablet Carga Rápida 3.0A Micro Usb_1.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 410011,
+    "name": "Manguera led 20 metros Blanca",
+    "price": 90000,
+    "categories": "Navidad",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/410011/af7101cb-238c-4e2e-82be-f2ccc804a4df-ceaebe2a-3f49-4f21-af71-48fa49a3e789-img_9636.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 636713,
+    "name": "CEPILLO  3 EN 1",
+    "price": 45000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/636713/1707246459CEPILLO 3 EN 1.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1037118,
+    "name": "COMBO HIDRO CEPILLO",
+    "price": 150000,
+    "categories": "Herramientas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1037118/1722569127IMG-20240705-WA0013.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 85624,
+    "name": "Sopote Para Celular Expandible De Mesa",
+    "price": 20000,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/85624/170301552517030155253b64ccf3-232d-4ed7-b9b7-0b6bacdb98ef_600x.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 409778,
+    "name": "Lampara de escritorio",
+    "price": 19900,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/409778/03cefd43-a082-4517-ac8d-6f84f10c4982-img_3060.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 412988,
+    "name": "PANTALONETA HOMBRE VERDE MANZANA M",
+    "price": 13000,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/412988/1695740886PANTALONETA VERE MANZANA.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 872252,
+    "name": "Guante Quita Pelo Masajeador Silicona",
+    "price": 12900,
+    "categories": "Mascotas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/872252/171621752017019755441701975544D_NQ_NP_2X_767786-MCO26710031653_012018-F.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 880985,
+    "name": "Mini Impresora Térmica Portátil De Bolsi",
+    "price": 63000,
+    "categories": "Hogar, Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479444impresora bluetooh portatil2.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": "Not Sure",
+    "description_html": "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>1. Diseño de bolsillo: la mini impresora térmica de bolsillo cuenta con un cuerpo compacto y liviano que se desliza fácilmente en su bolsillo o bolso, lo que la convierte en la perfecta compañero para imprimir mientras viaja, ya sea en el trabajo, en casa o de viaje.<br>2. Calidad de impresión nítida: con una resolución nítida de 200 ppp, esta impresora de fotografías para teléfonos sin tinta produce impresiones claras y detalladas, ideales para elaborar diarios personales, etiquetas o imprimir tareas, asegurando que sus materiales impresos siempre tengan un aspecto profesional.<br>3. Batería de larga duración: Equipada con una batería recargable incorporada de 1000 mAh, esta máquina de impresión de etiquetas funciona de manera silenciosa y eficiente sin necesidad de cartuchos de tinta, ofreciendo funcionalidad rentable y conveniencia tanto para estudiantes como para profesionales.<br>4. Opciones de impresión versátiles: esta impresora de etiquetas portátil no solo es capaz de imprimir fotos y etiquetas instantáneamente, sino que también permite la creación de notas, mensajes, patrones, listas y códigos QR personalizados, agilizando la organización y la creatividad en su personal y vida profesional.<br>5. Conectividad Compatible con Bluetooth: compatible con la mayoría de los dispositivos, la impresora fotográfica inteligente simplifica el proceso de configuración: simplemente descargue la aplicación como se indica en el manual del usuario y conecte su teléfono inteligente a través de Bluetooth para comenzar a imprimir al instante.<br><br>Especificación:<br>Origen: China continental<br>Material: ABS<br>Color: Azul, Rosa (opcional)<br>Tipo de impresión: Impresión térmica<br>Parámetro de impresión: 200 ppp<br>Método de impresión: Impresión térmica en blanco y negro sin tinta<br>Capacidad de la batería: 1000 mA Batería de litio de 7,4 v Carga 2A<br>Papel de impresión: 57 * 25 mm / 2,22 * 0,98 pulgadas<br>Conexión: Inalámbrica compatible con Bluetooth, blanco y negro sin tinta<br>Idiomas de impresión: inglés, francés, italiano, español, alemán, griego, ruso<br>Papel: aproximadamente 17 g/rollo<br>Tamaño del producto: 110 * 82 * 40 mm/4,33*3,23*1,57 pulgadas<br>Tamaño del embalaje: 119*89*50 mm/4,64*3,47*1,95 pulgadas<br>Peso individual: 200 g</p><p>&nbsp;</p><p><strong>*¿Tu producto tiene alguna novedad que debamos reportar?*</strong> **Una vez recibas tu producto, cuentas con máximo 5 días para reportar a Soporte: piezas faltantes, rotas o cualquier novedad que presente el producto. <strong>*¿No era lo que esperabas?*</strong> **Aplica Ley retracto Durante 5 días, contados a partir de la recepción del producto, para la devolución, ten en cuenta que debe estar en las condiciones que se recibió, con su empaque original, con las etiquetas, sellos de seguridad, y contar con todas sus partes y/o accesorios. Sin rayones ni manchas. Se recibirá únicamente en óptimas condiciones. Se anulará automáticamente el derecho a retracto si el producto fue usado. <strong>*¿Tu producto está presentando fallas?*</strong> **Cuentas con 30 días de garantía por funcionamiento y/o daños del producto que no estén relacionados a su mal uso. Para hacer efectiva la devolución, el producto debe entregarse debidamente protegido cuidando el estado del empaque original, incluir todos los documentos y/o manuales (si aplica) y las partes completas.</p>",
+    "attributes": [
+      {
+        "id": 82986,
+        "description": "COLOR",
+        "product_id": 880985,
+        "isVariation": null,
+        "deleted_at": null,
+        "values": [
+          {
+            "id": 358823,
+            "value": "Rosadp",
+            "attribute_id": 82986,
+            "attribute_name": "COLOR",
+            "deleted_at": null
+          },
+          {
+            "id": 358824,
+            "value": "Azul",
+            "attribute_id": 82986,
+            "attribute_name": "COLOR",
+            "deleted_at": null
+          }
+        ]
+      }
+    ],
+    "images": [
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479444impresora bluetooh portatil2.jpg",
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479445impresora bluetooh portatil3.jpg",
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479445impresora bluetooh portatil4.jpg",
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479445impresora bluetooh portatil5.jpg",
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479445impresora bluetooh portatil7.jpg",
+      "https://d39ru7awumhhs2.cloudfront.net/colombia/products/880985/1716479446impresora bluetooh portatil6.jpg"
+    ],
+    "findings": [
+      {
+        "id": "1748397241112-3601",
+        "price": "12000",
+        "match": "exact",
+        "store": "",
+        "stock": "",
+        "variant": "",
+        "link": "",
+        "rating": "",
+        "review_count": "",
+        "origin": "",
+        "deliveryTime": "",
+        "shippingCost": "",
+        "sellerType": "",
+        "listingType": "",
+        "badges": "",
+        "notes": "",
+        "imageQuality": "",
+        "imageMatch": ""
+      }
+    ],
+    "trendValidation": [
+      {
+        "id": 1748397257135.9316,
+        "trendSource": "YouTube",
+        "trendStatus": "",
+        "searchVolume": "",
+        "competition": "",
+        "targetAudience": "",
+        "keywords": "",
+        "researchLink": "",
+        "trendNotes": "",
+        "dateAdded": "2025-05-28T01:54:17.135Z"
+      }
+    ]
+  },
+  {
+    "id": 752941,
+    "name": "Organizador de maquillaje giratorio",
+    "price": 41990,
+    "categories": "Hogar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/752941/1712351405organizadorDeObjetos360r.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1755485,
+    "name": "SAUVAGE+EROS+LACOSTE POUR ELLE",
+    "price": 94000,
+    "categories": "Bisutería, Moda, Belleza, Salud, Hogar, Natural Home, Aseo, Bienestar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1755485/1744738615Post Para Instagram Publicidad para Restaurante Moderno Amarillo - 2025-04-15T123059.840.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1737117,
+    "name": "Anillo Argolla Padre Nuestro Acero",
+    "price": 11000,
+    "categories": "Bisutería, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1737117/17433604581.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1829089,
+    "name": "Lonchera Eléctrica Portacomida",
+    "price": 26000,
+    "categories": "Cocina",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1829089/1747944880lonchera.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1591585,
+    "name": "UN Soporte Helping Handle",
+    "price": 19200,
+    "categories": "Otros",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1591585/1734466078Soporte seguridad baño.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1759917,
+    "name": "kit 7 perfumes + perfumero",
+    "price": 222000,
+    "categories": "Bisutería, Moda, Belleza, Salud, Hogar, Natural Home, Aseo, Bienestar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1759917/1745248945Post Para Instagram Publicidad para Restaurante Moderno Amarillo - 2025-04-21T100341.717.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 784801,
+    "name": "Holder Soporte Multifuncional",
+    "price": 16000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/784801/17133841831.webp",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1614175,
+    "name": "Bvlgary man in black+sauvage+212 vip bla",
+    "price": 100000,
+    "categories": "Bisutería, Moda, Belleza, Salud, Hogar, Natural Home, Aseo, Bienestar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1614175/1735959754IMG_2522.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1572548,
+    "name": "Difusor de Aromas 300 ML KP-1564X",
+    "price": 35000,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1572548/1733431989DIFUSOR DE AROMAS POR ESTRELLAS 01.PNG",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 964633,
+    "name": "PROMO - 131 CABALLERO X3",
+    "price": 130000,
+    "categories": "Moda, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/964633/1743616486WhatsApp Image 2025-04-02 at 12.04.52 PM (2).jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1755712,
+    "name": "GAFAS RAYBAN KAT NEGRAS LENTE NEGRO 1.1",
+    "price": 95000,
+    "categories": "Moda, Belleza, Salud, Sex Shop, Aseo, Bienestar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1755712/1744749907WhatsApp Image 2025-04-14 at 12.49.27 PM (1).jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1284165,
+    "name": "Medias Largas Abeja Halloween MNA01",
+    "price": 16800,
+    "categories": "Moda, Halloween",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1284165/17278122271.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 574726,
+    "name": "PROMO DUO INVICTUS OLYMPEA",
+    "price": 76000,
+    "categories": "Moda, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/574726/1722968381WhatsApp Image 2024-08-06 at 12.44.06 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 163855,
+    "name": "One  Piece  Anime Figuras De Acción  X3",
+    "price": 70500,
+    "categories": "Otro, Jugueteria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/163855/17023060841702306084Diapositiva1 (2).JPG",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1403896,
+    "name": "VELAS DE COLORES X24",
+    "price": 24000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1403896/17299703311697742200VELAS.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1606106,
+    "name": "SmartWatch NW 900 Pro +",
+    "price": 45000,
+    "categories": "Moda, Tecnologia, Deportes",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1606106/1734971086WhatsApp Image 2024-12-23 at 10.25.12 AM (3).jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 348145,
+    "name": "Patineta Canasta Luces Sonido para Niños",
+    "price": 65000,
+    "categories": "Jugueteria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/348145/17018768981701876898pati canasta 5.PNG",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1101538,
+    "name": "Garantia",
+    "price": 1,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1101538/17242943421723216110Photoroom-20240809_100410.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 772151,
+    "name": "Shampoo Negro (Negro)",
+    "price": 35000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/772151/1712952283WhatsApp Image 2024-04-12 at 3.01.45 PM (1).jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1709172,
+    "name": "Combo Bolso 23 cm Correa Billetera Reloj",
+    "price": 105000,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1709172/1743701677IMG_7163.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1185406,
+    "name": "Pulidor De Uñas Eléctrico Drill Pro",
+    "price": 59900,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1185406/1726076079imagen_2024-09-11_123420048.png",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 304577,
+    "name": "Caja de alfileres metalicos",
+    "price": 750,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/304577/170189109117018910916f8b4d34-b958-45a5-8020-f57d38fdc09e-img_0018.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1298274,
+    "name": "Pulsera Neopreno Tres Oros Medallas",
+    "price": 23000,
+    "categories": "Bisutería",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1298274/1727984862WhatsApp Image 2024-10-03 at 2.46.33 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1284224,
+    "name": "Juguete Peluche Para Mascotas SC112-258",
+    "price": 17500,
+    "categories": "Mascotas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1284224/17278127861.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1666033,
+    "name": "COMBO:ARETES-TOPOS #2.5",
+    "price": 23000,
+    "categories": "Bisutería",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1666033/1739226397WhatsApp Image 2025-02-10 at 15.25.56_66504139.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 717169,
+    "name": "RALLADOR DE VERDURAS 6 EN 1",
+    "price": 31000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/717169/1710739259WhatsApp Image 2024-03-18 at 12.19.33 AM.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 946693,
+    "name": "Mochila Impermeable Moto Rigida Con USB",
+    "price": 41900,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/946693/1720286894MALETA RIGIDA.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 642341,
+    "name": "Morral con Cartuchera Estampado 10CM088",
+    "price": 32000,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/642341/170743086021.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 286171,
+    "name": "CAMISETA HOMBRE VINOTINTO XL",
+    "price": 16000,
+    "categories": "Ropa Deportiva",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/286171/170188169417018816949ZsieBWjNDlyhXhBNWBQL8Vopmp1eDGARgZUMqcW.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1814825,
+    "name": "Soplete Encendedor Flameador Cabezal",
+    "price": 16000,
+    "categories": "Camping",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1814825/17466596804958817756921310668.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1687804,
+    "name": "052 VIRGINIA",
+    "price": 55000,
+    "categories": "Tenis",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1687804/1740679350AZUL.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1736235,
+    "name": "Escurridor lavaplatos silicona",
+    "price": 13000,
+    "categories": "Cocina, Hogar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1736235/17456733651000267348.jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1726052,
+    "name": "IMPERMEDABLE SENCLIIO  PARA LLUVIA",
+    "price": 20000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1726052/1742424621WhatsApp Image 2025-03-17 at 11.03.14 AM.jpeg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1479526,
+    "name": "BOCTA RECTA PILING",
+    "price": 17000,
+    "categories": "Ropa Deportiva, Moda, Deportes",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1479526/1731605890PILING AZUL BBEB .jpg",
+    "scrapedAt": "2025-05-27T21:51:33.614Z",
+    "status": ""
+  },
+  {
+    "id": 1718357,
+    "name": "kit eelhoe collagen crema 60ml + serum",
+    "price": 19900,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1718357/1742597898KIT ELLHOEE COLLAGEN.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 464932,
+    "name": "Control Bluethoot Celular V8",
+    "price": 41000,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/464932/1698364768D_NQ_NP_883959-MCO47994700724_102021-O.webp",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 904718,
+    "name": "Organizador De Botas Zapatos Bajo Cama",
+    "price": 14900,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/904718/1717513677Organizador Botas01.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1526458,
+    "name": "LOUIS VUITTON SKATE",
+    "price": 69900,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1526458/17325496671FD91279-F5C6-474E-854D-CBDED70A237D.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1805069,
+    "name": "caja CON AMOR  para mama 5 productos",
+    "price": 100000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1805069/1746293761WhatsApp Image 2025-05-03 at 12.35.31 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1053835,
+    "name": "ARMA TU SET X 3 varios productos",
+    "price": 105000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1053835/172313323473.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1739355,
+    "name": "MANGUERA EXPANDIBLE 30 METROS",
+    "price": 50000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1739355/1743542527WhatsApp Image 2025-04-01 at 3.21.56 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 540709,
+    "name": "Pulidor uñas electrico",
+    "price": 21000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/540709/17015488491399a035-9bb8-4958-8333-9aee193c68d0.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1685354,
+    "name": "Kit 7 perfumes + perfumero",
+    "price": 218000,
+    "categories": "Bisutería, Moda, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1685354/1740510689Post Para Instagram Publicidad para Restaurante Moderno Amarillo.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 581891,
+    "name": "KIT PERFUM (LEGEND+PHANTOM+ONE LUCKY)",
+    "price": 110000,
+    "categories": "Moda, Belleza, Salud, Sex Shop, Aseo, Bienestar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/581891/1704232235112.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1189516,
+    "name": "LABIAL DOBLE MISS ROSE  x3 BIOTEZ",
+    "price": 24000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1189516/17261620305f7400279cf0d80afc96ecdc-large.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1674974,
+    "name": "Kit De Agujas De Tejer Aluminio 127pcs",
+    "price": 38000,
+    "categories": "Bisutería",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1674974/1739805123WhatsApp Image 2025-02-16 at 17.22.32.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1138220,
+    "name": "Kit Alimentación Bebe Niño Vajilla Silic",
+    "price": 34490,
+    "categories": "Hogar, Bebé",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1138220/1724969985SET DE BEBE.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1343560,
+    "name": "Grifo de agua caliente RX-008",
+    "price": 60000,
+    "categories": "Hogar, Natural Home",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1343560/1728776194Grifo RX-008.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1737691,
+    "name": "JUEGO DE 12 BROCAS PARA FRESAS O MADERA",
+    "price": 52000,
+    "categories": "Bisutería, Herramientas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1737691/1743439051RELOJ T800 ULTRA (2).png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1716878,
+    "name": "CEPILLO SECADOR KERATINA",
+    "price": 27500,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1716878/1741818864CEPILLO SECADOR DE KERATINA .png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1619429,
+    "name": "LAMPARA INALAMBRICA CON SENSOR A$S",
+    "price": 26900,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1619429/1736459330D_NQ_NP_755570-MCO80883948857_112024-O.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 197507,
+    "name": "Brasier Adhesivo Rabbit Bra Pus Up",
+    "price": 4000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/197507/17018969371701896937yq40BN0xjUfqtQjY5uJ3XlYtVGAGVh9vwpOtoyN3.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1639964,
+    "name": "Tenis Adidas 2K Caballero Deportivo",
+    "price": 62000,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1639964/173773562917018822151701882215xUBhg829m0oTjp8fEizAd78AffjNmXUfogTqzYdX.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1804327,
+    "name": "Calzado Para Mujer Importado PULSE ONE",
+    "price": 75312,
+    "categories": "Ropa Deportiva, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1804327/17462396951.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 304703,
+    "name": "COPA FLAUTA CRISTAL  Y VINO X 25",
+    "price": 16500,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/304703/17018910511701891051483a0410-0a5c-4730-8a90-3cc09e20ce6e-copa-flauta-1.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 714843,
+    "name": "DEPILADOR RECARGABLE S2305-016",
+    "price": 14000,
+    "categories": "Tecnologia, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/714843/1710545073DEPILADOR RECARGABLE.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1771308,
+    "name": "COMBO GAMER M-450",
+    "price": 45000,
+    "categories": "tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1771308/1745618019Image_2025-04-20_22-24-55.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1412258,
+    "name": "Pistola de Burbujas Camión 139 Agujeros",
+    "price": 65000,
+    "categories": "Jugueteria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1412258/1730222005IMG_5517.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1707780,
+    "name": "TENSIOMETRO DIGITAL",
+    "price": 33200,
+    "categories": "Salud, Bienestar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1707780/1741365424Sin título (300 x 500 px) (500 x 500 px).png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 971894,
+    "name": "Lampara Reflector Solar 50w Control Remo",
+    "price": 55000,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/971894/1721062509REFLECTOR SOLAR GDTIMES GD755  (1).png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1036567,
+    "name": "Masajeador Cervical DeCuello Recargable",
+    "price": 69000,
+    "categories": "Salud",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1036567/1722550504D_NQ_NP_2X_872006-MCO72938337519_112023-F.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1694430,
+    "name": "RAYBAN WAYFARER FOLDING",
+    "price": 31000,
+    "categories": "Bisutería, Moda, Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1694430/174112064117212386729.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1275239,
+    "name": "Resveratrol combo x 2 Und",
+    "price": 60000,
+    "categories": "Bienestar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1275239/1727709302resveratrol imagen x 2.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 44585,
+    "name": "CEPILLO DE BAMBU GRANDE",
+    "price": 15000,
+    "categories": "Moda, Belleza, Salud, Natural Home, Aseo, Bienestar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/44585/17030818181703081818CEPILLO GR BAMBU 1A.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1113570,
+    "name": "Organizador de reloj 5 puestos",
+    "price": 44000,
+    "categories": "Moda, Belleza, Hogar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1113570/1724543676relojes.JPG",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1740545,
+    "name": "SERUM SEMILLA DE CAMELIA CON CENTELLA",
+    "price": 7990,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1740545/1743624646Agregar un título (80).png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 489726,
+    "name": "REMOVEDOR DE CALLOS",
+    "price": 22000,
+    "categories": "Salud, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/489726/1699465796CALLOS1.webp",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 103583,
+    "name": "Extension Micro Led x10 Bombillos 1641",
+    "price": 41000,
+    "categories": "Hogar, Navidad",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/103583/17023913911702391391Extensión Micro Led Estilo Bombillo x10 Cálido RF 91C_1.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1650267,
+    "name": "Base de maquillaje moisture economic",
+    "price": 16500,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1650267/1741284705Captura de pantalla 2025-03-06 a la(s) 1.11.19 p. m..png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 986563,
+    "name": "Kit de Herramienta x46",
+    "price": 34990,
+    "categories": "Hogar, Herramientas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/986563/1721845139D_NQ_NP_2X_874573-MCO70080840425_062023-F.webp",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 782973,
+    "name": "BASCULA DIGITAL KALLEY",
+    "price": 48000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/782973/17133247452022-01-13_17-18-28-513.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 504618,
+    "name": "Maquina depiladora 2 en 1 recargable",
+    "price": 24000,
+    "categories": "Belleza, Salud, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/504618/1744066266WhatsApp Image 2025-04-07 at 3.58.58 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1221565,
+    "name": "gorra camping",
+    "price": 27000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1221565/1726773597WhatsApp Image 2024-09-19 at 12.55.59 PM.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 461084,
+    "name": "Kit De Marcadores Doble Punta Set De 48u",
+    "price": 40000,
+    "categories": "Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/461084/1698269117D_NQ_NP_840666-MCO70478459079_072023-O.webp",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 278592,
+    "name": "MAQUINA VGR287",
+    "price": 46000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/278592/17018954981701895498Diseño sin título - 2023-06-06T120938.989.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 568412,
+    "name": "Radio Bandas Am Fm Usb Microsd Bolsillo",
+    "price": 38000,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/568412/1702944339WhatsApp Image 2023-12-15 at 13.51.54.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 588777,
+    "name": "Taza de café inoxidable automezcable",
+    "price": 22290,
+    "categories": "Cocina, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/588777/1704831519mezcladorcafe.jpg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 79898,
+    "name": "Convertidor Para Celular Otg Tipo V8",
+    "price": 9100,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/79898/170301969817030196982052ac54-f2fd-4a22-88cf-1f29646a7493_713x.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 101822,
+    "name": "Luces Led Estrella X136 Luces 3m YG115",
+    "price": 78900,
+    "categories": "Hogar, Navidad",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/101822/17023906181702390618gcWYrMdXvsRPolgqG3ygoSGqlVDt8WtfOSZyBVgg.jpeg",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 467343,
+    "name": "Placa Giratoria Interactiva Con Bola",
+    "price": 18998,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/467343/16984402051.png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1407248,
+    "name": "PELUCHE NUTRIA + LAMPARA OSO PANDA",
+    "price": 66000,
+    "categories": "Otro, Jugueteria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1407248/1730132530Diseño sin título (29).png",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 923308,
+    "name": "Tapón de Desagüe para Lavado con Filtro",
+    "price": 17000,
+    "categories": "Tecnologia, Cocina, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/923308/1719245995S65fc5d824b184b588184aff9147dbaa5m.webp",
+    "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  }
+]

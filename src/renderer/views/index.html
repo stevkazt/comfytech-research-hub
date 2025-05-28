@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistente de Productos Dropi</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f9f9fb;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    header {
+      background-color: #1e88e5;
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    main {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    button {
+      margin: 1rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #loginBtn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    #checkSessionBtn {
+      background-color: #ff9800;
+      color: white;
+    }
+
+    #scrapeBtn {
+      background-color: #673ab7;
+      color: white;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    #output {
+      max-height: 30vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      background: #fff;
+      margin-top: 1em;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>ComfyTech</h1>
+    <p>Bienvenido a tu asistente de productos Dropi</p>
+  </header>
+
+  <!-- Removed mergeBtn since merge is now triggered automatically after scraping -->
+  <main>
+    <button id="checkSessionBtn">🔍 Verificar sesión</button>
+    <button id="loginBtn" disabled>🔐 Iniciar sesión</button>
+    <button id="scrapeBtn">📦 Buscar productos</button>
+    <button id="openViewerBtn" style="background-color: #2196f3; color: white;">🖼️ Ver nuevos productos</button>
+    <div id="output"></div>
+  </main>
+  <script src="../scripts/renderer.js"></script>
+</body>
+
+</html>

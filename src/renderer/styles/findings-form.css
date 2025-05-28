@@ -1,0 +1,95 @@
+/* Product Findings Form Styles */
+.finding-form {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.finding-form .form-group {
+  margin-bottom: 12px;
+}
+
+.finding-form .field-label {
+  display: block;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 13px;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.finding-form .form-control {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  background: #fff;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.finding-form select.form-control {
+  cursor: pointer;
+  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23666" d="M6 8L0 2h12z"/></svg>') no-repeat right 8px center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.finding-form textarea.form-control {
+  resize: vertical;
+  min-height: 70px;
+  font-family: inherit;
+}
+
+.finding-form .form-control:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.finding-form .form-control:hover {
+  border-color: #bbb;
+}
+
+/* Save button specific styling */
+#save-findings-btn {
+  width: 100%;
+  margin-top: 16px;
+  background: #2196f3;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+#save-findings-btn:hover {
+  background: #1976d2;
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+  transform: translateY(-1px);
+}
+
+#save-findings-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .finding-form {
+    padding: 12px;
+  }
+  
+  .finding-form .form-control {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

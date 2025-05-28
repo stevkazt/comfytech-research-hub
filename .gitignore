@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+*.log
+*.csv
+product_images/
+products_*/
+session.json
+scraping-errors.log
+output/
+*.tmp
+.env
+dist/

@@ -1,0 +1,1060 @@
+/* Product Details Page Styles */
+
+* {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f9fafb;
+  font-size: 14px;
+  color: #2c3e50;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.product-info {
+  margin-top: 20px;
+}
+
+.action-btn {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  color: #2c3e50;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background: #fff;
+  border-color: #2196f3;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  padding: 24px;
+  gap: 24px;
+}
+
+.content-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-info-section {
+  flex: 0;
+}
+
+.product-info-section h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.price-suggestions {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.price-high {
+  color: #2e7d32;
+}
+
+.price-standard {
+  color: #f57c00;
+}
+
+.price-low {
+  color: #c62828;
+}
+
+#image-slider {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 12px 0;
+  margin: 16px 0;
+  text-align: center;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+#image-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+#image-slider::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+#image-slider::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+#image-slider::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+#image-slider img {
+  flex: 0 0 auto;
+  max-height: 180px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+#image-slider img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.button-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.findings-section {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Tab Interface Styles */
+.form-tabs {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 16px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background: #f8f9fa;
+  color: #2196f3;
+}
+
+.tab-button.active {
+  color: #2196f3;
+  border-bottom-color: #2196f3;
+  background: #f8f9fa;
+}
+
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.form-actions {
+  margin-top: 16px;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 16px;
+}
+
+.form-actions button {
+  background: #2196f3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+.form-actions button:hover {
+  background: #1976d2;
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+  transform: translateY(-1px);
+}
+
+.form-actions button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+#findings-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.finding-entry {
+  background: white;
+  margin-bottom: 16px;
+}
+
+/* Enhanced Findings Container - Updated for two-column layout */
+
+#findings-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#findings-list li {
+  position: relative;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+#findings-list li:hover {
+  border-color: #bbdefb;
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.1);
+  transform: translateY(-2px);
+}
+
+#findings-list li:last-child {
+  margin-bottom: 0;
+}
+
+.finding-details-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.finding-details-item:hover {
+  background: #fff;
+  border-color: #90caf9;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.finding-meta {
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.finding-meta strong {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.finding-meta div {
+  margin-bottom: 4px;
+}
+
+.finding-meta div:last-child {
+  margin-bottom: 0;
+}
+
+.finding-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.finding-match {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: #e3f2fd;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.finding-match[data-match="exact"] {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.finding-match[data-match="similar"] {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.finding-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 0;
+}
+
+/* Updated Findings List Styles - Similar to Trend Validation */
+.finding-header {
+  margin-bottom: 8px;
+}
+
+.finding-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.finding-store-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finding-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.finding-content {
+  color: #455a64;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.finding-meta {
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 12px;
+}
+
+.finding-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.finding-link:hover {
+  text-decoration: underline;
+}
+
+/* Edit and Delete Button Styles for Findings */
+.edit-finding-btn:hover {
+  background: #bbdefb !important;
+  border-color: #64b5f6 !important;
+}
+
+.delete-finding-btn:hover {
+  background: #ffcdd2 !important;
+}
+
+.edit-finding-btn:active,
+.delete-finding-btn:active {
+  transform: translateY(1px);
+}
+
+.finding-notes {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  margin: 12px 0;
+  color: #455a64;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+textarea {
+  height: 60px;
+  resize: vertical;
+}
+
+#save-findings-btn {
+  margin-top: 8px;
+  background: #2196f3;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar .status-select-container {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0e0e0;
+}
+
+.sidebar .status-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #2c3e50;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  margin-top: 4px;
+}
+
+.status-select:hover {
+  border-color: #2196f3;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+  background-color: #fff;
+}
+
+.status-select option {
+  padding: 10px 14px;
+  margin: 4px 0;
+}
+
+.status-select option.status-worth-selling {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.status-select option.status-skip {
+  background-color: #ffebee;
+  color: #c62828;
+  font-weight: 500;
+}
+
+.status-select option.status-not-sure {
+  background-color: #fff3e0;
+  color: #f57c00;
+  font-weight: 500;
+}
+
+.status-select-container label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Findings List Styles */
+.finding-main-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.finding-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 13px;
+}
+
+.finding-notes {
+  font-size: 13px;
+  color: #666;
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.finding-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.finding-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.finding-link:hover {
+  text-decoration: underline;
+}
+
+.finding-price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.finding-match {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e3f2fd;
+  color: #1976d2;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1px solid #90caf9;
+}
+
+.edit-btn:hover {
+  background: #bbdefb;
+}
+
+.delete-btn {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.delete-btn:hover {
+  background: #ffcdd2;
+}
+
+/* Image Modal Styles */
+.image-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.modal-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 18px;
+  transition: background-color 0.2s;
+}
+
+.modal-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+.image-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Two-column layout for findings and trend validation */
+.findings-columns-container {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+#saved-findings,
+#trend-validation {
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+#saved-findings h3,
+#trend-validation h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+#trend-validation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Trend validation specific styles */
+.trend-validation-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+.trend-validation-item:hover {
+  border-color: #bbdefb;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.trend-validation-header {
+  font-weight: 600;
+  color: #1976d2;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.trend-validation-content {
+  color: #455a64;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.trend-validation-meta {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 12px;
+}
+
+/* Trend Validation Form Styles */
+.trend-validation-form {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.trend-validation-form .form-group {
+  margin-bottom: 12px;
+}
+
+.trend-validation-form .field-label {
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.trend-validation-form .form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.trend-validation-form select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+}
+
+.trend-validation-form textarea.form-control {
+  resize: vertical;
+  min-height: 60px;
+  font-family: inherit;
+}
+
+.trend-validation-form .form-control:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.trend-validation-form .form-actions {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.trend-validation-form .btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trend-validation-form .btn-primary {
+  background: #2196f3;
+  color: white;
+}
+
+.trend-validation-form .btn-primary:hover {
+  background: #1976d2;
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+}
+
+.saved-trend-validations {
+  margin-bottom: 20px;
+}
+
+.saved-trend-validations h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.trend-link {
+  color: #2196f3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.trend-link:hover {
+  text-decoration: underline;
+}
+
+.delete-trend-btn:hover {
+  background: #ffcdd2 !important;
+}
+
+/* Edit and Delete Button Styles */
+.edit-trend-btn:hover {
+  background: #bbdefb !important;
+  border-color: #64b5f6 !important;
+}
+
+.edit-trend-btn:active,
+.delete-trend-btn:active {
+  transform: translateY(1px);
+}
+
+/* Editing Indicator Styles */
+.editing-indicator {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #90caf9;
+}
+
+/* Product Info Two-Column Layout */
+.product-info-columns {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.product-details-column {
+  flex: 2;
+}
+
+.product-status-column {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.product-status-column .status-select-container {
+  background: transparent;
+  padding: 16px;
+  border: none;
+  min-width: 200px;
+}
+
+.product-status-column .status-select-container label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+.product-status-column .status-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+/* Trend Search Section */
+.trend-search-section {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.trend-search-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.trend-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trend-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a42a0 100%);
+}
+
+.trend-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.3);
+}
+
+/* Handle 5 buttons with last one spanning both columns */
+.trend-search-buttons .trend-btn:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+/* Responsive Design for Product Info Columns */
+@media (max-width: 768px) {
+  .product-info-columns {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .product-status-column {
+    justify-content: flex-start;
+  }
+  
+  .product-status-column .status-select-container {
+    min-width: 100%;
+  }
+  
+  .trend-search-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .trend-search-buttons .trend-btn:nth-child(5) {
+    grid-column: 1;
+  }
+  
+  .trend-btn {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  .sidebar {
+    order: -1;
+  }
+  
+  .trend-search-section {
+    padding: 8px;
+  }
+}
+
+/* Generate AI Prompt Button */
+.generate-prompt-btn {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+}
+
+.generate-prompt-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a42a0 100%);
+}
+
+.generate-prompt-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+}
