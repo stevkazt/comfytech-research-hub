@@ -51,7 +51,29 @@
     "categories": "Otro",
     "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/348781/170187680917018768098385b56f-a6c7-486c-aae2-807f869f14c2-img_0535-(2).jpg",
     "scrapedAt": "2025-05-27T21:51:33.614Z",
-    "status": ""
+    "status": "",
+    "findings": [
+      {
+        "id": "1748489374716-22099",
+        "price": "12",
+        "match": "",
+        "store": "",
+        "stock": "",
+        "variant": "",
+        "link": "",
+        "rating": "",
+        "review_count": "",
+        "origin": "",
+        "deliveryTime": "",
+        "shippingCost": "",
+        "sellerType": "",
+        "listingType": "",
+        "badges": "",
+        "notes": "",
+        "imageQuality": "",
+        "imageMatch": ""
+      }
+    ]
   },
   {
     "id": 1078439,
@@ -949,6 +971,429 @@
     "categories": "Tecnologia, Cocina, Hogar",
     "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/923308/1719245995S65fc5d824b184b588184aff9147dbaa5m.webp",
     "scrapedAt": "2025-05-27T21:52:04.295Z",
+    "status": ""
+  },
+  {
+    "id": 1035971,
+    "name": "Depilador Facial Y Cejas",
+    "price": 16000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1035971/17225439831722292739D_NQ_NP_2X_682598-MCO54965098754_042023-F.webp",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 409833,
+    "name": "Extensión de luces x 100 Bombillos Mult",
+    "price": 9000,
+    "categories": "Navidad",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/409833/377f2496-6572-445c-95c2-6a77d7825c9e-img_9592.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1633939,
+    "name": "CAMISETA MILLOS BLANCAVERSIONPLAYER 2025",
+    "price": 70000,
+    "categories": "Ropa Deportiva",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1633939/1737389211WhatsApp Image 2025-01-20 at 11.01.59 AM.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 348928,
+    "name": "jarrón decorativo en forma de Hoja",
+    "price": 40000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/348928/17018767661701876766628ee37a-9cbc-4ef7-9e50-39aaa10c90b3-28.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1693845,
+    "name": "Bolso de viaje amplio",
+    "price": 35000,
+    "categories": "Accesorios, Bolsos",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1693845/1741100446Captura de pantalla 2025-03-04 095908.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1293255,
+    "name": "CARRIEL DE MANO DAMA REF DIESEL",
+    "price": 45000,
+    "categories": "Otro, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1293255/1727960539WhatsApp Image 2024-10-02 at 4.15.10 PM.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1729061,
+    "name": "TOPO TRIO RODIO LLAVE CORAZON 3 OROS",
+    "price": 20500,
+    "categories": "Bisutería",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1729061/1742597893WhatsApp Image 2025-03-21 at 3.56.24 PM.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1752661,
+    "name": "JUEGO DE COPAS 53 PC",
+    "price": 33000,
+    "categories": "Herramientas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1752661/17444708411743805286477.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 999314,
+    "name": "PERFUMES EROS+SAUVAGE+INVICTUS+212MEN1.1",
+    "price": 150000,
+    "categories": "Otro, Bienestar, Aseo, Sex Shop, Salud, Belleza, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/999314/1721616162312.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 875569,
+    "name": "Kit Pistola Remachadora Manual Con gafas",
+    "price": 69900,
+    "categories": "Herramientas",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/875569/1716313923Remachadora01.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1739930,
+    "name": "Tenis GET caballero suela 100% Eva",
+    "price": 64900,
+    "categories": "Ropa Deportiva, Moda, Deportes",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1739930/1743606533WhatsApp Image 2025-04-01 at 5.51.23 PM.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1817043,
+    "name": "KHAMRAH LUJO+ERBA PURA LUJO+9PM",
+    "price": 164000,
+    "categories": "Bisutería, Moda, Belleza, Hogar, Natural Home, Aseo",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1817043/1746888006Post Para Instagram Publicidad para Restaurante Moderno Amarillo - 2025-05-10T093825.545.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1744157,
+    "name": "1PERFUME HUGO BOSS DE SENCE",
+    "price": 46000,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1744157/1743802006Droppi (21).png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1427199,
+    "name": "Tamagotchi  Mascotas Virtuales",
+    "price": 15000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1427199/17304980623.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 130546,
+    "name": "Huevo Vibrador IRENA I",
+    "price": 213300,
+    "categories": "Vibradores",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/130546/17023453071702345307IRENA (8).jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 775530,
+    "name": "MOLDE PARA PANCAKEs",
+    "price": 30000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/775530/171314154118a8f386353-variedades_tv_calle_14-6zs4rn59oku-o73ukyjae7.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 972242,
+    "name": "OMBRE NOMADE LOUIS VUITTON CAJA",
+    "price": 40000,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/972242/1726521851Diseño sin título (19).png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 179380,
+    "name": "Faja  short sauna",
+    "price": 24000,
+    "categories": "Ropa Deportiva",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/179380/170230458717023045872B458403-5CDD-4A0A-9DFE-EA686506C07C.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1667348,
+    "name": "Cera Fijadora De Cabello",
+    "price": 19900,
+    "categories": "Belleza, Aseo",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1667348/1739296899Captura de pantalla 2025-02-11 125558.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 399368,
+    "name": "Mini Teclado Inalámbrico Smart Tv",
+    "price": 15900,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/399368/17018709981701870998D_NQ_NP_679015-MLU54984829326_052023-O.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 930587,
+    "name": "Secador Remington Keratina 2003 de 3000w",
+    "price": 27900,
+    "categories": "Belleza",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/930587/1719852155imagen_2024-07-01_114214905.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 367359,
+    "name": "Licuadora Eléctrica Portátil",
+    "price": 34900,
+    "categories": "Cocina, Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/367359/1701875300170187530006df494e-62e2-467e-9a47-99788d757dd8.d65a2cb78fc46d6cfe7187b3b28ff362.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 233657,
+    "name": "Amplificador Auditivo Para Sordos",
+    "price": 14500,
+    "categories": "Salud",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/233657/17019839731701983973D_NQ_NP_2X_764561-MCO50518105573_062022-F.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1279527,
+    "name": "Nike Letras Negro Dama",
+    "price": 65000,
+    "categories": "Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1279527/1727740134WhatsApp Image 2024-09-30 at 1.42.20 PM (1).jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1101684,
+    "name": "COMBO X3 DAMA",
+    "price": 100000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1101684/1724298019125.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 44741,
+    "name": "CEPILLO ALISADOR SIMPLY",
+    "price": 37900,
+    "categories": "Belleza, Tecnologia, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/44741/17030817991703081799CEPILLO ALISADOR SIMPLY 1.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1818164,
+    "name": "MASCARILLA CAPILAR HYDROMASK 500ML _2054",
+    "price": 35900,
+    "categories": "Belleza, Aseo",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1818164/1747082428HYDROMASK 3.JPG",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 995083,
+    "name": "Perfume 212 NYC Men Eau de Toilette-3A",
+    "price": 70000,
+    "categories": "Belleza, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/995083/172140820718.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1740417,
+    "name": "Camara Monitor De Seguridad Para Bebe",
+    "price": 110000,
+    "categories": "Tecnologia, Hogar, Bebé",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1740417/174361926401.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1675597,
+    "name": "Chak - Gel veneno para cucarachas",
+    "price": 8000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1675597/1740626097Diseño sin título (7).jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 313875,
+    "name": "Organizador Tendedero plegable de Ropa",
+    "price": 49900,
+    "categories": "Ropa Deportiva, Moda, Tecnologia, Hogar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/313875/17018827971701882797photo1688694288.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1689185,
+    "name": "Disfraz Monja + 03 Neutro 30mL",
+    "price": 45000,
+    "categories": "Belleza, Salud, Natural Home, Deportes, Sex Shop",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1689185/1740765661DS010 - NEUTRO30-Photoroom.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1830362,
+    "name": "UN Radio De Baofeng BF-888S",
+    "price": 67200,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1830362/1748291914Radio De Baofeng BF-888S.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 378710,
+    "name": "bombillo led multicolor",
+    "price": 12000,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/378710/170187327217018732720f025b1b-749b-4acb-b02f-a6bb37c518af-img_8592.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 605879,
+    "name": "Almohada Inflable Automatica Cuello Cerv",
+    "price": 17900,
+    "categories": "Hogar",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/605879/1705696407D_NQ_NP_2X_669742-MCO73343962325_122023-F.webp",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1573572,
+    "name": "Cubo Balde Multifuncional Plegable",
+    "price": 18500,
+    "categories": "Hogar, Aseo, Vehículos",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1573572/1733503420388940966.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1817629,
+    "name": "CHANCE CHANEL TENDRE + PERFUMERO FENIX",
+    "price": 48000,
+    "categories": "Moda, Belleza, Salud, Sex Shop, Aseo, Bienestar, Otro",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1817629/174705681631.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1745094,
+    "name": "Pad Mouse Con Carga Inalámbrica",
+    "price": 49900,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1745094/174387356961bptciUoHL._AC_SL1500_.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 763298,
+    "name": "Combo Nano Titanium",
+    "price": 39000,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/763298/1712686028nano titan.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 995820,
+    "name": "PERFUME CH 212 VIP BLACK-3A RIVIERA",
+    "price": 70000,
+    "categories": "Belleza, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/995820/1721417355VIP BLACK.JPG",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 484854,
+    "name": "Diadema Banda Balaca Bluetooth",
+    "price": 25000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/484854/1703621740D_NQ_NP_602465-MCO70859791124_082023-O.webp",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 263298,
+    "name": "Mini linterna led 511",
+    "price": 14000,
+    "categories": "Defensa personal",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/263298/1701898736170189873605B1012D-8EDA-4BBF-839E-2BC806364F86.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 490065,
+    "name": "Balon Pelota Disco Frisbe Magic Ball Luz",
+    "price": 23000,
+    "categories": "Mascotas, Moda, Bebé, Camping, Pesca, Otro, Jugueteria, Piñateria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/490065/1699471323HOAL.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 1125513,
+    "name": "SET MOCHILA BOLSO ESCOLAR + LONCHERA",
+    "price": 38000,
+    "categories": "Bebé, Moda",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/1125513/1724812345IMG_5495.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 90029,
+    "name": "Alcancía diseño gato",
+    "price": 37700,
+    "categories": "Jugueteria",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/90029/17030148511703014851Alcancia de gato 1.jpg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 128885,
+    "name": "Cámara De Seguridad Wifi Bombillo Roboti",
+    "price": 91000,
+    "categories": "",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/128885/17023455171702345517WhatsApp Image 2022-12-26 at 4.02.47 PM.jpeg",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
+    "status": ""
+  },
+  {
+    "id": 417668,
+    "name": "SECADOR NOVA 9103",
+    "price": 29700,
+    "categories": "Tecnologia",
+    "image": "https://d39ru7awumhhs2.cloudfront.net/colombia/products/417668/1695936996SECADOR NOVA 9103.png",
+    "scrapedAt": "2025-05-29T03:27:30.105Z",
     "status": ""
   }
 ]

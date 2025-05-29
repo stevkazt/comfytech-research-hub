@@ -1,5 +1,6 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
+const { sessionFile } = require('../../config/paths');
 
 async function performLogin() {
     const browser = await chromium.launch({ headless: false });
@@ -10,7 +11,7 @@ async function performLogin() {
         await page.goto('https://app.dropi.co/auth/login');
         await page.waitForURL('https://app.dropi.co/dashboard/home', { timeout: 0 });
         await page.waitForLoadState('load');
-        await context.storageState({ path: require('path').join(__dirname, '../../../data/session.json') });
+        await context.storageState({ path: sessionFile });
         return true;
     } catch (error) {
         return false;
