@@ -1,7 +1,5 @@
 const { ipcRenderer } = require('electron');
-const { productsDb } = require('../../config/paths');
-const fs = require('fs');
-const path = require('path');
+const axios = require('axios');
 
 let allProducts = []; // Store all products for filtering
 
@@ -76,26 +74,28 @@ function renderProducts(products) {
     });
 }
 
-// Load products from database
-function loadProducts() {
+// Load products from API
+async function loadProducts() {
     try {
-        if (fs.existsSync(productsDb)) {
-            const products = JSON.parse(fs.readFileSync(productsDb, 'utf8'));
-            allProducts = products;
-            renderProducts(products);
+        const response = await axios.get('http://localhost:3000/products');
+        const products = response.data;
+        allProducts = products;
+        renderProducts(products);
 
-            // Update counter
-            const counter = document.getElementById('productCount');
-            if (counter) {
-                counter.textContent = `${products.length} productos encontrados`;
-            }
-        } else {
-            console.error('No se encontró la base de datos de productos');
-            document.getElementById('productGrid').innerHTML = '<div class="error-message">No hay productos disponibles</div>';
+        // Update counter
+        const counter = document.getElementById('productCount');
+        if (counter) {
+            counter.textContent = `${products.length} productos encontrados`;
         }
     } catch (error) {
-        console.error('Error loading products:', error);
-        document.getElementById('productGrid').innerHTML = '<div class="error-message">Error al cargar los productos</div>';
+        console.error('Error loading products from API:', error);
+        document.getElementById('productGrid').innerHTML = '<div class="error-message">Error al cargar los productos desde la base de datos</div>';
+
+        // Update counter for error state
+        const counter = document.getElementById('productCount');
+        if (counter) {
+            counter.textContent = '0 productos encontrados';
+        }
     }
 }
 
@@ -153,6 +153,12 @@ document.getElementById('statusFilter')?.addEventListener('change', (e) => {
     });
 
     renderProducts(filtered);
+
+    // Update counter
+    const counter = document.getElementById('productCount');
+    if (counter) {
+        counter.textContent = `${filtered.length} productos encontrados`;
+    }
 });
 
 // Add sort functionality
@@ -192,7 +198,7 @@ document.getElementById('sortSelect').addEventListener('change', (e) => {
     renderProducts(sortedProducts);
 });
 
-// Add refresh functionality
+// Add refresh functionality with API call
 document.getElementById('refreshBtn')?.addEventListener('click', () => {
     loadProducts();
 });

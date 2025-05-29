@@ -2,6 +2,7 @@ const { renderFindingsList } = require('./findings-storage');
 const { addFinding } = require('./findings-form');
 const { addTrendValidationForm, renderSavedTrendValidations } = require('./trend-validation');
 const { ipcRenderer, shell } = require('electron');
+const axios = require('axios');
 
 
 function renderProduct(product) {
@@ -101,10 +102,16 @@ function switchTab(tabName) {
 }
 
 ipcRenderer.on('product-id', async (event, id) => {
-    // Fetch the latest product data from the DB
-    const product = await ipcRenderer.invoke('reload-product', id);
-    // Now render the product as before
-    renderProduct(product);
+    try {
+        // Fetch the latest product data from the API
+        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        const product = response.data;
+        // Now render the product as before
+        renderProduct(product);
+    } catch (error) {
+        console.error('Error loading product:', error);
+        alert('❌ Error loading product: ' + (error.response?.data?.message || error.message));
+    }
 });
 
 const { BrowserWindow } = require('@electron/remote');

@@ -4,7 +4,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
-const { parse } = require('json2csv');
+const axios = require('axios');
 
 // === Config and Paths ===
 const { sessionFile } = require('../../config/paths');
@@ -19,13 +19,28 @@ const errorLogStream = fs.createWriteStream(errorLogPath, { flags: 'a' });
 const sanitizeName = (name) => name.replace(/\s+/g, ' ').trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
 const getPath = (...args) => path.join(DATA_DIR, ...args);
 
-const validProducts = [];
+// === Send product to API ===
+async function sendProductToAPI(product, onMessage) {
+    try {
+        await axios.post('http://localhost:3000/products', product);
+        onMessage?.({ type: 'info', message: `✅ Producto enviado: ${product.name}` });
+        return true;
+    } catch (error) {
+        const errorMsg = `❌ Error enviando producto ${product.name}: ${error.message}`;
+        onMessage?.({ type: 'error', message: errorMsg });
+        errorLogStream.write(`${new Date().toISOString()} - ${errorMsg}\n`);
+        return false;
+    }
+}
 
 // === Scraper ===
 async function scrapeProducts(onMessage) {
     const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext({ storageState: sessionFile });
     const page = await context.newPage();
+
+    let sentCount = 0;
+    let failedCount = 0;
 
     // Inspect all network responses for product metadata (potential IDs)
     page.on('response', async (response) => {
@@ -37,8 +52,8 @@ async function scrapeProducts(onMessage) {
                 fs.writeFileSync(jsonLogPath, JSON.stringify(json, null, 2));
                 console.log(`🔍 API Response from: ${url}`);
                 if (Array.isArray(json.objects)) {
-                    json.objects.forEach((product) => {
-                        validProducts.push({
+                    for (const product of json.objects) {
+                        const productData = {
                             id: product.id,
                             name: product.name,
                             price: product.sale_price,
@@ -46,10 +61,25 @@ async function scrapeProducts(onMessage) {
                             image: product.gallery?.[0]?.urlS3
                                 ? `https://d39ru7awumhhs2.cloudfront.net/${product.gallery[0].urlS3}`
                                 : '',
+                            description_html: product.description || '',
                             scrapedAt: new Date().toISOString(),
                             status: '' // Initialize with empty status (New)
-                        });
-                    });
+                        };
+
+                        // Filter out invalid products
+                        const isMeaningful = productData.name && (productData.price || productData.image);
+                        const knownBadNames = ['PREMIUM', 'VERIFICADO'];
+                        const isValidProduct = isMeaningful && !knownBadNames.includes(productData.name.trim().toUpperCase());
+
+                        if (isValidProduct) {
+                            const success = await sendProductToAPI(productData, onMessage);
+                            if (success) {
+                                sentCount++;
+                            } else {
+                                failedCount++;
+                            }
+                        }
+                    }
                 } else {
                     console.dir(json, { depth: 4 });
                 }
@@ -73,22 +103,14 @@ async function scrapeProducts(onMessage) {
     }
 
     await new Promise(res => setTimeout(res, 5000)); // Allow more time for API responses
-    console.log(`📊 Productos recolectados: ${validProducts.length}`);
 
-    const cleanedProducts = validProducts.filter(p => {
-        const isMeaningful = p.name && (p.price || p.image);
-        const knownBadNames = ['PREMIUM', 'VERIFICADO'];
-        return isMeaningful && !knownBadNames.includes(p.name.trim().toUpperCase());
-    });
+    const totalProcessed = sentCount + failedCount;
+    onMessage?.({ type: 'info', message: `📊 Procesamiento completo: ${sentCount} enviados, ${failedCount} fallidos de ${totalProcessed} productos` });
 
-    if (cleanedProducts.length) {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const folderPath = getPath(`products_${timestamp}`);
-        fs.mkdirSync(folderPath);
-        fs.writeFileSync(path.join(folderPath, 'products.json'), JSON.stringify(cleanedProducts, null, 2));
-        onMessage?.({ type: 'info', message: `✅ ${cleanedProducts.length} productos guardados.` });
+    if (sentCount > 0) {
+        onMessage?.({ type: 'info', message: `✅ ${sentCount} productos guardados en la base de datos.` });
     } else {
-        onMessage?.({ type: 'warning', message: '⚠️ No se encontraron productos válidos.' });
+        onMessage?.({ type: 'warning', message: '⚠️ No se encontraron productos válidos o todos fallaron.' });
     }
 
     onMessage?.({ type: 'info', message: '✅ Scraping complete' });

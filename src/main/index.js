@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const fs = require('fs');
+const axios = require('axios');
 const { updateDropiDetails } = require('../services/dropi-api/products');
+const fs = require('fs');
 require('@electron/remote/main').initialize();
 
 // Cross-platform path helpers
@@ -79,44 +80,36 @@ ipcMain.handle('update-product-details', async (event, id) => {
 });
 
 ipcMain.handle('update-product-status', async (event, id, status) => {
-    const dbPath = path.join(getDataPath(), 'products_db.json');
-    let db = [];
+    try {
+        // Get product from API
+        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        const product = response.data;
 
-    // Read the database
-    if (fs.existsSync(dbPath)) {
-        db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-    }
+        if (!product) {
+            throw new Error('Product not found');
+        }
 
-    // Find the product by ID
-    const product = db.find(p => p.id === id);
-    if (product) {
         // Update the status
         product.status = status;
 
-        // Save the updated database
-        fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8');
+        // Save via API
+        await axios.put(`http://localhost:3000/products/${id}`, product);
         return true;
-    } else {
-        throw new Error('Product not found');
+    } catch (error) {
+        console.error('Error updating product status:', error);
+        throw new Error(`Failed to update product status: ${error.message}`);
     }
-}
-);
+});
 
 ipcMain.handle('reload-product', async (event, id) => {
-    const dbPath = path.join(getDataPath(), 'products_db.json');
-    if (fs.existsSync(dbPath)) {
-        const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        const product = db.find(p => p.id === id);
-        if (product) {
-            return product;
-        } else {
-            throw new Error('Product not found');
-        }
-    } else {
-        throw new Error('Database file not found');
+    try {
+        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error reloading product:', error);
+        throw new Error(`Failed to reload product: ${error.message}`);
     }
-}
-);
+});
 
 function createProductViewerWindow() {
     const win = new BrowserWindow({
@@ -131,17 +124,7 @@ function createProductViewerWindow() {
     win.maximize();
     win.show();
 
-    // Always read the latest data from the DB when opening the viewer
-    win.webContents.once('did-finish-load', () => {
-        const dbPath = path.join(getDataPath(), 'products_db.json');
-        if (fs.existsSync(dbPath)) {
-            const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-            win.webContents.send('products-data', data);
-        } else {
-            win.webContents.send('products-data', []);
-        }
-    });
-
+    // Products will be loaded via API calls in the renderer process
     win.loadFile(path.join(__dirname, '../renderer/views/product-viewer.html'));
 }
 

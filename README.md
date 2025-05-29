@@ -31,14 +31,12 @@ dropi-app/
 │   │   ├── auth/             # Authentication
 │   │   ├── dropi-api/        # Dropi platform integration
 │   │   └── scraper/          # Data extraction
-│   │       ├── index.js         # Main scraping engine
-│   │       └── merge-new-products.js # Data merging
+│   │       └── index.js         # Main scraping engine with API integration
 │   │
 │   └── config/               # Configuration
 │       └── paths.js            # File paths and constants
 │
 ├── data/                      # Data storage
-│   ├── products_db.json         # Product database
 │   ├── session.json            # Authentication session
 │   └── logs/                   # Application logs
 │
@@ -73,18 +71,18 @@ dropi-app/
 - **External Search Integration**: One-click searches across platforms
   - Google, MercadoLibre, Amazon search buttons
   - Image-based reverse search capabilities
-- **Data Persistence**: Local findings storage and management
-  - Edit and delete findings
+- **Data Persistence**: API-based findings storage and management
+  - Edit and delete findings via REST API
   - Product status tracking (Worth Selling, Skip, Not Sure)
-  - Automatic data backup and synchronization
+  - Real-time data synchronization with backend database
 
 ### Services (`src/services/`)
 - **Authentication (`auth/`)**: Automated Dropi login management
-- **Scraper (`scraper/`)**: Advanced product data extraction
+- **Scraper (`scraper/`)**: Advanced product data extraction with API integration
   - Network response interception for real-time data
-  - Online image URL collection and referencing
-  - Batch processing with error handling and logging
-  - Smart data merging and deduplication
+  - Direct API submission to http://localhost:3000/products
+  - Real-time error handling and logging
+  - Smart product validation and filtering
 - **Dropi API (`dropi-api/)**: Platform integration
   - Session management and validation
   - Product details updating and synchronization
@@ -104,7 +102,11 @@ cd dropi-app
 npm install
 ```
 
-### 2. Run the App
+### 2. Start the Backend API
+
+Make sure your local API server is running on http://localhost:3000 to receive scraped product data.
+
+### 3. Run the App
 
 ```bash
 npm start
@@ -116,8 +118,8 @@ npm start
 
 ### Core Functionality
 - ✅ **Session Management** – Automated Dropi login and session validation
-- 🔍 **Product Scraping** – Real-time product data extraction from Dropi dashboard
-- 💾 **Data Storage** – Product data persistence with online image references
+- 🔍 **Product Scraping** – Real-time product data extraction with API integration
+- 💾 **API-Based Storage** – Direct product submission to backend database
 - 🖼️ **Product Browser** – Advanced product viewer with search, filter, and status management
 
 ### Research & Analysis Tools
@@ -151,12 +153,12 @@ npm start
   - Consistent visual hierarchy and typography
 
 ### Data Management
-- 🗄️ **Local Database Storage**
-  - JSON-based product database with findings
-  - Online image URL references and metadata
-  - Smart data merging for new product imports
+- 🗄️ **API-Based Database Integration**
+  - Real-time product submission to backend API
+  - RESTful endpoints for CRUD operations
+  - Automatic error handling and retry logic
 - 📊 **Export & Analysis**
-  - CSV export functionality for data analysis
+  - API-based data export functionality
   - Detailed logging and error tracking
   - Performance metrics and scraping statistics
 
@@ -166,6 +168,7 @@ npm start
 
 - Node.js (v18+ recommended)
 - Electron
+- Backend API server running on http://localhost:3000
 - Tested on Windows and macOS
 
 ---

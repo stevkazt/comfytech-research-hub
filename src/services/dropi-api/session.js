@@ -1,10 +1,9 @@
 const axios = require('axios');
-const fs = require('fs');
-const { sessionFile } = require('../../config/paths');
 
 async function checkSession() {
     try {
-        const session = JSON.parse(fs.readFileSync(sessionFile, 'utf8'));
+        const response = await axios.get('http://localhost:3000/session');
+        const session = response.data;
 
         const localStorageToken = session.origins?.[0]?.localStorage?.find(e => e.name === 'DROPI_token');
         if (!localStorageToken) {
@@ -14,7 +13,7 @@ async function checkSession() {
 
         const bearerToken = localStorageToken.value.replace(/^"|"$/g, '');
 
-        const response = await axios.get(
+        const apiResponse = await axios.get(
             'https://api.dropi.co/api/product/categoryuser/list',
             {
                 headers: {
@@ -25,7 +24,7 @@ async function checkSession() {
             }
         );
 
-        if (response.status === 401 || response.data?.message === 'Token is Expired') {
+        if (apiResponse.status === 401 || apiResponse.data?.message === 'Token is Expired') {
             console.log('❌ Token is expired or invalid');
             return false;
         }
