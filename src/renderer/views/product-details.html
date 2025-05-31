@@ -34,8 +34,11 @@
                 <option value="">Select Status...</option>
                 <option value="Worth Selling" class="status-worth-selling">✅ Worth Selling</option>
                 <option value="Skip" class="status-skip">❌ Skip</option>
-                <option value="Not Sure" class="status-not-sure">❓ Not Sure</option>
+                <option value="In Research" class="status-not-sure">❓ In Research</option>
               </select>
+              <button id="edit-product-btn" class="edit-product-btn" onclick="showEditProductModal()">
+                ✏️ Edit Product
+              </button>
               <button id="generate-prompt-btn" class="generate-prompt-btn" onclick="generateAndCopyPrompt()">
                 🤖 Generate AI Prompt
               </button>
@@ -66,7 +69,7 @@
         <button class="action-btn" onclick="searchML()">🛒 MercadoLibre</button>
         <button class="action-btn" onclick="searchAmazon()">📦 Amazon</button>
         <button class="action-btn" onclick="searchImage()">🖼️ Image Search</button>
-        <button class="action-btn" onclick="updateDetails()">🔄 Update Dropi details</button>
+        <!-- Removed Update Dropi details button as it relied on scraping functionality -->
       </div>
 
       <div class="trend-search-section">

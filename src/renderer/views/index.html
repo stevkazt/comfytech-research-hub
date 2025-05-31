@@ -37,24 +37,13 @@
       transition: background 0.3s;
     }
 
-    #loginBtn {
-      background-color: #4caf50;
+    #openViewerBtn {
+      background-color: #2196f3;
       color: white;
     }
 
-    #checkSessionBtn {
-      background-color: #ff9800;
-      color: white;
-    }
-
-    #scrapeBtn {
-      background-color: #673ab7;
-      color: white;
-    }
-
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    button:hover {
+      opacity: 0.9;
     }
 
     #output {
@@ -74,15 +63,11 @@
 <body>
   <header>
     <h1>ComfyTech</h1>
-    <p>Bienvenido a tu asistente de productos Dropi</p>
+    <p>Gestor manual de productos Dropi</p>
   </header>
 
-  <!-- Removed mergeBtn since merge is now triggered automatically after scraping -->
   <main>
-    <button id="checkSessionBtn">🔍 Verificar sesión</button>
-    <button id="loginBtn" disabled>🔐 Iniciar sesión</button>
-    <button id="scrapeBtn">📦 Buscar productos</button>
-    <button id="openViewerBtn" style="background-color: #2196f3; color: white;">🖼️ Ver nuevos productos</button>
+    <button id="openViewerBtn">🖼️ Gestionar productos</button>
     <div id="output"></div>
   </main>
   <script src="../scripts/renderer.js"></script>

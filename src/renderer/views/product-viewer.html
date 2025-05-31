@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Product Viewer</title>
+  <title>Gestor de Productos Dropi</title>
   <style>
     body {
       margin: 0;
@@ -48,6 +48,22 @@
       display: flex;
       justify-content: center;
       gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .add-product-btn {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .add-product-btn:hover {
+      background: #45a049;
     }
 
     .search-input,
@@ -107,10 +123,11 @@
 <body style="margin: 0; font-family: sans-serif; background: #f4f4f4;">
   <div style="margin: 0; padding: 24px; background: white; border-radius: 0; box-shadow: none;">
     <div style="background: #2196f3; padding: 20px; color: white; border-radius: 8px; text-align: center;">
-      <h1 style="margin: 0; font-size: 28px;">ComfyTech</h1>
-      <p style="margin: 4px 0 0;">Bienvenido a tu asistente de productos Dropi</p>
+      <h1 style="margin: 0; font-size: 28px;">Gestor de Productos Dropi</h1>
+      <p style="margin: 4px 0 0;">Gestiona tus productos manualmente</p>
     </div>
     <div class="controls-container">
+      <button id="addProductBtn" class="add-product-btn">➕ Agregar Producto</button>
       <input type="text" id="searchInput" class="search-input" placeholder="Search...">
       <select id="searchType" class="search-select">
         <option value="id">By ID</option>
@@ -120,7 +137,7 @@
         <option value="all">All Status</option>
         <option value="Worth Selling">✅ Worth Selling</option>
         <option value="Skip">❌ Skip</option>
-        <option value="Not Sure">❓ Not Sure</option>
+        <option value="In Research">❓ In Research</option>
         <option value="">⚪ New</option>
       </select>
       <select id="sortSelect" class="filter-select">

@@ -6,6 +6,8 @@ const axios = require('axios');
 
 
 function renderProduct(product) {
+    console.log('🎨 [DEBUG] Rendering product:', product.name, 'ID:', product.id, 'Type:', typeof product.id);
+
     document.getElementById('title').textContent = product.name || 'Sin título';
     document.getElementById('price').textContent = product.price || 'N/A';
 
@@ -32,7 +34,12 @@ function renderProduct(product) {
         }
     });
 
+    // Set both window.productId and global productId variable
     window.productId = product.id;
+    window.productData = product; // Store full product data for debugging
+
+    console.log('🔗 [DEBUG] Set window.productId to:', window.productId, 'Type:', typeof window.productId);
+
     const idSpan = document.getElementById('product-id');
     const idLink = document.getElementById('product-id-link');
     idSpan.textContent = product.id || 'N/A';
@@ -103,13 +110,52 @@ function switchTab(tabName) {
 
 ipcRenderer.on('product-id', async (event, id) => {
     try {
+        console.log('📥 [DEBUG] Received product ID:', id, 'Type:', typeof id);
+
+        // Try both string and number versions for API call
+        let productId = id;
+        console.log('🔍 [DEBUG] Attempting to fetch product with ID:', productId);
+
         // Fetch the latest product data from the API
-        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        console.log('✅ [DEBUG] API response received:', response.data);
+
         const product = response.data;
+        console.log('📋 [DEBUG] Product loaded successfully:', product.name, 'ID:', product.id);
+
         // Now render the product as before
         renderProduct(product);
     } catch (error) {
-        console.error('Error loading product:', error);
+        console.error('❌ [DEBUG] Error loading product:', error);
+        console.error('❌ [DEBUG] Failed ID:', id, 'Type:', typeof id);
+
+        // Try alternative ID format if the first fails
+        if (typeof id === 'string') {
+            const numericId = parseInt(id, 10);
+            if (!isNaN(numericId)) {
+                console.log('🔄 [DEBUG] Retrying with numeric ID:', numericId);
+                try {
+                    const retryResponse = await axios.get(`http://localhost:3000/products/${numericId}`);
+                    console.log('✅ [DEBUG] Retry successful:', retryResponse.data);
+                    renderProduct(retryResponse.data);
+                    return;
+                } catch (retryError) {
+                    console.error('❌ [DEBUG] Retry also failed:', retryError);
+                }
+            }
+        } else if (typeof id === 'number') {
+            const stringId = id.toString();
+            console.log('🔄 [DEBUG] Retrying with string ID:', stringId);
+            try {
+                const retryResponse = await axios.get(`http://localhost:3000/products/${stringId}`);
+                console.log('✅ [DEBUG] Retry successful:', retryResponse.data);
+                renderProduct(retryResponse.data);
+                return;
+            } catch (retryError) {
+                console.error('❌ [DEBUG] Retry also failed:', retryError);
+            }
+        }
+
         alert('❌ Error loading product: ' + (error.response?.data?.message || error.message));
     }
 });

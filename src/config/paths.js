@@ -17,8 +17,7 @@ const getDataDir = () => {
 const DATA_DIR = getDataDir();
 
 module.exports = {
-    sessionFile: path.join(DATA_DIR, 'session.json'),
     dataDir: DATA_DIR,
-    // Removed productsDb since we're using API calls only
+    // Removed sessionFile and productsDb since authentication and local storage are no longer used
     // Add other paths as needed
 };

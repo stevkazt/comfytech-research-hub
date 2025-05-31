@@ -1,6 +1,6 @@
 # 🧩 Dropi Product Research Desktop App
 
-An Electron-based desktop application for researching and analyzing products from the Dropi marketplace. The app provides tools for product scraping, detailed market research, findings management, and competitor analysis — all from an intuitive desktop interface.
+An Electron-based desktop application for manual product research and analysis. The app provides tools for detailed market research, findings management, and competitor analysis — all from an intuitive desktop interface.
 
 ---
 
@@ -73,19 +73,14 @@ dropi-app/
   - Image-based reverse search capabilities
 - **Data Persistence**: API-based findings storage and management
   - Edit and delete findings via REST API
-  - Product status tracking (Worth Selling, Skip, Not Sure)
+  - Product status tracking (Worth Selling, Skip, In Research)
   - Real-time data synchronization with backend database
 
 ### Services (`src/services/`)
-- **Authentication (`auth/`)**: Automated Dropi login management
-- **Scraper (`scraper/`)**: Advanced product data extraction with API integration
-  - Network response interception for real-time data
-  - Direct API submission to http://localhost:3000/products
-  - Real-time error handling and logging
-  - Smart product validation and filtering
-- **Dropi API (`dropi-api/)**: Platform integration
-  - Session management and validation
-  - Product details updating and synchronization
+- **Database (`database/`)**: Local data management utilities
+- **Prompt Generation (`prompt-generation/`)**: AI prompt generation for product analysis
+  - Automated prompt creation for market research
+  - Product data formatting for AI assistants
 
 ### Configuration (`src/config/`)
 - File path management and application constants
@@ -104,7 +99,7 @@ npm install
 
 ### 2. Start the Backend API
 
-Make sure your local API server is running on http://localhost:3000 to receive scraped product data.
+Make sure your local API server is running on http://localhost:3000 to store and manage product data.
 
 ### 3. Run the App
 
@@ -117,10 +112,10 @@ npm start
 ## 📌 Features
 
 ### Core Functionality
-- ✅ **Session Management** – Automated Dropi login and session validation
-- 🔍 **Product Scraping** – Real-time product data extraction with API integration
-- 💾 **API-Based Storage** – Direct product submission to backend database
 - 🖼️ **Product Browser** – Advanced product viewer with search, filter, and status management
+- 📝 **Manual Product Entry** – Create and edit product information manually
+- 💾 **API-Based Storage** – Direct product management with backend database
+- 🔍 **Research Tools** – External search integration and analysis capabilities
 
 ### Research & Analysis Tools
 - 📊 **Comprehensive Findings Management**
@@ -134,7 +129,7 @@ npm start
   - Image-based reverse search functionality
   - Direct marketplace links for competitor research
 - 📋 **Product Status Management**
-  - Categorize products as "Worth Selling", "Skip", or "Not Sure"
+  - Categorize products as "Worth Selling", "Skip", or "In Research"
   - Visual status indicators and filtering options
   - Bulk status updates and management tools
 
@@ -170,6 +165,18 @@ npm start
 - Electron
 - Backend API server running on http://localhost:3000
 - Tested on Windows and macOS
+
+---
+
+## 📝 Usage
+
+This app focuses on manual product research and management. Key workflows include:
+
+1. **Manual Product Entry**: Create new products directly through the interface
+2. **Research & Analysis**: Use the comprehensive findings forms to track competitor data
+3. **External Search**: Leverage integrated search buttons for market research
+4. **Status Management**: Organize products with "Worth Selling", "Skip", or "In Research" statuses
+5. **Export & Analysis**: Generate AI-ready prompts and export findings
 
 ---
 

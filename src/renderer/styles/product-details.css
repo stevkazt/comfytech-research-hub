@@ -1058,3 +1058,31 @@ textarea {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
 }
+
+/* Edit Product Button */
+.edit-product-btn {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+}
+
+.edit-product-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  background: linear-gradient(135deg, #45a049 0%, #3e8e41 100%);
+}
+
+.edit-product-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+}

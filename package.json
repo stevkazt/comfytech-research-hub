@@ -1,7 +1,7 @@
 {
   "name": "dropi-app",
   "version": "1.0.0",
-  "description": "Dropi Product Research Desktop App",
+  "description": "Manual Product Management Desktop App for Dropi",
   "main": "src/main/index.js",
   "author": "ComfyTech",
   "license": "MIT",
@@ -89,9 +89,6 @@
     "csv-parser": "^3.2.0",
     "csv-writer": "^1.6.0",
     "json2csv": "^6.0.0-alpha.2",
-    "playwright": "^1.52.0",
-    "tesseract.js": "^6.0.1",
-    "tesseract.js-node": "^0.1.0",
     "trash": "^9.0.0"
   },
   "devDependencies": {
