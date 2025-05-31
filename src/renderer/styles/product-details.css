@@ -423,6 +423,9 @@ img {
   text-align: center;
   scrollbar-width: thin;
   scrollbar-color: var(--color-neutral-300) var(--color-neutral-100);
+  min-height: 30vh; /* Add minimum height of 30% viewport height */
+  align-items: center; /* Center images vertically in the container */
+  justify-content: flex-start; /* Start images from the left */
 }
 
 #image-slider::-webkit-scrollbar {
@@ -454,6 +457,19 @@ img {
 #image-slider img:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+}
+
+/* Add responsive adjustments for image slider */
+@media (max-height: 800px) {
+  #image-slider {
+    min-height: 25vh; /* Slightly smaller on shorter screens */
+  }
+}
+
+@media (max-height: 600px) {
+  #image-slider {
+    min-height: 20vh; /* Even smaller on very short screens */
+  }
 }
 
 .button-group {
@@ -788,7 +804,10 @@ textarea {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px; /* Reduced from 16px */
+  overflow-y: auto; /* Allow scrolling if needed */
+  max-height: 100%; /* Take full height */
+  padding-right: 4px; /* Space for scrollbar */
 }
 
 .sidebar .status-select-container {
@@ -1151,127 +1170,35 @@ textarea {
 
 #saved-findings h3,
 #trend-validation h3 {
-  margin: 0 0 16px 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2c3e50;
-}
-
-#trend-validation-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Trend validation specific styles */
-.trend-validation-item {
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 12px;
-  transition: all 0.2s ease;
-}
-
-.trend-validation-item:hover {
-  border-color: #bbdefb;
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
-}
-
-.trend-validation-header {
-  font-weight: 600;
-  color: #1976d2;
-  margin-bottom: 8px;
+  margin: 0;
   font-size: 14px;
-}
-
-.trend-validation-content {
-  color: #455a64;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-.trend-validation-meta {
-  margin-top: 8px;
-  padding-top: 8px;
-  border-top: 1px solid #e0e0e0;
-  color: #666;
-  font-size: 12px;
-}
-
-/* Trend Validation Form Styles */
-.trend-validation-form {
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
-}
-
-.trend-validation-form .form-group {
-  margin-bottom: 12px;
-}
-
-.trend-validation-form .field-label {
-  display: block;
-  font-weight: 500;
-  font-size: 13px;
+  font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 4px;
+  padding-bottom: 6px;
 }
 
-.trend-validation-form .form-control {
-  width: 100%;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 13px;
-  box-sizing: border-box;
-  background: #fff;
+.section-header {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-neutral-100);
+  border-bottom: 1px solid var(--color-neutral-200);
+  margin: 0;
+  flex-shrink: 0;
 }
 
-.trend-validation-form select.form-control {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 14px;
+.section-header h3 {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-neutral-800);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.trend-validation-form textarea.form-control {
-  resize: vertical;
-  min-height: 60px;
-  font-family: inherit;
-}
-
-.trend-validation-form .form-control:focus {
-  outline: none;
-  border-color: #2196f3;
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
-}
-
-.trend-validation-form .form-actions {
-  margin-top: 16px;
-  text-align: center;
-}
-
-.trend-validation-form .btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.trend-validation-form .btn-primary {
-  background: #2196f3;
-  color: white;
-}
-
-.trend-validation-form .btn-primary:hover {
-  background: #1976d2;
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+.research-list {
+  padding: var(--space-3);
+  overflow-y: auto;
+  flex: 1;
 }
 
 /* ================================
@@ -1279,61 +1206,56 @@ textarea {
    ================================ */
 
 .research-data-section {
-  margin-top: var(--spacing-6);
-  padding: var(--spacing-6);
+  margin-top: var(--space-1);
+  padding: var(--space-4);
   background: var(--color-neutral-50);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-neutral-200);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent overflow at this level */
 }
 
 .research-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-6);
+  gap: var(--space-6);
   align-items: start;
+  flex: 1;
+  overflow: hidden; /* Contain overflow at this level */
 }
 
 .research-section {
   background: white;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-neutral-200);
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Fill the available height */
 }
 
 .research-column {
   min-height: 300px;
+  height: 100%; /* Fill the column height */
+  display: flex;
+  flex-direction: column;
 }
 
 .section-header {
-  padding: var(--spacing-4) var(--spacing-5);
+  padding: var(--space-2) var(--space-4);
   background: var(--color-neutral-100);
   border-bottom: 1px solid var(--color-neutral-200);
   margin: 0;
-}
-
-.section-header h3 {
-  margin: 0;
-  font-size: var(--text-lg);
-  font-weight: 600;
-  color: var(--color-neutral-800);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
+  flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .research-list {
-  padding: var(--spacing-4);
-  min-height: 250px;
-}
-
-.research-list:empty::after {
-  content: "No data added yet. Use the buttons in the sidebar to add research findings or trend analysis.";
-  display: block;
-  text-align: center;
-  color: var(--color-neutral-500);
-  font-style: italic;
-  padding: var(--spacing-8) var(--spacing-4);
+  padding: var(--space-3);
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex: 1; /* Take up remaining space */
 }
 
 /* Responsive Design */
@@ -1366,4 +1288,88 @@ textarea {
     padding: var(--spacing-3);
     min-height: 200px;
   }
+}
+
+.three-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.price-suggestions-column {
+  text-align: center;
+}
+
+.product-status-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .three-columns {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .product-status-column {
+    justify-content: flex-start;
+  }
+}
+
+/* Trend validation specific styles */
+.trend-validation-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  margin-bottom: 12px; /* Add vertical separation between items */
+}
+
+.trend-validation-item:last-child {
+  margin-bottom: 0; /* Remove margin from last item */
+}
+
+/* Add to existing CSS */
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px; /* Reduced from 12px */
+}
+
+.tool-section {
+  margin-bottom: 12px; /* Reduced from 20px */
+}
+
+.tool-section:last-child {
+  margin-bottom: 4px; /* Even less margin on the last section */
+}
+
+.section-title {
+  font-size: 14px; /* Smaller section titles */
+  margin: 0 0 8px 0; /* Reduced top/bottom margin */
+  padding: 0;
+}
+
+.tool-btn {
+  padding: 8px; /* Reduced from 12px */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px; /* Reduced space between icon and text */
+}
+
+.btn-icon {
+  font-size: 1.1rem; /* Slightly reduced */
+  margin-bottom: 2px;
+}
+
+.btn-text {
+  font-size: 0.8rem; /* Smaller text */
+  text-align: center;
+  line-height: 1.1; /* Tighter line height */
 }

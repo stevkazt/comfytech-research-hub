@@ -8,12 +8,12 @@ async function updateProductStatus(status) {
     try {
         // Get productId from window object or localStorage fallback
         const productId = window.productId || localStorage.getItem('currentProductId');
-        
+
         if (!productId) {
             alert('❌ No product ID found. Please refresh the page.');
             return;
         }
-        
+
         console.log('🔄 [DEBUG] Updating status for product ID:', productId, 'Type:', typeof productId, 'Status:', status);
 
         // Get current product data first
@@ -39,7 +39,7 @@ async function generateAndCopyPrompt() {
     try {
         // Get productId from window object or localStorage fallback
         const productId = window.productId || localStorage.getItem('currentProductId');
-        
+
         console.log('🤖 [DEBUG] Generating AI prompt for product ID:', productId);
 
         // Validate that productId is available
@@ -79,7 +79,7 @@ async function showEditProductModal() {
     try {
         // Get productId from window object or localStorage fallback
         const productId = window.productId || localStorage.getItem('currentProductId');
-        
+
         console.log('✏️ [DEBUG] Opening edit modal for product ID:', productId);
 
         if (!productId) {
@@ -280,7 +280,7 @@ async function deleteProduct() {
     try {
         // Get productId from window object or localStorage fallback
         const productId = window.productId || localStorage.getItem('currentProductId');
-        
+
         if (!productId) {
             alert('❌ No product ID found. Please refresh the page.');
             return;
@@ -292,7 +292,7 @@ async function deleteProduct() {
         const productName = product.name || 'this product';
 
         const isConfirmed = confirm(`❗️ WARNING: Are you sure you want to permanently delete "${productName}"?\n\nThis action cannot be undone.`);
-        
+
         if (!isConfirmed) {
             return; // User cancelled
         }
@@ -301,14 +301,14 @@ async function deleteProduct() {
 
         // Delete the product via API
         await axios.delete(`http://localhost:3000/products/${productId}`);
-        
+
         // Show success notification
         alert(`✅ Product "${productName}" has been deleted successfully.`);
-        
+
         // Close the window or navigate back
         const { ipcRenderer } = require('electron');
         ipcRenderer.send('close-product-details');
-        
+
     } catch (error) {
         console.error('❌ [DEBUG] Error deleting product:', error);
         alert('❌ Error deleting product: ' + (error.response?.data?.message || error.message));

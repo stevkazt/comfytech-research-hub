@@ -36,7 +36,7 @@ function renderProduct(product) {
     // Set both window.productId and global productId variable
     window.productId = product.id;
     window.productData = product; // Store full product data for debugging
-    
+
     // Store productId in localStorage for persistence between refreshes
     localStorage.setItem('currentProductId', product.id);
     console.log('💾 [DEBUG] Saved productId to localStorage:', product.id);
@@ -79,13 +79,13 @@ function renderProduct(product) {
 function initializeProductOnLoad() {
     // Check if we have a productId stored in localStorage
     const storedProductId = localStorage.getItem('currentProductId');
-    
+
     if (storedProductId) {
         console.log('🔄 [DEBUG] Found stored productId in localStorage:', storedProductId);
-        
+
         // Set the window.productId to the stored value
         window.productId = storedProductId;
-        
+
         // Fetch and render the product
         fetchAndRenderProduct(storedProductId);
     } else {
@@ -97,12 +97,12 @@ function initializeProductOnLoad() {
 async function fetchAndRenderProduct(productId) {
     try {
         console.log('🔍 [DEBUG] Fetching product with ID:', productId);
-        
+
         const response = await axios.get(`http://localhost:3000/products/${productId}`);
         const product = response.data;
-        
+
         console.log('✅ [DEBUG] Product loaded successfully:', product.name);
-        
+
         // Render the product
         renderProduct(product);
     } catch (error) {
@@ -298,7 +298,7 @@ function initUI() {
     } catch (error) {
         console.log('Modal functions not yet available for count badges');
     }
-    
+
     // Initialize product on page load/refresh
     initializeProductOnLoad();
 }

@@ -14,13 +14,18 @@
     <!-- Left Column -->
     <div class="content-column">
       <div id="product-info" class="product-info-section">
-        <div class="product-info-columns">
+        <div class="product-info-columns three-columns">
+          <!-- Column 1: Title, ID and Price -->
           <div class="product-details-column">
             <h2 id="title">Cargando...</h2>
             <p>
               <strong>ID:</strong> <a href="#" id="product-id-link" data-id=""><span id="product-id">...</span></a> |
               <strong>Precio:</strong> <span id="price">...</span> (Dropi)
             </p>
+          </div>
+
+          <!-- Column 2: Price Suggestions -->
+          <div class="price-suggestions-column">
             <div class="price-suggestions">
               <strong>Precios sugeridos:</strong><br />
               <span id="price-high" class="price-high"></span> |
@@ -28,6 +33,8 @@
               <span id="price-low" class="price-low"></span>
             </div>
           </div>
+
+          <!-- Column 3: Product Status -->
           <div class="product-status-column">
             <div class="status-select-container">
               <label for="product-status">Product Status:</label>
