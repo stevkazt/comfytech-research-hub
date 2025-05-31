@@ -10,7 +10,7 @@ async function saveFindings(productId) {
     wrappers.forEach(wrapper => {
         // Debug: Log the finding ID being processed
         console.log('🔍 [DEBUG] Processing wrapper with finding ID:', wrapper.dataset.findingId);
-        
+
         // Use optional chaining and fallback for all value accesses
         const price = wrapper.querySelector('input[name="price"]')?.value?.replace(/[^\d.]/g, '')?.trim() || '';
         const match = wrapper.querySelector('select[name="match"]')?.value || '';
@@ -63,10 +63,10 @@ async function saveFindings(productId) {
             imageQuality,
             imageMatch
         };
-        
+
         // Debug: Log the complete finding data
         console.log('🔍 [DEBUG] Finding data created:', findingData);
-        
+
         findings.push(findingData);
     });
 
@@ -189,7 +189,7 @@ function renderFindingsList(findingsArr) {
 
         findingsList.appendChild(li);
     });
-    
+
     // Update count badge
     const countBadge = document.getElementById('findings-count');
     if (countBadge) {
@@ -210,15 +210,15 @@ window.editFinding = async function (findingId) {
 
         // Import modal functions
         const { openFindingsModal } = require('./modal-functions');
-        
+
         // Open the findings modal
         openFindingsModal();
-        
+
         // Wait for modal to be fully rendered, then pre-populate with existing data
         setTimeout(() => {
             const modalContainer = document.getElementById('findings-modal-container');
             const wrapper = modalContainer.querySelector('.finding-entry');
-            
+
             if (!wrapper) {
                 console.error('Modal wrapper not found');
                 return;
@@ -279,7 +279,7 @@ window.editFinding = async function (findingId) {
             // Focus on first input
             const firstInput = wrapper.querySelector('input');
             if (firstInput) firstInput.focus();
-            
+
         }, 100);
 
     } catch (error) {

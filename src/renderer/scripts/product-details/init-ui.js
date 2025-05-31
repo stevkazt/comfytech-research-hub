@@ -36,6 +36,10 @@ function renderProduct(product) {
     // Set both window.productId and global productId variable
     window.productId = product.id;
     window.productData = product; // Store full product data for debugging
+    
+    // Store productId in localStorage for persistence between refreshes
+    localStorage.setItem('currentProductId', product.id);
+    console.log('💾 [DEBUG] Saved productId to localStorage:', product.id);
 
     console.log('🔗 [DEBUG] Set window.productId to:', window.productId, 'Type:', typeof window.productId);
 
@@ -69,6 +73,42 @@ function renderProduct(product) {
         }
     }
 
+}
+
+// Add a new function to initialize product on page load/refresh
+function initializeProductOnLoad() {
+    // Check if we have a productId stored in localStorage
+    const storedProductId = localStorage.getItem('currentProductId');
+    
+    if (storedProductId) {
+        console.log('🔄 [DEBUG] Found stored productId in localStorage:', storedProductId);
+        
+        // Set the window.productId to the stored value
+        window.productId = storedProductId;
+        
+        // Fetch and render the product
+        fetchAndRenderProduct(storedProductId);
+    } else {
+        console.log('⚠️ [DEBUG] No productId found in localStorage');
+    }
+}
+
+// Create a new function to fetch and render product
+async function fetchAndRenderProduct(productId) {
+    try {
+        console.log('🔍 [DEBUG] Fetching product with ID:', productId);
+        
+        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const product = response.data;
+        
+        console.log('✅ [DEBUG] Product loaded successfully:', product.name);
+        
+        // Render the product
+        renderProduct(product);
+    } catch (error) {
+        console.error('❌ [DEBUG] Error loading product:', error);
+        alert('❌ Error loading product: ' + (error.response?.data?.message || error.message));
+    }
 }
 
 // Tab switching functionality
@@ -250,7 +290,7 @@ function initUI() {
 
     // Set up image modal
     setupImageModal();
-    
+
     // Initialize count badges for research tabs
     try {
         const { initializeCountBadges } = require('./modal-functions');
@@ -258,10 +298,14 @@ function initUI() {
     } catch (error) {
         console.log('Modal functions not yet available for count badges');
     }
+    
+    // Initialize product on page load/refresh
+    initializeProductOnLoad();
 }
 
 module.exports = {
     initUI,
     renderProduct,
-    switchTab
+    switchTab,
+    fetchAndRenderProduct
 };

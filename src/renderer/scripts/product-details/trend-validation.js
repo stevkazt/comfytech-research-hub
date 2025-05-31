@@ -225,7 +225,7 @@ function renderSavedTrendValidations(trendValidations) {
 
     container.appendChild(item);
   });
-  
+
   // Update count badge
   const countBadge = document.getElementById('trends-count');
   if (countBadge) {
@@ -300,15 +300,15 @@ async function editTrendValidation(trendId) {
 
     // Import modal functions
     const { openTrendsModal } = require('./modal-functions');
-    
+
     // Open the trends modal
     openTrendsModal();
-    
+
     // Wait for modal to be fully rendered, then pre-populate with existing data
     setTimeout(() => {
       const modalContainer = document.getElementById('trends-modal-container');
       const wrapper = modalContainer.querySelector('.trend-validation-entry');
-      
+
       if (!wrapper) {
         console.error('Modal wrapper not found');
         return;

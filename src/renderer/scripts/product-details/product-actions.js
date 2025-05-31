@@ -6,6 +6,14 @@ const productToPrompt = require('../../../services/prompt-generation/autoPromptG
 
 async function updateProductStatus(status) {
     try {
+        // Get productId from window object or localStorage fallback
+        const productId = window.productId || localStorage.getItem('currentProductId');
+        
+        if (!productId) {
+            alert('❌ No product ID found. Please refresh the page.');
+            return;
+        }
+        
         console.log('🔄 [DEBUG] Updating status for product ID:', productId, 'Type:', typeof productId, 'Status:', status);
 
         // Get current product data first
@@ -29,17 +37,20 @@ async function updateProductStatus(status) {
 
 async function generateAndCopyPrompt() {
     try {
-        console.log('🤖 [DEBUG] Generating AI prompt for product ID:', window.productId, 'Type:', typeof window.productId);
+        // Get productId from window object or localStorage fallback
+        const productId = window.productId || localStorage.getItem('currentProductId');
+        
+        console.log('🤖 [DEBUG] Generating AI prompt for product ID:', productId);
 
         // Validate that productId is available
-        if (!window.productId) {
+        if (!productId) {
             alert('❌ No product ID found. Please refresh the page.');
             return;
         }
 
         console.log('📡 [DEBUG] Fetching product data from API...');
         // Get current product data from the API
-        const response = await axios.get(`http://localhost:3000/products/${window.productId}`);
+        const response = await axios.get(`http://localhost:3000/products/${productId}`);
         const product = response.data;
 
         console.log('📋 [DEBUG] Found product:', product.name, 'ID:', product.id);
@@ -66,17 +77,20 @@ async function generateAndCopyPrompt() {
 // Function to show edit product modal
 async function showEditProductModal() {
     try {
-        console.log('✏️ [DEBUG] Opening edit modal for product ID:', window.productId);
+        // Get productId from window object or localStorage fallback
+        const productId = window.productId || localStorage.getItem('currentProductId');
         
-        if (!window.productId) {
+        console.log('✏️ [DEBUG] Opening edit modal for product ID:', productId);
+
+        if (!productId) {
             alert('❌ No product ID found. Please refresh the page.');
             return;
         }
 
         // Get current product data
-        const response = await axios.get(`http://localhost:3000/products/${window.productId}`);
+        const response = await axios.get(`http://localhost:3000/products/${productId}`);
         const product = response.data;
-        
+
         console.log('📋 [DEBUG] Current product data:', product);
 
         return new Promise((resolve) => {
@@ -126,10 +140,10 @@ async function showEditProductModal() {
                     </div>
                 </div>
             `;
-            
+
             // Add modal to DOM
             document.body.insertAdjacentHTML('beforeend', modalHTML);
-            
+
             const modal = document.getElementById('editProductModal');
             const nameInput = document.getElementById('editProductName');
             const priceInput = document.getElementById('editProductPrice');
@@ -138,10 +152,10 @@ async function showEditProductModal() {
             const cancelBtn = document.getElementById('editCancelBtn');
             const saveBtn = document.getElementById('editSaveBtn');
             const addImageBtn = document.getElementById('addEditImageBtn');
-            
+
             // Focus on name input
             nameInput.focus();
-            
+
             // Add image button functionality
             addImageBtn.addEventListener('click', () => {
                 const imageInputs = document.getElementById('editImageInputs');
@@ -153,7 +167,7 @@ async function showEditProductModal() {
                 `;
                 imageInputs.appendChild(newInputDiv);
             });
-            
+
             // Helper function to remove image input
             window.removeEditImageInput = (button) => {
                 const container = button.parentNode;
@@ -164,23 +178,23 @@ async function showEditProductModal() {
                     alert('Must keep at least one image field');
                 }
             };
-            
+
             // Handle cancel
             const closeModal = () => {
                 modal.remove();
                 delete window.removeEditImageInput;
                 resolve(null);
             };
-            
+
             cancelBtn.addEventListener('click', closeModal);
-            
+
             // Handle click outside modal
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     closeModal();
                 }
             });
-            
+
             // Handle escape key
             const handleEscape = (e) => {
                 if (e.key === 'Escape') {
@@ -189,23 +203,23 @@ async function showEditProductModal() {
                 }
             };
             document.addEventListener('keydown', handleEscape);
-            
+
             // Handle save
             saveBtn.addEventListener('click', async () => {
                 const name = nameInput.value.trim();
-                
+
                 if (!name) {
                     alert('Please enter a product name');
                     nameInput.focus();
                     return;
                 }
-                
+
                 // Collect image URLs
                 const imageInputs = document.querySelectorAll('.edit-image-input');
                 const images = Array.from(imageInputs)
                     .map(input => input.value.trim())
                     .filter(url => url.length > 0);
-                
+
                 const updatedProduct = {
                     ...product, // Keep existing data
                     name: name,
@@ -216,34 +230,34 @@ async function showEditProductModal() {
                     description_html: descriptionInput.value.trim(),
                     description: descriptionInput.value.trim()
                 };
-                
+
                 console.log('💾 [DEBUG] Updating product with data:', updatedProduct);
-                
+
                 try {
                     saveBtn.disabled = true;
                     saveBtn.textContent = 'Saving...';
-                    
+
                     // Use IPC handler for updating product
                     const { ipcRenderer } = require('electron');
                     const updateResponse = await ipcRenderer.invoke('update-product-details', window.productId, updatedProduct);
                     console.log('✅ [DEBUG] Product updated successfully:', updateResponse);
-                    
+
                     document.removeEventListener('keydown', handleEscape);
                     modal.remove();
                     delete window.removeEditImageInput;
                     resolve(updateResponse);
-                    
+
                     // Refresh the product display by re-fetching from API and re-rendering
                     console.log('🔄 [DEBUG] Refreshing product display...');
                     try {
                         const refreshResponse = await axios.get(`http://localhost:3000/products/${window.productId}`);
                         const updatedProductData = refreshResponse.data;
                         console.log('📋 [DEBUG] Refreshed product data:', updatedProductData);
-                        
+
                         // Import and call the renderProduct function from init-ui.js to properly refresh all elements
                         const { renderProduct } = require('./init-ui');
                         renderProduct(updatedProductData);
-                        
+
                         console.log('✅ [DEBUG] Product display refreshed successfully using renderProduct');
                     } catch (refreshError) {
                         console.error('❌ [DEBUG] Error refreshing product display:', refreshError);
@@ -262,4 +276,43 @@ async function showEditProductModal() {
     }
 }
 
-module.exports = { updateProductStatus, generateAndCopyPrompt, showEditProductModal };
+async function deleteProduct() {
+    try {
+        // Get productId from window object or localStorage fallback
+        const productId = window.productId || localStorage.getItem('currentProductId');
+        
+        if (!productId) {
+            alert('❌ No product ID found. Please refresh the page.');
+            return;
+        }
+
+        // Show confirmation dialog with product name
+        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const product = response.data;
+        const productName = product.name || 'this product';
+
+        const isConfirmed = confirm(`❗️ WARNING: Are you sure you want to permanently delete "${productName}"?\n\nThis action cannot be undone.`);
+        
+        if (!isConfirmed) {
+            return; // User cancelled
+        }
+
+        console.log('🗑️ [DEBUG] Deleting product ID:', productId);
+
+        // Delete the product via API
+        await axios.delete(`http://localhost:3000/products/${productId}`);
+        
+        // Show success notification
+        alert(`✅ Product "${productName}" has been deleted successfully.`);
+        
+        // Close the window or navigate back
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.send('close-product-details');
+        
+    } catch (error) {
+        console.error('❌ [DEBUG] Error deleting product:', error);
+        alert('❌ Error deleting product: ' + (error.response?.data?.message || error.message));
+    }
+}
+
+module.exports = { updateProductStatus, generateAndCopyPrompt, showEditProductModal, deleteProduct };

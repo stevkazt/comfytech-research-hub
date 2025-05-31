@@ -100,11 +100,11 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
     try {
         console.log('📝 [DEBUG] Updating product details for ID:', id);
         console.log('📝 [DEBUG] Updated product data:', updatedProduct);
-        
+
         // Save via API
         const response = await axios.put(`http://localhost:3000/products/${id}`, updatedProduct);
         console.log('✅ [DEBUG] Product details updated successfully:', response.data);
-        
+
         return response.data;
     } catch (error) {
         console.error('❌ [DEBUG] Error updating product details:', error);

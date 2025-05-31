@@ -940,15 +940,14 @@ textarea {
 }
 
 .delete-btn {
-  background: var(--color-danger-light);
+  background-color: var(--color-danger-light);
   color: var(--color-danger-dark);
-  border: 1px solid var(--color-danger-light);
+  border: 1px solid var(--color-danger);
 }
 
 .delete-btn:hover {
-  background: var(--color-danger-light);
-  border-color: var(--color-danger);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--color-danger);
+  color: white;
 }
 
 /* Modal System Styles */
