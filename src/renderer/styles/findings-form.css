@@ -1,42 +1,43 @@
-/* Product Findings Form Styles */
+/* Product Findings Form Styles - Using theme variables */
 .finding-form {
-  background: #f8f9fa;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 16px;
+  background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-sm);
 }
 
 .finding-form .form-group {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
 }
 
 .finding-form .field-label {
   display: block;
-  font-weight: 500;
-  color: #2c3e50;
-  font-size: 13px;
-  margin-bottom: 6px;
-  letter-spacing: 0.3px;
+  font-weight: var(--font-medium);
+  color: var(--color-neutral-700);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-1);
 }
 
 .finding-form .form-control {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 13px;
-  background: #fff;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  background: white;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .finding-form select.form-control {
   cursor: pointer;
-  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23666" d="M6 8L0 2h12z"/></svg>') no-repeat right 8px center;
+  background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="none" viewBox="0 0 12 6"><path fill="%236B7280" d="M6 6L0 0h12L6 6z"/></svg>') no-repeat right var(--space-3) center;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  padding-right: var(--space-6);
 }
 
 .finding-form textarea.form-control {
@@ -47,49 +48,52 @@
 
 .finding-form .form-control:focus {
   outline: none;
-  border-color: #2196f3;
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+  border-color: var(--color-primary-400);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
 }
 
 .finding-form .form-control:hover {
-  border-color: #bbb;
+  border-color: var(--color-neutral-300);
 }
 
 /* Save button specific styling */
 #save-findings-btn {
   width: 100%;
-  margin-top: 16px;
-  background: #2196f3;
+  margin-top: var(--space-4);
+  background: var(--color-primary-500);
   color: white;
-  padding: 12px 20px;
+  padding: var(--space-3) var(--space-4);
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #save-findings-btn:hover {
-  background: #1976d2;
-  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+  background: var(--color-primary-600);
+  box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
 #save-findings-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .finding-form {
-    padding: 12px;
+    padding: var(--space-3);
   }
   
   .finding-form .form-control {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: calc(var(--space-2) - 2px) var(--space-2);
+    font-size: var(--text-xs);
   }
 }

@@ -1,5 +1,4 @@
 const { renderFindingsList } = require('./findings-storage');
-const { addFinding } = require('./findings-form');
 const { addTrendValidationForm, renderSavedTrendValidations } = require('./trend-validation');
 const { ipcRenderer, shell } = require('electron');
 const axios = require('axios');
@@ -63,15 +62,8 @@ function renderProduct(product) {
         renderFindingsList(product.findings);
     }
 
-    // Initialize trend validation in the new form container
-    if (typeof addTrendValidationForm === 'function') {
-        const trendFormContainer = document.getElementById('trend-validation-form-container');
-        if (trendFormContainer) {
-            trendFormContainer.innerHTML = ''; // Clear existing content
-            addTrendValidationForm();
-        }
-
-        // Render existing trend validation data in the saved area
+    // Render existing trend validation data in the saved area
+    if (typeof renderSavedTrendValidations === 'function') {
         if (product.trendValidation && product.trendValidation.length > 0) {
             renderSavedTrendValidations(product.trendValidation);
         }
@@ -256,11 +248,16 @@ function initUI() {
         }
     });
 
-    // Initialize findings form
-    addFinding();
-
     // Set up image modal
     setupImageModal();
+    
+    // Initialize count badges for research tabs
+    try {
+        const { initializeCountBadges } = require('./modal-functions');
+        initializeCountBadges();
+    } catch (error) {
+        console.log('Modal functions not yet available for count badges');
+    }
 }
 
 module.exports = {

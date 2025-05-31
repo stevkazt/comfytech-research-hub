@@ -172,7 +172,6 @@ async function saveTrendValidation() {
     addTrendValidationForm();
     renderSavedTrendValidations(product.trendValidation);
 
-    alert('✅ Trend validation data saved successfully');
   } catch (error) {
     console.error('Error saving trend validation:', error);
     alert('❌ Error saving trend validation data: ' + (error.response?.data?.message || error.message));
@@ -186,6 +185,9 @@ function renderSavedTrendValidations(trendValidations) {
     if (container) {
       container.innerHTML = '<p style="color: #666; font-style: italic; text-align: center; padding: 20px;">No trend data saved yet.</p>';
     }
+    // Update count badge
+    const countBadge = document.getElementById('trends-count');
+    if (countBadge) countBadge.textContent = '0';
     return;
   }
 
@@ -223,6 +225,12 @@ function renderSavedTrendValidations(trendValidations) {
 
     container.appendChild(item);
   });
+  
+  // Update count badge
+  const countBadge = document.getElementById('trends-count');
+  if (countBadge) {
+    countBadge.textContent = trendValidations.length.toString();
+  }
 }
 
 function renderTrendValidationList(trendValidations) {
@@ -290,40 +298,51 @@ async function editTrendValidation(trendId) {
       return;
     }
 
-    // Create edit form by adding a new form and populating it with existing data
-    addTrendValidationForm();
-
-    // Wait for the form to be created, then populate it
+    // Import modal functions
+    const { openTrendsModal } = require('./modal-functions');
+    
+    // Open the trends modal
+    openTrendsModal();
+    
+    // Wait for modal to be fully rendered, then pre-populate with existing data
     setTimeout(() => {
-      const forms = document.querySelectorAll('.trend-validation-form');
-      const lastForm = forms[forms.length - 1]; // Get the newest form
-
-      if (lastForm) {
-        // Populate the form with existing data
-        lastForm.querySelector('[name="trendSource"]').value = trend.trendSource || '';
-        lastForm.querySelector('[name="trendStatus"]').value = trend.trendStatus || '';
-        lastForm.querySelector('[name="searchVolume"]').value = trend.searchVolume || '';
-        lastForm.querySelector('[name="competition"]').value = trend.competition || '';
-        lastForm.querySelector('[name="targetAudience"]').value = trend.targetAudience || '';
-        lastForm.querySelector('[name="keywords"]').value = trend.keywords || '';
-        lastForm.querySelector('[name="researchLink"]').value = trend.researchLink || '';
-        lastForm.querySelector('[name="trendNotes"]').value = trend.trendNotes || '';
-
-        // Store the trend ID in the form for editing
-        lastForm.setAttribute('data-editing-id', trendId);
-
-        // Add a visual indicator that this is an edit
-        const formHeader = lastForm.querySelector('.form-group');
-        if (formHeader) {
-          const editIndicator = document.createElement('div');
-          editIndicator.style.cssText = 'background: #e3f2fd; color: #1976d2; padding: 6px 12px; border-radius: 4px; margin-bottom: 12px; font-size: 12px; font-weight: bold; text-align: center;';
-          editIndicator.textContent = '✏️ Editing Trend Validation Data';
-          formHeader.parentNode.insertBefore(editIndicator, formHeader);
-        }
-
-        // Scroll to the form
-        lastForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const modalContainer = document.getElementById('trends-modal-container');
+      const wrapper = modalContainer.querySelector('.trend-validation-entry');
+      
+      if (!wrapper) {
+        console.error('Modal wrapper not found');
+        return;
       }
+
+      const form = wrapper.querySelector('.trend-validation-form');
+      if (!form) {
+        console.error('Modal form not found');
+        return;
+      }
+
+      // Store the trend ID for editing
+      form.setAttribute('data-editing-id', trendId);
+
+      // Populate the form with existing data
+      form.querySelector('[name="trendSource"]').value = trend.trendSource || '';
+      form.querySelector('[name="trendStatus"]').value = trend.trendStatus || '';
+      form.querySelector('[name="searchVolume"]').value = trend.searchVolume || '';
+      form.querySelector('[name="competition"]').value = trend.competition || '';
+      form.querySelector('[name="targetAudience"]').value = trend.targetAudience || '';
+      form.querySelector('[name="keywords"]').value = trend.keywords || '';
+      form.querySelector('[name="researchLink"]').value = trend.researchLink || '';
+      form.querySelector('[name="trendNotes"]').value = trend.trendNotes || '';
+
+      // Update modal title to indicate editing
+      const modalHeader = document.querySelector('#trendsModal .modal-header h3');
+      if (modalHeader) {
+        modalHeader.textContent = 'Edit Trend Analysis';
+      }
+
+      // Focus on first input
+      const firstInput = form.querySelector('select, input');
+      if (firstInput) firstInput.focus();
+
     }, 100);
 
   } catch (error) {

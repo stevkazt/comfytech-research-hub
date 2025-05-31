@@ -5,6 +5,7 @@ const findingsForm = require('./findings-form.js');
 const findingsStorage = require('./findings-storage.js');
 const searchButtons = require('./search-buttons.js');
 const trendValidation = require('./trend-validation.js');
+const modalFunctions = require('./modal-functions.js');
 
 module.exports = {
     ...productActions,
@@ -12,6 +13,7 @@ module.exports = {
     ...findingsStorage,
     ...searchButtons,
     ...trendValidation,
+    ...modalFunctions,
     initUI,
     switchTab
 };
@@ -43,3 +45,11 @@ window.searchTikTokAds = searchButtons.searchTikTokAds;
 window.searchFacebookAds = searchButtons.searchFacebookAds;
 window.searchInstagram = searchButtons.searchInstagram;
 window.searchYouTube = searchButtons.searchYouTube;
+
+// Modal functions
+window.openFindingsModal = modalFunctions.openFindingsModal;
+window.closeFindingsModal = modalFunctions.closeFindingsModal;
+window.saveFindingsFromModal = modalFunctions.saveFindingsFromModal;
+window.openTrendsModal = modalFunctions.openTrendsModal;
+window.closeTrendsModal = modalFunctions.closeTrendsModal;
+window.saveTrendsFromModal = modalFunctions.saveTrendsFromModal;

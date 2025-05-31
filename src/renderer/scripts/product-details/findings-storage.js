@@ -1,6 +1,6 @@
 const { ipcRenderer, shell } = require('electron');
 const axios = require('axios');
-const { getFindingFormHTML, setupTagToggles, addFinding } = require('./findings-form');
+const { getFindingFormHTML } = require('./findings-form');
 
 async function saveFindings(productId) {
     const container = document.getElementById('findings-container');
@@ -8,6 +8,9 @@ async function saveFindings(productId) {
     const findings = [];
 
     wrappers.forEach(wrapper => {
+        // Debug: Log the finding ID being processed
+        console.log('🔍 [DEBUG] Processing wrapper with finding ID:', wrapper.dataset.findingId);
+        
         // Use optional chaining and fallback for all value accesses
         const price = wrapper.querySelector('input[name="price"]')?.value?.replace(/[^\d.]/g, '')?.trim() || '';
         const match = wrapper.querySelector('select[name="match"]')?.value || '';
@@ -27,8 +30,20 @@ async function saveFindings(productId) {
         const imageQuality = wrapper.querySelector('select[name="imageQuality"]')?.value || '';
         const imageMatch = wrapper.querySelector('select[name="imageMatch"]')?.value || '';
 
+        // Debug: Log the extracted select values
+        console.log('🔍 [DEBUG] Extracted select values:', {
+            match,
+            stock,
+            origin,
+            sellerType,
+            listingType,
+            badges,
+            imageQuality,
+            imageMatch
+        });
+
         // format values and push to findings array
-        findings.push({
+        const findingData = {
             id: wrapper.dataset.findingId || `${Date.now()}-${Math.floor(Math.random() * 100000)}`,
             price,
             match,
@@ -47,7 +62,12 @@ async function saveFindings(productId) {
             notes,
             imageQuality,
             imageMatch
-        });
+        };
+        
+        // Debug: Log the complete finding data
+        console.log('🔍 [DEBUG] Finding data created:', findingData);
+        
+        findings.push(findingData);
     });
 
     console.log("🧾 Saving entries:", findings);
@@ -64,25 +84,32 @@ async function saveFindings(productId) {
         // Remove old entries with the same IDs as the new findings
         findings.forEach(newFinding => {
             const index = product.findings.findIndex(f => f.id === newFinding.id);
+            console.log(`🔍 [DEBUG] Looking for existing finding with ID: ${newFinding.id}, found at index: ${index}`);
             if (index !== -1) {
+                console.log(`🔍 [DEBUG] Removing old finding at index ${index}:`, product.findings[index]);
                 product.findings.splice(index, 1); // Remove the old entry
             }
         });
 
         // Add the new findings
+        console.log('🔍 [DEBUG] Adding new findings:', findings);
         product.findings = [...product.findings, ...findings];
 
         // Update the product via API
+        console.log('🔍 [DEBUG] About to update product via API with data:', product);
         await axios.put(`http://localhost:3000/products/${productId}`, product);
+        console.log('✅ [DEBUG] Product updated successfully via API');
 
         container.innerHTML = '';
-        addFinding();
 
         // Re-read and update UI from API
+        console.log('🔍 [DEBUG] Re-fetching product data to refresh UI...');
         const updatedResponse = await axios.get(`http://localhost:3000/products/${productId}`);
         const updatedProduct = updatedResponse.data;
+        console.log('✅ [DEBUG] Refreshed product data:', updatedProduct);
 
         if (updatedProduct && updatedProduct.findings) {
+            console.log('🔍 [DEBUG] About to render findings list with:', updatedProduct.findings);
             renderFindingsList(updatedProduct.findings);
             // Update images if they changed
             if (updatedProduct.images && Array.isArray(updatedProduct.images)) {
@@ -104,9 +131,17 @@ async function saveFindings(productId) {
 
 
 function renderFindingsList(findingsArr) {
+    console.log('🔍 [DEBUG] renderFindingsList called with:', findingsArr);
     const findingsList = document.getElementById('findings-list');
     findingsList.innerHTML = '';
-    if (!findingsArr || !Array.isArray(findingsArr)) return;
+    if (!findingsArr || !Array.isArray(findingsArr)) {
+        console.log('🔍 [DEBUG] No findings array provided or empty');
+        // Update count badge
+        const countBadge = document.getElementById('findings-count');
+        if (countBadge) countBadge.textContent = '0';
+        return;
+    }
+    console.log('🔍 [DEBUG] Rendering', findingsArr.length, 'findings');
     findingsArr.forEach(finding => {
         const li = document.createElement('li');
         li.innerHTML = `
@@ -154,6 +189,12 @@ function renderFindingsList(findingsArr) {
 
         findingsList.appendChild(li);
     });
+    
+    // Update count badge
+    const countBadge = document.getElementById('findings-count');
+    if (countBadge) {
+        countBadge.textContent = findingsArr.length.toString();
+    }
 }
 
 // Global functions for edit and delete actions
@@ -167,50 +208,80 @@ window.editFinding = async function (findingId) {
         const finding = product.findings.find(f => f.id === findingId);
         if (!finding) return;
 
-        const container = document.getElementById('findings-container');
-        container.innerHTML = '';
-        const wrapper = document.createElement('div');
-        wrapper.dataset.findingId = finding.id;
-        wrapper.innerHTML = getFindingFormHTML();
-        wrapper.className = 'finding-entry';
+        // Import modal functions
+        const { openFindingsModal } = require('./modal-functions');
+        
+        // Open the findings modal
+        openFindingsModal();
+        
+        // Wait for modal to be fully rendered, then pre-populate with existing data
+        setTimeout(() => {
+            const modalContainer = document.getElementById('findings-modal-container');
+            const wrapper = modalContainer.querySelector('.finding-entry');
+            
+            if (!wrapper) {
+                console.error('Modal wrapper not found');
+                return;
+            }
 
-        // Pre-fill input fields
-        const preFillInputs = {
-            price: finding.price,
-            store: finding.store,
-            variant: finding.variant,
-            link: finding.link,
-            rating: finding.rating,
-            review_count: finding.review_count,
-            deliveryTime: finding.deliveryTime,
-            shippingCost: finding.shippingCost
-        };
+            // Store the finding ID for editing
+            wrapper.dataset.findingId = finding.id;
 
-        Object.entries(preFillInputs).forEach(([name, value]) => {
-            const input = wrapper.querySelector(`input[name="${name}"]`);
-            if (input) input.value = value || '';
-        });
+            // Pre-fill input fields
+            const preFillInputs = {
+                price: finding.price,
+                store: finding.store,
+                variant: finding.variant,
+                link: finding.link,
+                rating: finding.rating,
+                review_count: finding.review_count,
+                deliveryTime: finding.deliveryTime,
+                shippingCost: finding.shippingCost
+            };
 
-        const notesTextarea = wrapper.querySelector('textarea[name="notes"]');
-        if (notesTextarea) notesTextarea.value = finding.notes || '';
+            Object.entries(preFillInputs).forEach(([name, value]) => {
+                const input = wrapper.querySelector(`input[name="${name}"]`);
+                if (input) input.value = value || '';
+            });
 
-        const selectFields = {
-            match: finding.match,
-            stock: finding.stock,
-            origin: finding.origin,
-            sellerType: finding.sellerType,
-            listingType: finding.listingType,
-            badges: finding.badges,
-            imageQuality: finding.imageQuality,
-            imageMatch: finding.imageMatch
-        };
+            const notesTextarea = wrapper.querySelector('textarea[name="notes"]');
+            if (notesTextarea) notesTextarea.value = finding.notes || '';
 
-        Object.entries(selectFields).forEach(([name, value]) => {
-            const select = wrapper.querySelector(`select[name="${name}"]`);
-            if (select) select.value = value || '';
-        });
+            const selectFields = {
+                match: finding.match,
+                stock: finding.stock,
+                origin: finding.origin,
+                sellerType: finding.sellerType,
+                listingType: finding.listingType,
+                badges: finding.badges,
+                imageQuality: finding.imageQuality,
+                imageMatch: finding.imageMatch
+            };
 
-        container.appendChild(wrapper);
+            Object.entries(selectFields).forEach(([name, value]) => {
+                const select = wrapper.querySelector(`select[name="${name}"]`);
+                if (select) {
+                    console.log(`🔍 [DEBUG] Setting select field ${name} to value: "${value}"`);
+                    select.value = value || '';
+                    // Verify the value was set
+                    console.log(`🔍 [DEBUG] Select field ${name} now has value: "${select.value}"`);
+                } else {
+                    console.warn(`🔍 [DEBUG] Select field ${name} not found in wrapper`);
+                }
+            });
+
+            // Update modal title to indicate editing
+            const modalHeader = document.querySelector('#findingsModal .modal-header h3');
+            if (modalHeader) {
+                modalHeader.textContent = 'Edit Research Finding';
+            }
+
+            // Focus on first input
+            const firstInput = wrapper.querySelector('input');
+            if (firstInput) firstInput.focus();
+            
+        }, 100);
+
     } catch (error) {
         console.error('Error editing finding:', error);
         alert('❌ Error loading finding for editing: ' + (error.response?.data?.message || error.message));
