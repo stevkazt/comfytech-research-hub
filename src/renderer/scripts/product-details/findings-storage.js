@@ -143,8 +143,9 @@ function renderFindingsList(findingsArr) {
     }
     console.log('🔍 [DEBUG] Rendering', findingsArr.length, 'findings');
     findingsArr.forEach(finding => {
-        const li = document.createElement('li');
-        li.innerHTML = `
+        const div = document.createElement('div');
+        div.className = 'finding-item';
+        div.innerHTML = `
         <div class="finding-header">
           <div class="finding-title-row">
             <div class="finding-store-info">
@@ -177,7 +178,7 @@ function renderFindingsList(findingsArr) {
           </div>
         </div>
       `;
-        li.querySelector('a').addEventListener('click', e => {
+        div.querySelector('a').addEventListener('click', e => {
             e.preventDefault();
             const link = e.target.getAttribute('data-link');
             if (link && link.trim() && link !== 'undefined' && link !== 'null') {
@@ -187,7 +188,7 @@ function renderFindingsList(findingsArr) {
             }
         });
 
-        findingsList.appendChild(li);
+        findingsList.appendChild(div);
     });
 
     // Update count badge
@@ -210,6 +211,10 @@ window.editFinding = async function (findingId) {
 
         // Import modal functions
         const { openFindingsModal } = require('./modal-functions');
+        const { closeFindingsListModal } = require('./research-counters');
+
+        // Close the findings list modal first
+        closeFindingsListModal();
 
         // Open the findings modal
         openFindingsModal();

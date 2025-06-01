@@ -300,6 +300,10 @@ async function editTrendValidation(trendId) {
 
     // Import modal functions
     const { openTrendsModal } = require('./modal-functions');
+    const { closeTrendsListModal } = require('./research-counters');
+
+    // Close the trends list modal first
+    closeTrendsListModal();
 
     // Open the trends modal
     openTrendsModal();

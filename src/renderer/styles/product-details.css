@@ -110,6 +110,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* List reset to prevent bullet points */
+ul, ol, li {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding-left: 0;
+  margin: 0;
+}
+
 /* ================================
    COMPONENT SYSTEM
    ================================ */
@@ -579,7 +587,7 @@ img {
 /* Enhanced Findings Container - Updated for two-column layout */
 
 #findings-list {
-  list-style: none;
+  list-style: none !important;
   padding-left: 0;
   margin: 0;
   display: flex;
@@ -587,7 +595,9 @@ img {
   gap: var(--space-3);
 }
 
-#findings-list li {
+#findings-list .finding-item {
+  list-style: none !important;
+  list-style-type: none !important;
   position: relative;
   padding: var(--space-4);
   background: white;
@@ -598,13 +608,13 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
-#findings-list li:hover {
+#findings-list .finding-item:hover {
   border-color: var(--color-primary-200);
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 
-#findings-list li:last-child {
+#findings-list .finding-item:last-child {
   margin-bottom: 0;
 }
 
@@ -1372,4 +1382,90 @@ textarea {
   font-size: 0.8rem; /* Smaller text */
   text-align: center;
   line-height: 1.1; /* Tighter line height */
+}
+
+/* Status and Counters Area */
+.status-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.research-counters {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.counter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background-color: var(--color-neutral-100);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  flex: 1;
+  transition: all var(--transition-fast);
+}
+
+.counter-btn:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-300);
+  box-shadow: var(--shadow-sm);
+}
+
+.counter-icon {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.counter-label {
+  font-size: 12px;
+  font-weight: var(--font-medium);
+}
+
+.counter-value {
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0 6px;
+}
+
+.findings-counter .counter-value {
+  background-color: var(--color-success);
+}
+
+.trends-counter .counter-value {
+  background-color: var(--color-warning);
+}
+
+/* Modal modifications */
+.modal-lg {
+  max-width: 800px;
+  width: 90%;
+}
+
+.research-list-container {
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+@media (max-width: 768px) {
+  .research-counters {
+    margin-top: 10px;
+  }
+  
+  .status-container {
+    width: 100%;
+  }
 }

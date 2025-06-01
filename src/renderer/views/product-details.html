@@ -36,22 +36,37 @@
 
           <!-- Column 3: Product Status -->
           <div class="product-status-column">
-            <div class="status-select-container">
-              <label for="product-status">Product Status:</label>
-              <select id="product-status" class="status-select" onchange="updateProductStatus(this.value)">
-                <option value="">Select Status...</option>
-                <option value="Worth Selling" class="status-worth-selling">✅ Worth Selling</option>
-                <option value="Skip" class="status-skip">❌ Skip</option>
-                <option value="In Research" class="status-not-sure">❓ In Research</option>
-              </select>
+            <div class="status-container">
+              <div class="status-select-container">
+                <label for="product-status">Product Status:</label>
+                <select id="product-status" class="status-select" onchange="updateProductStatus(this.value)">
+                  <option value="">Select Status...</option>
+                  <option value="Worth Selling" class="status-worth-selling">✅ Worth Selling</option>
+                  <option value="Skip" class="status-skip">❌ Skip</option>
+                  <option value="In Research" class="status-not-sure">❓ In Research</option>
+                </select>
+              </div>
+
+              <div class="research-counters">
+                <button class="counter-btn findings-counter" onclick="openFindingsListModal()">
+                  <span class="counter-icon">📋</span>
+                  <span class="counter-label">Findings</span>
+                  <span class="counter-value" id="findings-count">0</span>
+                </button>
+                <button class="counter-btn trends-counter" onclick="openTrendsListModal()">
+                  <span class="counter-icon">📈</span>
+                  <span class="counter-label">Trends</span>
+                  <span class="counter-value" id="trends-count">0</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div id="image-slider">
       </div>
-      <!-- Research Data Section -->
-      <div class="research-data-section">
+      <!-- Research Data Section (Hidden, will be shown in modals) -->
+      <div class="research-data-section" style="display: none;">
         <div class="research-columns">
           <!-- Research Findings Section -->
           <div class="research-section research-column">
@@ -208,7 +223,35 @@
     </div>
   </div>
 
-  <script>require('../scripts/product-details/index.js');</script>
+<!-- Research Findings List Modal -->
+<div class="form-modal" id="findingsListModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h3>📋 Research Findings</h3>
+      <button class="modal-close-btn" onclick="closeFindingsListModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="findings-list-container" class="research-list-container"></div>
+    </div>
+    <!-- Footer with buttons removed -->
+  </div>
+</div>
+
+<!-- Trends List Modal -->
+<div class="form-modal" id="trendsListModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-header">
+      <h3>📈 Trend Analysis</h3>
+      <button class="modal-close-btn" onclick="closeTrendsListModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="trends-list-container" class="research-list-container"></div>
+    </div>
+    <!-- Footer with buttons removed -->
+  </div>
+</div>
+
+<script>require('../scripts/product-details/index.js');</script>
 </body>
 
 </html>

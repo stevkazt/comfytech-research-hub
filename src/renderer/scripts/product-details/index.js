@@ -6,6 +6,7 @@ const findingsStorage = require('./findings-storage.js');
 const searchButtons = require('./search-buttons.js');
 const trendValidation = require('./trend-validation.js');
 const modalFunctions = require('./modal-functions.js');
+const researchCounters = require('./research-counters.js');
 
 module.exports = {
     ...productActions,
@@ -60,6 +61,12 @@ window.saveFindingsFromModal = modalFunctions.saveFindingsFromModal;
 window.openTrendsModal = modalFunctions.openTrendsModal;
 window.closeTrendsModal = modalFunctions.closeTrendsModal;
 window.saveTrendsFromModal = modalFunctions.saveTrendsFromModal;
+
+// Research counters modal functions
+window.openFindingsListModal = researchCounters.openFindingsListModal;
+window.closeFindingsListModal = researchCounters.closeFindingsListModal;
+window.openTrendsListModal = researchCounters.openTrendsListModal;
+window.closeTrendsListModal = researchCounters.closeTrendsListModal;
 
 // Add the persistence utilities to window for debugging purposes
 const persistenceUtils = require('./persistence-utils.js');
