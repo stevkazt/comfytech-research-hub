@@ -74,11 +74,33 @@ async function saveFindings(productId) {
 
     try {
         // Get current product data from API
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
-        const product = response.data;
-
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
+        const product = response.data;        // CRITICAL FIX: Ensure findings is always an array
         if (!Array.isArray(product.findings)) {
-            product.findings = [];
+            console.log('🔧 [DEBUG] Converting findings from object to array');
+
+            // If it's an object with data, try to preserve it
+            if (product.findings && typeof product.findings === 'object' && Object.keys(product.findings).length > 0) {
+                // Convert object to array format if it has meaningful data
+                product.findings = [product.findings];
+            } else {
+                // Initialize as empty array
+                product.findings = [];
+            }
+        }
+
+        // CRITICAL FIX: Ensure trendValidation is always an array
+        if (!Array.isArray(product.trendValidation)) {
+            console.log('🔧 [DEBUG] Converting trendValidation from object to array');
+
+            // If it's an object with data, try to preserve it
+            if (product.trendValidation && typeof product.trendValidation === 'object' && Object.keys(product.trendValidation).length > 0) {
+                // Convert object to array format if it has meaningful data
+                product.trendValidation = [product.trendValidation];
+            } else {
+                // Initialize as empty array
+                product.trendValidation = [];
+            }
         }
 
         // Remove old entries with the same IDs as the new findings
@@ -97,14 +119,14 @@ async function saveFindings(productId) {
 
         // Update the product via API
         console.log('🔍 [DEBUG] About to update product via API with data:', product);
-        await axios.put(`http://localhost:3000/products/${productId}`, product);
+        await axios.put(`https://dropi-research-api.onrender.com/products/${productId}`, product);
         console.log('✅ [DEBUG] Product updated successfully via API');
 
         container.innerHTML = '';
 
         // Re-read and update UI from API
         console.log('🔍 [DEBUG] Re-fetching product data to refresh UI...');
-        const updatedResponse = await axios.get(`http://localhost:3000/products/${productId}`);
+        const updatedResponse = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
         const updatedProduct = updatedResponse.data;
         console.log('✅ [DEBUG] Refreshed product data:', updatedProduct);
 
@@ -125,7 +147,29 @@ async function saveFindings(productId) {
         }
     } catch (error) {
         console.error('Error saving findings:', error);
-        alert('❌ Error saving findings: ' + (error.response?.data?.message || error.message));
+
+        // Log detailed error information for debugging
+        if (error.response) {
+            console.error('🔍 [DEBUG] API Error Response Status:', error.response.status);
+            console.error('🔍 [DEBUG] API Error Response Data:', error.response.data);
+            console.error('🔍 [DEBUG] API Error Response Headers:', error.response.headers);
+
+            // ENHANCED: Log the specific validation errors
+            if (error.response.data && error.response.data.details) {
+                console.error('🔍 [DEBUG] Validation Details:', error.response.data.details);
+                error.response.data.details.forEach((detail, index) => {
+                    console.error(`🔍 [DEBUG] Validation Error ${index + 1}:`, JSON.stringify(detail, null, 2));
+                });
+            }
+
+            // ENHANCED: Log the request data that caused the error
+            if (error.config && error.config.data) {
+                console.error('🔍 [DEBUG] Request Data that caused error:', error.config.data);
+            }
+        }
+
+        const errorMessage = error.response?.data?.message || error.response?.data?.error || error.message;
+        alert('❌ Error saving findings: ' + errorMessage);
     }
 }
 
@@ -134,15 +178,31 @@ function renderFindingsList(findingsArr) {
     console.log('🔍 [DEBUG] renderFindingsList called with:', findingsArr);
     const findingsList = document.getElementById('findings-list');
     findingsList.innerHTML = '';
-    if (!findingsArr || !Array.isArray(findingsArr)) {
-        console.log('🔍 [DEBUG] No findings array provided or empty');
-        // Update count badge
+
+    // CRITICAL FIX: Handle both object and array inputs
+    let findings = findingsArr;
+
+    if (!Array.isArray(findingsArr)) {
+        if (findingsArr && typeof findingsArr === 'object' && Object.keys(findingsArr).length > 0) {
+            console.log('🔧 [DEBUG] Converting findings object to array for rendering');
+            findings = [findingsArr];
+        } else {
+            console.log('🔍 [DEBUG] No findings array provided or empty');
+            const countBadge = document.getElementById('findings-count');
+            if (countBadge) countBadge.textContent = '0';
+            return;
+        }
+    }
+
+    if (!findings || findings.length === 0) {
+        console.log('🔍 [DEBUG] No findings to render');
         const countBadge = document.getElementById('findings-count');
         if (countBadge) countBadge.textContent = '0';
         return;
     }
-    console.log('🔍 [DEBUG] Rendering', findingsArr.length, 'findings');
-    findingsArr.forEach(finding => {
+
+    console.log('🔍 [DEBUG] Rendering', findings.length, 'findings');
+    findings.forEach(finding => {
         const div = document.createElement('div');
         div.className = 'finding-item';
         div.innerHTML = `
@@ -194,14 +254,14 @@ function renderFindingsList(findingsArr) {
     // Update count badge
     const countBadge = document.getElementById('findings-count');
     if (countBadge) {
-        countBadge.textContent = findingsArr.length.toString();
+        countBadge.textContent = findings.length.toString();
     }
 }
 
 // Global functions for edit and delete actions
 window.editFinding = async function (findingId) {
     try {
-        const response = await axios.get(`http://localhost:3000/products/${window.productId}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${window.productId}`);
         const product = response.data;
 
         if (!product || !product.findings) return;
@@ -303,7 +363,7 @@ window.deleteFinding = async function (findingId) {
 
     try {
         // Get current product data from API
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
         const product = response.data;
 
         if (!Array.isArray(product.findings)) {
@@ -323,7 +383,7 @@ window.deleteFinding = async function (findingId) {
             console.log('📋 Remaining findings:', product.findings.length);
 
             // Update the product via API
-            await axios.put(`http://localhost:3000/products/${productId}`, product);
+            await axios.put(`https://dropi-research-api.onrender.com/products/${productId}`, product);
             console.log('💾 Database updated successfully');
 
             // Update UI immediately with the modified data

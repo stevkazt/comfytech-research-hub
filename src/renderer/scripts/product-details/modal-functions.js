@@ -86,6 +86,11 @@ async function saveFindingsFromModal() {
         tempContainer.style.display = 'none';
         const clonedWrapper = formWrapper.cloneNode(true);
 
+        // CRITICAL FIX: Ensure finding ID is preserved in clone
+        if (formWrapper.dataset.findingId) {
+            clonedWrapper.dataset.findingId = formWrapper.dataset.findingId;
+        }
+
         // Debug: Check if finding ID was preserved in clone
         console.log('🔍 [DEBUG] Cloned wrapper finding ID:', clonedWrapper.dataset.findingId);
 
@@ -96,8 +101,9 @@ async function saveFindingsFromModal() {
             const clonedSelect = clonedWrapper.querySelector(`select[name="${fieldName}"]`);
             if (originalSelect && clonedSelect) {
                 console.log(`🔍 [DEBUG] Select ${fieldName} - Original: "${originalSelect.value}", Cloned: "${clonedSelect.value}"`);
-                // Ensure the cloned select has the same value as the original
+                // CRITICAL FIX: Ensure the cloned select has the same value as the original
                 clonedSelect.value = originalSelect.value;
+                console.log(`🔍 [DEBUG] Select ${fieldName} - After fix: "${clonedSelect.value}"`);
             }
         });
 
@@ -123,8 +129,9 @@ async function saveFindingsFromModal() {
         }
 
     } catch (error) {
-        console.error('❌ Error saving finding from modal:', error);
-        alert('❌ Error saving finding: ' + (error.response?.data?.message || error.message));
+        console.error('Error saving findings from modal:', error);
+        const errorMessage = error.response?.data?.message || error.response?.data?.error || error.message;
+        alert('❌ Error saving findings: ' + errorMessage);
     }
 }
 
