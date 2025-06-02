@@ -133,7 +133,7 @@ async function showEditProductModal() {
                         
                         <div style="margin-bottom: 20px;">
                             <label style="display: block; margin-bottom: 5px; font-weight: bold;">Description</label>
-                            <textarea id="editProductDescription" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px; resize: vertical;" placeholder="Product description">${product.description_html || product.description || ''}</textarea>
+                            <textarea id="editProductDescription" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px; resize: vertical;" placeholder="Product description">${product.dropi_description || product.description_html || product.description || ''}</textarea>
                         </div>
                         
                         <div style="display: flex; justify-content: flex-end; gap: 10px;">
@@ -229,9 +229,7 @@ async function showEditProductModal() {
                     price: priceInput.value.trim(),
                     categories: categoriesInput.value.trim(),
                     images: images,
-                    image: images.length > 0 ? images[0] : product.image, // Set main image to first image
-                    description_html: descriptionInput.value.trim(),
-                    description: descriptionInput.value.trim()
+                    dropi_description: descriptionInput.value.trim()
                 };
 
                 console.log('💾 [DEBUG] Updating product with data:', updatedProduct);

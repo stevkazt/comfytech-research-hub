@@ -9,7 +9,7 @@ function renderProducts(products) {
     grid.innerHTML = ''; // Clear existing products
 
     products.forEach(product => {
-        const { id, name, price, categories, image } = product;
+        const { id, name, price, categories, images } = product;
 
         const card = document.createElement('div');
         card.className = 'card';
@@ -38,7 +38,8 @@ function renderProducts(products) {
         card.appendChild(statusTag);
 
         const img = document.createElement('img');
-        img.src = image || ''; // Use direct image URL from Dropi
+        // Use first image from images array, fallback to empty string if no images
+        img.src = (images && images.length > 0) ? images[0] : '';
         img.alt = name;
         img.onerror = () => {
             img.src = '../../../assets/icons/no-image.png'; // Fallback image
@@ -79,7 +80,7 @@ function renderProducts(products) {
 async function loadProducts() {
     try {
         console.log('🔄 [DEBUG] Loading products from API...');
-        const response = await axios.get('https://dropi-research-api.onrender.com/products?fields=id,name,price,categories,image,status');
+        const response = await axios.get('https://dropi-research-api.onrender.com/products?fields=id,name,price,categories,images,status');
         const products = response.data;
         console.log('✅ [DEBUG] Loaded', products.length, 'products');
 
@@ -270,7 +271,7 @@ function showNewProductModal() {
                     
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; margin-bottom: 5px; font-weight: bold;">Descripción</label>
-                        <textarea id="productDescription" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px; resize: vertical;" placeholder="Descripción del producto"></textarea>
+                        <textarea id="productDescription" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; height: 80px; resize: vertical;" placeholder="Descripción del producto" maxlength="1000"></textarea>
                     </div>
                     
                     <div style="display: flex; justify-content: flex-end; gap: 10px;">
@@ -298,11 +299,34 @@ function showNewProductModal() {
         idInput.focus();
 
         // Add image button functionality
+        const addImageInput = () => {
+            const imageInputs = document.getElementById('imageInputs');
+            const newInputDiv = document.createElement('div');
+            newInputDiv.style.cssText = 'display: flex; gap: 5px; margin-bottom: 5px;';
+            newInputDiv.innerHTML = `
+                <input type="text" class="image-input" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="https://ejemplo.com/imagen.jpg">
+                <button type="button" onclick="removeImageInput(this)" style="padding: 8px 12px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">×</button>
+            `;
+            imageInputs.appendChild(newInputDiv);
+        };
+
+        // Helper function to remove image input
+        window.removeImageInput = (button) => {
+            const container = button.parentNode;
+            const imageInputs = document.getElementById('imageInputs');
+            if (imageInputs.children.length > 1) {
+                container.remove();
+            } else {
+                alert('Debe mantener al menos un campo de imagen');
+            }
+        };
+
         addImageBtn.addEventListener('click', addImageInput);
 
         // Handle cancel
         const closeModal = () => {
             modal.remove();
+            delete window.removeImageInput; // Clean up global function
             resolve(null);
         };
 
@@ -379,6 +403,7 @@ function showNewProductModal() {
 
             document.removeEventListener('keydown', handleEscape);
             modal.remove();
+            delete window.removeImageInput; // Clean up global function
             resolve(productData);
         });
 

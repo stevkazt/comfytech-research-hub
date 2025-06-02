@@ -67,15 +67,51 @@ ipcMain.handle('update-product-status', async (event, id, status) => {
 ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
     try {
         console.log('📝 [DEBUG] Updating product details for ID:', id);
-        console.log('📝 [DEBUG] Updated product data:', updatedProduct);
+        console.log('📝 [DEBUG] Raw updated product data:', updatedProduct);
+
+        // Validate description length (API limit: 1000 characters)
+        const description = updatedProduct.description || updatedProduct.description_html || '';
+        const validDescription = description.length <= 1000 ? description : '';
+        
+        if (description.length > 1000) {
+            console.log(`⚠️ [WARNING] Description too long (${description.length} characters), skipping description field. Maximum allowed is 1000 characters.`);
+        }
+
+        // Transform data to match API schema (same as product creation)
+        const transformedProduct = {
+            ...updatedProduct, // Keep existing data first
+            price: updatedProduct.price ? parseFloat(updatedProduct.price.toString().replace(/[^\d.]/g, '')) || updatedProduct.price : updatedProduct.price,
+            dropi_description: validDescription,
+            categories: updatedProduct.categories ? 
+                (typeof updatedProduct.categories === 'string' ? 
+                    updatedProduct.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) : 
+                    updatedProduct.categories) : 
+                (updatedProduct.categories || [])
+        };
+
+        // Remove deprecated fields
+        delete transformedProduct.description_html;
+        delete transformedProduct.description;
+        delete transformedProduct.image; // Remove deprecated image field
+
+        console.log('💾 [DEBUG] Transformed product data for API:', transformedProduct);
 
         // Save via API
-        const response = await axios.put(`https://dropi-research-api.onrender.com/products/${id}`, updatedProduct);
+        const response = await axios.put(`https://dropi-research-api.onrender.com/products/${id}`, transformedProduct);
         console.log('✅ [DEBUG] Product details updated successfully:', response.data);
 
         return response.data;
     } catch (error) {
         console.error('❌ [DEBUG] Error updating product details:', error);
+        
+        // Enhanced error logging for validation issues
+        if (error.response?.status === 400 && error.response?.data) {
+            console.error('❌ [DEBUG] Update Validation Error Details:');
+            console.error('❌ [DEBUG] Error:', error.response.data.error);
+            console.error('❌ [DEBUG] Message:', error.response.data.message);
+            console.error('❌ [DEBUG] Validation Details:', JSON.stringify(error.response.data.details, null, 2));
+        }
+        
         throw new Error(`Failed to update product details: ${error.message}`);
     }
 });
@@ -112,18 +148,28 @@ ipcMain.handle('create-new-product', async (event, productData) => {
             }
         }
 
-        // Create a new product with basic structure
+        // Validate description length (API limit: 1000 characters)
+        const description = productData.description || '';
+        const validDescription = description.length <= 1000 ? description : '';
+        
+        if (description.length > 1000) {
+            console.log(`⚠️ [WARNING] Description too long (${description.length} characters), skipping description field. Maximum allowed is 1000 characters.`);
+        }
+
+        // Create a new product with basic structure that matches API schema
         const newProduct = {
             id: productData.id || undefined, // Let API generate if not provided
             name: productData.name || 'Nuevo Producto',
-            price: productData.price || '',
-            description_html: productData.description || '',
-            image: productData.images && productData.images.length > 0 ? productData.images[0] : '',
+            price: productData.price ? parseFloat(productData.price.toString().replace(/[^\d.]/g, '')) || 0 : 0,
+            dropi_description: validDescription,
             images: productData.images || [],
-            categories: productData.categories || '',
-            status: '',
-            scrapedAt: new Date().toISOString(),
-            ...productData
+            categories: productData.categories ? 
+                (typeof productData.categories === 'string' ? 
+                    productData.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) : 
+                    productData.categories) : 
+                [],
+            status: 'research', // Default status
+            scrapedAt: new Date().toISOString()
         };
 
         console.log('💾 [DEBUG] Sending product to API:', newProduct);
@@ -135,6 +181,15 @@ ipcMain.handle('create-new-product', async (event, productData) => {
         return response.data;
     } catch (error) {
         console.error('❌ [DEBUG] Error creating product:', error);
+        
+        // Enhanced error logging for validation issues
+        if (error.response?.status === 400 && error.response?.data) {
+            console.error('❌ [DEBUG] Validation Error Details:');
+            console.error('❌ [DEBUG] Error:', error.response.data.error);
+            console.error('❌ [DEBUG] Message:', error.response.data.message);
+            console.error('❌ [DEBUG] Validation Details:', JSON.stringify(error.response.data.details, null, 2));
+        }
+        
         throw new Error(`Failed to create product: ${error.message}`);
     }
 });
