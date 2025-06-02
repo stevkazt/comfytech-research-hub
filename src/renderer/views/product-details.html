@@ -41,9 +41,9 @@
                 <label for="product-status">Product Status:</label>
                 <select id="product-status" class="status-select" onchange="updateProductStatus(this.value)">
                   <option value="">Select Status...</option>
-                  <option value="Worth Selling" class="status-worth-selling">✅ Worth Selling</option>
-                  <option value="Skip" class="status-skip">❌ Skip</option>
-                  <option value="In Research" class="status-not-sure">❓ In Research</option>
+                  <option value="worth" class="status-worth-selling">✅ Worth Selling</option>
+                  <option value="skip" class="status-skip">❌ Skip</option>
+                  <option value="research" class="status-not-sure">❓ In Research</option>
                 </select>
               </div>
 
@@ -223,35 +223,35 @@
     </div>
   </div>
 
-<!-- Research Findings List Modal -->
-<div class="form-modal" id="findingsListModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-header">
-      <h3>📋 Research Findings</h3>
-      <button class="modal-close-btn" onclick="closeFindingsListModal()">✕</button>
+  <!-- Research Findings List Modal -->
+  <div class="form-modal" id="findingsListModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>📋 Research Findings</h3>
+        <button class="modal-close-btn" onclick="closeFindingsListModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="findings-list-container" class="research-list-container"></div>
+      </div>
+      <!-- Footer with buttons removed -->
     </div>
-    <div class="modal-body">
-      <div id="findings-list-container" class="research-list-container"></div>
-    </div>
-    <!-- Footer with buttons removed -->
   </div>
-</div>
 
-<!-- Trends List Modal -->
-<div class="form-modal" id="trendsListModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-header">
-      <h3>📈 Trend Analysis</h3>
-      <button class="modal-close-btn" onclick="closeTrendsListModal()">✕</button>
+  <!-- Trends List Modal -->
+  <div class="form-modal" id="trendsListModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3>📈 Trend Analysis</h3>
+        <button class="modal-close-btn" onclick="closeTrendsListModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="trends-list-container" class="research-list-container"></div>
+      </div>
+      <!-- Footer with buttons removed -->
     </div>
-    <div class="modal-body">
-      <div id="trends-list-container" class="research-list-container"></div>
-    </div>
-    <!-- Footer with buttons removed -->
   </div>
-</div>
 
-<script>require('../scripts/product-details/index.js');</script>
+  <script>require('../scripts/product-details/index.js');</script>
 </body>
 
 </html>

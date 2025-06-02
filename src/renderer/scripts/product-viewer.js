@@ -19,15 +19,15 @@ function renderProducts(products) {
         const statusTag = document.createElement('div');
         statusTag.className = 'status-tag';
         switch (product.status) {
-            case 'Worth Selling':
+            case 'worth':
                 statusTag.className += ' worth-selling';
                 statusTag.textContent = '✅ Worth Selling';
                 break;
-            case 'Skip':
+            case 'skip':
                 statusTag.className += ' skip';
                 statusTag.textContent = '❌ Skip';
                 break;
-            case 'In Research':
+            case 'research':
                 statusTag.className += ' not-sure';
                 statusTag.textContent = '❓ In Research';
                 break;
@@ -79,7 +79,7 @@ function renderProducts(products) {
 async function loadProducts() {
     try {
         console.log('🔄 [DEBUG] Loading products from API...');
-        const response = await axios.get('http://localhost:3000/products');
+        const response = await axios.get('https://dropi-research-api.onrender.com/products?fields=id,name,price,categories,image,status');
         const products = response.data;
         console.log('✅ [DEBUG] Loaded', products.length, 'products');
 
@@ -155,9 +155,13 @@ document.getElementById('statusFilter')?.addEventListener('change', (e) => {
     // Apply status filter if not "all"
     if (statusValue !== 'all') {
         filtered = filtered.filter(product => {
-            if (statusValue === '') {
-                // For "New" products, check if status is empty, null, undefined, or doesn't exist
-                return !product.status || product.status === '';
+            if (statusValue === 'new') {
+                // For "New" products, consider anything that's not one of the defined statuses
+                return !product.status || (
+                    product.status !== 'skip' &&
+                    product.status !== 'research' &&
+                    product.status !== 'worth'
+                );
             }
             return product.status === statusValue;
         });
@@ -222,29 +226,6 @@ document.getElementById('sortSelect').addEventListener('change', (e) => {
 document.getElementById('refreshBtn')?.addEventListener('click', () => {
     loadProducts();
 });
-
-// Helper function to remove image input
-function removeImageInput(button) {
-    const container = button.parentNode;
-    const imageInputs = document.getElementById('imageInputs');
-    if (imageInputs.children.length > 1) {
-        container.remove();
-    } else {
-        alert('Debe mantener al menos un campo de imagen');
-    }
-}
-
-// Helper function to add image input
-function addImageInput() {
-    const imageInputs = document.getElementById('imageInputs');
-    const newInputDiv = document.createElement('div');
-    newInputDiv.style.cssText = 'display: flex; gap: 5px; margin-bottom: 5px;';
-    newInputDiv.innerHTML = `
-        <input type="text" class="image-input" style="flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="https://ejemplo.com/imagen.jpg">
-        <button type="button" onclick="removeImageInput(this)" style="padding: 8px 12px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">×</button>
-    `;
-    imageInputs.appendChild(newInputDiv);
-}
 
 // Function to show new product modal
 function showNewProductModal() {

@@ -2,6 +2,9 @@ const { clipboard } = require('electron');
 const axios = require('axios');
 const productToPrompt = require('../../../services/prompt-generation/autoPromptGenerator');
 
+// Define API base URL
+const API_BASE_URL = 'https://dropi-research-api.onrender.com';
+
 // Removed updateDetails function as it relied on scraping functionality
 
 async function updateProductStatus(status) {
@@ -17,7 +20,7 @@ async function updateProductStatus(status) {
         console.log('🔄 [DEBUG] Updating status for product ID:', productId, 'Type:', typeof productId, 'Status:', status);
 
         // Get current product data first
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${productId}`);
         const product = response.data;
         console.log('📋 [DEBUG] Current product data:', product);
 
@@ -26,7 +29,7 @@ async function updateProductStatus(status) {
 
         console.log('💾 [DEBUG] Updating product with status:', status);
         // Send the updated product back
-        await axios.put(`http://localhost:3000/products/${productId}`, product);
+        await axios.put(`${API_BASE_URL}/products/${productId}`, product);
         console.log('✅ [DEBUG] Status updated successfully');
 
     } catch (error) {
@@ -50,7 +53,7 @@ async function generateAndCopyPrompt() {
 
         console.log('📡 [DEBUG] Fetching product data from API...');
         // Get current product data from the API
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${productId}`);
         const product = response.data;
 
         console.log('📋 [DEBUG] Found product:', product.name, 'ID:', product.id);
@@ -88,7 +91,7 @@ async function showEditProductModal() {
         }
 
         // Get current product data
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${productId}`);
         const product = response.data;
 
         console.log('📋 [DEBUG] Current product data:', product);
@@ -250,7 +253,7 @@ async function showEditProductModal() {
                     // Refresh the product display by re-fetching from API and re-rendering
                     console.log('🔄 [DEBUG] Refreshing product display...');
                     try {
-                        const refreshResponse = await axios.get(`http://localhost:3000/products/${window.productId}`);
+                        const refreshResponse = await axios.get(`${API_BASE_URL}/products/${window.productId}`);
                         const updatedProductData = refreshResponse.data;
                         console.log('📋 [DEBUG] Refreshed product data:', updatedProductData);
 
@@ -287,7 +290,7 @@ async function deleteProduct() {
         }
 
         // Show confirmation dialog with product name
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/products/${productId}`);
         const product = response.data;
         const productName = product.name || 'this product';
 
@@ -300,7 +303,7 @@ async function deleteProduct() {
         console.log('🗑️ [DEBUG] Deleting product ID:', productId);
 
         // Delete the product via API
-        await axios.delete(`http://localhost:3000/products/${productId}`);
+        await axios.delete(`${API_BASE_URL}/products/${productId}`);
 
         // Show success notification
         alert(`✅ Product "${productName}" has been deleted successfully.`);

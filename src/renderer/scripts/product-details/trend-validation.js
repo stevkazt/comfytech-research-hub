@@ -138,7 +138,7 @@ async function saveTrendValidation() {
 
   try {
     // First, get the current product data
-    const response = await axios.get(`http://localhost:3000/products/${productId}`);
+    const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
     const product = response.data;
 
     if (!product.trendValidation) {
@@ -165,7 +165,7 @@ async function saveTrendValidation() {
     });
 
     // Update the product via API
-    await axios.put(`http://localhost:3000/products/${productId}`, product);
+    await axios.put(`https://dropi-research-api.onrender.com/products/${productId}`, product);
 
     // Clear the form and refresh saved data display
     container.innerHTML = '';
@@ -284,7 +284,7 @@ async function editTrendValidation(trendId) {
   if (!productId) return;
 
   try {
-    const response = await axios.get(`http://localhost:3000/products/${productId}`);
+    const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
     const product = response.data;
 
     if (!product || !product.trendValidation) {
@@ -365,14 +365,14 @@ async function deleteTrendValidation(trendId) {
 
   try {
     // Get current product data
-    const response = await axios.get(`http://localhost:3000/products/${productId}`);
+    const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
     const product = response.data;
 
     if (product && product.trendValidation) {
       product.trendValidation = product.trendValidation.filter(t => t.id.toString() !== trendId.toString());
 
       // Update the product via API
-      await axios.put(`http://localhost:3000/products/${productId}`, product);
+      await axios.put(`https://dropi-research-api.onrender.com/products/${productId}`, product);
 
       // Refresh the saved trend validation display
       renderSavedTrendValidations(product.trendValidation);

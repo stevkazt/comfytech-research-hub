@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const axios = require('axios');
-const fs = require('fs');
 require('@electron/remote/main').initialize();
 
 // Cross-platform path helpers
@@ -14,38 +13,7 @@ const getResourcePath = (relativePath) => {
     }
 };
 
-const getDataPath = () => {
-    if (isDev) {
-        return path.join(__dirname, '..', '..', 'data');
-    } else {
-        // Use app data directory for production
-        return path.join(app.getPath('userData'), 'data');
-    }
-};
 
-// Ensure data directory exists
-const dataPath = getDataPath();
-if (!fs.existsSync(dataPath)) {
-    fs.mkdirSync(dataPath, { recursive: true });
-}
-
-function createMainWindow() {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false
-        }
-    });
-    require('@electron/remote/main').enable(win.webContents);
-
-    win.loadFile(path.join(__dirname, '../renderer/views/index.html'));
-}
-
-ipcMain.on('open-product-viewer', () => {
-    createProductViewerWindow();
-});
 
 ipcMain.on('open-product-details', (event, product) => {
     console.log('🔍 [DEBUG] Opening product details for:', product);
@@ -77,7 +45,7 @@ ipcMain.on('open-product-details', (event, product) => {
 ipcMain.handle('update-product-status', async (event, id, status) => {
     try {
         // Get product from API
-        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${id}`);
         const product = response.data;
 
         if (!product) {
@@ -88,7 +56,7 @@ ipcMain.handle('update-product-status', async (event, id, status) => {
         product.status = status;
 
         // Save via API
-        await axios.put(`http://localhost:3000/products/${id}`, product);
+        await axios.put(`https://dropi-research-api.onrender.com/products/${id}`, product);
         return true;
     } catch (error) {
         console.error('Error updating product status:', error);
@@ -102,7 +70,7 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
         console.log('📝 [DEBUG] Updated product data:', updatedProduct);
 
         // Save via API
-        const response = await axios.put(`http://localhost:3000/products/${id}`, updatedProduct);
+        const response = await axios.put(`https://dropi-research-api.onrender.com/products/${id}`, updatedProduct);
         console.log('✅ [DEBUG] Product details updated successfully:', response.data);
 
         return response.data;
@@ -114,7 +82,7 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
 
 ipcMain.handle('reload-product', async (event, id) => {
     try {
-        const response = await axios.get(`http://localhost:3000/products/${id}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${id}`);
         return response.data;
     } catch (error) {
         console.error('Error reloading product:', error);
@@ -130,7 +98,7 @@ ipcMain.handle('create-new-product', async (event, productData) => {
         // Check if product with this ID already exists
         if (productData.id) {
             try {
-                const existingResponse = await axios.get(`http://localhost:3000/products/${productData.id}`);
+                const existingResponse = await axios.get(`https://dropi-research-api.onrender.com/products/${productData.id}`);
                 if (existingResponse.data) {
                     throw new Error(`Product with ID ${productData.id} already exists`);
                 }
@@ -161,7 +129,7 @@ ipcMain.handle('create-new-product', async (event, productData) => {
         console.log('💾 [DEBUG] Sending product to API:', newProduct);
 
         // Save via API
-        const response = await axios.post('http://localhost:3000/products', newProduct);
+        const response = await axios.post('https://dropi-research-api.onrender.com/products', newProduct);
         console.log('✅ [DEBUG] API response:', response.data);
 
         return response.data;

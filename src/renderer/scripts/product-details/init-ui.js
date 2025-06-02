@@ -5,7 +5,7 @@ const axios = require('axios');
 
 
 function renderProduct(product) {
-    console.log('🎨 [DEBUG] Rendering product:', product.name, 'ID:', product.id, 'Type:', typeof product.id);
+    console.log('🎨 [DEBUG] Rendering product:', product.name, 'ID:', product.id)
 
     document.getElementById('title').textContent = product.name || 'Sin título';
     document.getElementById('price').textContent = product.price || 'N/A';
@@ -77,20 +77,26 @@ function renderProduct(product) {
 
 // Add a new function to initialize product on page load/refresh
 function initializeProductOnLoad() {
-    // Check if we have a productId stored in localStorage
-    const storedProductId = localStorage.getItem('currentProductId');
+    // Set a flag to track if we've received a product ID via IPC
+    window.receivedProductIdViaIPC = false;
 
-    if (storedProductId) {
-        console.log('🔄 [DEBUG] Found stored productId in localStorage:', storedProductId);
+    // Add a timeout to only load from localStorage if we don't get an IPC message quickly
+    setTimeout(() => {
+        // If we already received a product ID via IPC, don't load from localStorage
+        if (window.receivedProductIdViaIPC) {
+            return;
+        }
 
-        // Set the window.productId to the stored value
-        window.productId = storedProductId;
-
-        // Fetch and render the product
-        fetchAndRenderProduct(storedProductId);
-    } else {
-        console.log('⚠️ [DEBUG] No productId found in localStorage');
-    }
+        // Only use localStorage as fallback if no IPC message was received
+        const storedProductId = localStorage.getItem('currentProductId');
+        if (storedProductId) {
+            console.log('🔄 [DEBUG] No IPC message received, loading from localStorage:', storedProductId);
+            window.productId = storedProductId;
+            fetchAndRenderProduct(storedProductId);
+        } else {
+            console.log('⚠️ [DEBUG] No productId found in localStorage');
+        }
+    }, 200); // Wait 200ms to see if we get an IPC message first
 }
 
 // Create a new function to fetch and render product
@@ -98,7 +104,7 @@ async function fetchAndRenderProduct(productId) {
     try {
         console.log('🔍 [DEBUG] Fetching product with ID:', productId);
 
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
         const product = response.data;
 
         console.log('✅ [DEBUG] Product loaded successfully:', product.name);
@@ -140,16 +146,19 @@ function switchTab(tabName) {
     }
 }
 
+// Then modify the IPC handler to set the flag
 ipcRenderer.on('product-id', async (event, id) => {
     try {
-        console.log('📥 [DEBUG] Received product ID:', id, 'Type:', typeof id);
+        console.log('📥 [DEBUG] Received product ID via IPC:', id);
 
-        // Try both string and number versions for API call
+        // Set the flag to indicate we received a product ID via IPC
+        window.receivedProductIdViaIPC = true;
+
         let productId = id;
         console.log('🔍 [DEBUG] Attempting to fetch product with ID:', productId);
 
         // Fetch the latest product data from the API
-        const response = await axios.get(`http://localhost:3000/products/${productId}`);
+        const response = await axios.get(`https://dropi-research-api.onrender.com/products/${productId}`);
         console.log('✅ [DEBUG] API response received:', response.data);
 
         const product = response.data;
@@ -159,34 +168,7 @@ ipcRenderer.on('product-id', async (event, id) => {
         renderProduct(product);
     } catch (error) {
         console.error('❌ [DEBUG] Error loading product:', error);
-        console.error('❌ [DEBUG] Failed ID:', id, 'Type:', typeof id);
-
-        // Try alternative ID format if the first fails
-        if (typeof id === 'string') {
-            const numericId = parseInt(id, 10);
-            if (!isNaN(numericId)) {
-                console.log('🔄 [DEBUG] Retrying with numeric ID:', numericId);
-                try {
-                    const retryResponse = await axios.get(`http://localhost:3000/products/${numericId}`);
-                    console.log('✅ [DEBUG] Retry successful:', retryResponse.data);
-                    renderProduct(retryResponse.data);
-                    return;
-                } catch (retryError) {
-                    console.error('❌ [DEBUG] Retry also failed:', retryError);
-                }
-            }
-        } else if (typeof id === 'number') {
-            const stringId = id.toString();
-            console.log('🔄 [DEBUG] Retrying with string ID:', stringId);
-            try {
-                const retryResponse = await axios.get(`http://localhost:3000/products/${stringId}`);
-                console.log('✅ [DEBUG] Retry successful:', retryResponse.data);
-                renderProduct(retryResponse.data);
-                return;
-            } catch (retryError) {
-                console.error('❌ [DEBUG] Retry also failed:', retryError);
-            }
-        }
+        console.error('❌ [DEBUG] Failed ID:', id);
 
         alert('❌ Error loading product: ' + (error.response?.data?.message || error.message));
     }
