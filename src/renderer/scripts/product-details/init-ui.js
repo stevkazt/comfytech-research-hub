@@ -26,10 +26,32 @@ function renderProduct(product) {
     const images = Array.isArray(product.images) && product.images.length ? product.images : [product.image];
     images.forEach((src, index) => {
         if (src) {
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.display = 'inline-block';
+            wrapper.style.margin = '5px';
+
             const img = document.createElement('img');
             img.src = src;
             img.alt = `${product.name || 'Producto'} ${index + 1}`;
-            slider.appendChild(img);
+
+            // Download button
+            const downloadBtn = document.createElement('a');
+            downloadBtn.href = src;
+            downloadBtn.download = `product-image-${index + 1}.png`;
+            downloadBtn.textContent = '⬇️';
+            downloadBtn.style.position = 'absolute';
+            downloadBtn.style.top = '5px';
+            downloadBtn.style.right = '5px';
+            downloadBtn.style.background = '#fff';
+            downloadBtn.style.borderRadius = '50%';
+            downloadBtn.style.padding = '4px';
+            downloadBtn.style.fontSize = '12px';
+            downloadBtn.style.textDecoration = 'none';
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(downloadBtn);
+            slider.appendChild(wrapper);
         }
     });
 
@@ -59,7 +81,7 @@ function renderProduct(product) {
     // Set the status selector to the saved value or "New"
     const statusSelect = document.getElementById('product-status');
     if (statusSelect) {
-        statusSelect.value = product.status || ''; // Empty value represents "New" in our select
+        statusSelect.value = product.status || 'new'; // Set to 'new' if no status is defined
     }
 
     if (typeof renderFindingsList === 'function') {
@@ -281,6 +303,18 @@ function initUI() {
         console.log('Modal functions not yet available for count badges');
     }
 
+
+    // NEW CODE: Expose search functions to global window
+    try {
+        const searchFunctions = require('./search-buttons');
+        // Make search functions available globally
+        Object.keys(searchFunctions).forEach(funcName => {
+            window[funcName] = searchFunctions[funcName];
+        });
+        console.log('🔍 [DEBUG] Search functions exposed to window:', Object.keys(searchFunctions));
+    } catch (error) {
+        console.error('❌ [ERROR] Failed to expose search functions:', error);
+    }
     // Initialize product on page load/refresh
     initializeProductOnLoad();
 }

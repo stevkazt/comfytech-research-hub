@@ -71,6 +71,18 @@ function searchYouTube() {
     }
 }
 
+function openImageGeneration() {
+    const firstImage = document.querySelector('#image-slider img');
+    const imageUrl = firstImage?.src;
+    if (imageUrl && imageUrl !== '#') {
+        const prompt = `A 3D-rendered digital illustration showcases a high-quality product styled for the ComfyTech dropshipping store. The image is clean, square, and optimized for ecommerce. The background uses soft gradients and tones from the ComfyTech brand palette: #2563EB (primary blue), #1D4ED8 (deep shadow blue), and soft teal accents. Avoid text or labels. The illustration should feel modern, trustworthy, and adaptable for a variety of tech or lifestyle products. Use realistic 3D shading and lighting to enhance the product’s appeal. The product shown is the one in this image:`;
+        const url = `https://chat.openai.com/?model=gpt-4o&prompt=${encodeURIComponent(prompt)}`;
+        require('electron').shell.openExternal(url);
+    } else {
+        alert("⚠️ No image available to generate prompt.");
+    }
+}
+
 module.exports = {
     searchGoogle,
     searchML,
@@ -80,5 +92,8 @@ module.exports = {
     searchTikTokAds,
     searchFacebookAds,
     searchInstagram,
-    searchYouTube
+    searchYouTube,
+    openImageGeneration
 };
+
+
