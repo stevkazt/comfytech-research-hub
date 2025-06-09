@@ -864,6 +864,12 @@ textarea {
   margin: var(--space-1) 0;
 }
 
+.status-select option.status-new {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+  font-weight: var(--font-medium);
+}
+
 .status-select option.status-worth-selling {
   background-color: var(--color-success-light);
   color: var(--color-success-dark);

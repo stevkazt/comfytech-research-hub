@@ -306,6 +306,10 @@ async function deleteProduct() {
         // Show success notification
         alert(`✅ Product "${productName}" has been deleted successfully.`);
 
+        // Clear any stored references to this product
+        localStorage.removeItem('currentProductId');
+        window.productId = null;
+
         // Close the window or navigate back
         const { ipcRenderer } = require('electron');
         ipcRenderer.send('close-product-details');
@@ -313,6 +317,13 @@ async function deleteProduct() {
     } catch (error) {
         console.error('❌ [DEBUG] Error deleting product:', error);
         alert('❌ Error deleting product: ' + (error.response?.data?.message || error.message));
+
+        // Ask user if they want to close the window anyway
+        const shouldClose = confirm('Do you want to close this window anyway?');
+        if (shouldClose) {
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.send('close-product-details');
+        }
     }
 }
 

@@ -18,6 +18,10 @@ function renderProducts(products) {
         // Add status tag
         const statusTag = document.createElement('div');
         statusTag.className = 'status-tag';
+
+        // Log status for debugging
+        console.log(`🔍 [DEBUG] Product ${id} status: "${product.status}"`);
+
         switch (product.status) {
             case 'worth':
                 statusTag.className += ' worth-selling';
@@ -30,6 +34,10 @@ function renderProducts(products) {
             case 'research':
                 statusTag.className += ' not-sure';
                 statusTag.textContent = '❓ In Research';
+                break;
+            case 'new':
+                statusTag.className += ' no-status';
+                statusTag.textContent = '⚪ New';
                 break;
             default:
                 statusTag.className += ' no-status';
@@ -157,8 +165,8 @@ document.getElementById('statusFilter')?.addEventListener('change', (e) => {
     if (statusValue !== 'all') {
         filtered = filtered.filter(product => {
             if (statusValue === 'new') {
-                // For "New" products, consider anything that's not one of the defined statuses
-                return !product.status || (
+                // For "New" products, include products with status 'new' or no defined status
+                return product.status === 'new' || !product.status || (
                     product.status !== 'skip' &&
                     product.status !== 'research' &&
                     product.status !== 'worth'

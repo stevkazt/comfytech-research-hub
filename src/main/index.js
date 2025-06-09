@@ -13,7 +13,14 @@ const getResourcePath = (relativePath) => {
     }
 };
 
-
+// Add listener to close the product details window
+ipcMain.on('close-product-details', (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender);
+    if (window) {
+        console.log('🔒 [DEBUG] Closing product details window');
+        window.close();
+    }
+});
 
 ipcMain.on('open-product-details', (event, product) => {
     console.log('🔍 [DEBUG] Opening product details for:', product);
@@ -72,7 +79,7 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
         // Validate description length (API limit: 1000 characters)
         const description = updatedProduct.description || updatedProduct.description_html || '';
         const validDescription = description.length <= 1000 ? description : '';
-        
+
         if (description.length > 1000) {
             console.log(`⚠️ [WARNING] Description too long (${description.length} characters), skipping description field. Maximum allowed is 1000 characters.`);
         }
@@ -82,10 +89,10 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
             ...updatedProduct, // Keep existing data first
             price: updatedProduct.price ? parseFloat(updatedProduct.price.toString().replace(/[^\d.]/g, '')) || updatedProduct.price : updatedProduct.price,
             dropi_description: validDescription,
-            categories: updatedProduct.categories ? 
-                (typeof updatedProduct.categories === 'string' ? 
-                    updatedProduct.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) : 
-                    updatedProduct.categories) : 
+            categories: updatedProduct.categories ?
+                (typeof updatedProduct.categories === 'string' ?
+                    updatedProduct.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) :
+                    updatedProduct.categories) :
                 (updatedProduct.categories || [])
         };
 
@@ -103,7 +110,7 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
         return response.data;
     } catch (error) {
         console.error('❌ [DEBUG] Error updating product details:', error);
-        
+
         // Enhanced error logging for validation issues
         if (error.response?.status === 400 && error.response?.data) {
             console.error('❌ [DEBUG] Update Validation Error Details:');
@@ -111,7 +118,7 @@ ipcMain.handle('update-product-details', async (event, id, updatedProduct) => {
             console.error('❌ [DEBUG] Message:', error.response.data.message);
             console.error('❌ [DEBUG] Validation Details:', JSON.stringify(error.response.data.details, null, 2));
         }
-        
+
         throw new Error(`Failed to update product details: ${error.message}`);
     }
 });
@@ -151,7 +158,7 @@ ipcMain.handle('create-new-product', async (event, productData) => {
         // Validate description length (API limit: 1000 characters)
         const description = productData.description || '';
         const validDescription = description.length <= 1000 ? description : '';
-        
+
         if (description.length > 1000) {
             console.log(`⚠️ [WARNING] Description too long (${description.length} characters), skipping description field. Maximum allowed is 1000 characters.`);
         }
@@ -163,12 +170,12 @@ ipcMain.handle('create-new-product', async (event, productData) => {
             price: productData.price ? parseFloat(productData.price.toString().replace(/[^\d.]/g, '')) || 0 : 0,
             dropi_description: validDescription,
             images: productData.images || [],
-            categories: productData.categories ? 
-                (typeof productData.categories === 'string' ? 
-                    productData.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) : 
-                    productData.categories) : 
+            categories: productData.categories ?
+                (typeof productData.categories === 'string' ?
+                    productData.categories.split(',').map(c => c.trim()).filter(c => c.length > 0) :
+                    productData.categories) :
                 [],
-            status: 'research', // Default status
+            status: 'new', // Default status for newly created products
             scrapedAt: new Date().toISOString()
         };
 
@@ -181,7 +188,7 @@ ipcMain.handle('create-new-product', async (event, productData) => {
         return response.data;
     } catch (error) {
         console.error('❌ [DEBUG] Error creating product:', error);
-        
+
         // Enhanced error logging for validation issues
         if (error.response?.status === 400 && error.response?.data) {
             console.error('❌ [DEBUG] Validation Error Details:');
@@ -189,7 +196,7 @@ ipcMain.handle('create-new-product', async (event, productData) => {
             console.error('❌ [DEBUG] Message:', error.response.data.message);
             console.error('❌ [DEBUG] Validation Details:', JSON.stringify(error.response.data.details, null, 2));
         }
-        
+
         throw new Error(`Failed to create product: ${error.message}`);
     }
 });

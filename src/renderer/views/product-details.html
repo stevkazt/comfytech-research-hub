@@ -41,6 +41,7 @@
                 <label for="product-status">Product Status:</label>
                 <select id="product-status" class="status-select" onchange="updateProductStatus(this.value)">
                   <option value="">Select Status...</option>
+                  <option value="new" class="status-new">⚪ New</option>
                   <option value="worth" class="status-worth-selling">✅ Worth Selling</option>
                   <option value="skip" class="status-skip">❌ Skip</option>
                   <option value="research" class="status-not-sure">❓ In Research</option>
@@ -100,6 +101,10 @@
           <button class="tool-btn" onclick="generateAndCopyPrompt()">
             <span class="btn-icon">🤖</span>
             <span class="btn-text">AI Prompt</span>
+          </button>
+          <button class="tool-btn" onclick="openImageGeneration()">
+            <span class="btn-icon">💬</span>
+            <span class="btn-text">AI Image Gen</span>
           </button>
           <button class="tool-btn delete-btn" onclick="deleteProduct()">
             <span class="btn-icon">🗑️</span>
