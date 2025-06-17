@@ -147,9 +147,16 @@ class ProductDetails {
             this.showEditProductModal();
         });
 
-        document.getElementById('generatePromptBtn')?.addEventListener('click', () => {
-            this.generateAIPrompt();
-        });
+        const generateBtn = document.getElementById('generatePromptBtn');
+        if (generateBtn) {
+            console.log('✅ Generate AI Analysis button found and setting up click handler');
+            generateBtn.addEventListener('click', () => {
+                console.log('🎯 Generate AI Analysis button clicked!');
+                this.handleAIResearch();
+            });
+        } else {
+            console.warn('⚠️ Generate AI Analysis button not found in DOM');
+        }
 
         document.getElementById('deleteProductBtn')?.addEventListener('click', () => {
             this.deleteProduct();
@@ -268,9 +275,76 @@ class ProductDetails {
             this.renderProduct();
             this.updateResearchPreviews();
 
+            // Check for and load saved AI analysis
+            this.loadSavedAIResponse();
+
         } catch (error) {
             console.error('❌ Error loading product:', error);
             this.showError('Failed to load product. Please try again.');
+        }
+    }
+
+    loadSavedAIResponse() {
+        // Check if there are any AI-generated findings and display the most recent one
+        if (!this.currentProduct || !this.currentProduct.findings) {
+            console.log('📋 No findings available to check for AI responses');
+            return;
+        }
+
+        // Find AI-generated findings (look for the special flag)
+        const aiFindings = this.currentProduct.findings.filter(finding =>
+            finding.isAIGenerated === true || finding.store === 'AI Analysis'
+        );
+
+        if (aiFindings.length === 0) {
+            console.log('📋 No saved AI analysis found');
+            return;
+        }
+
+        // Get the most recent AI finding (highest timestamp)
+        const mostRecentAI = aiFindings.reduce((latest, current) => {
+            const currentTime = new Date(current.timestamp || 0).getTime();
+            const latestTime = new Date(latest.timestamp || 0).getTime();
+            return currentTime > latestTime ? current : latest;
+        });
+
+        console.log('🔍 Found saved AI analysis:', mostRecentAI.id);
+
+        // Extract AI response data
+        let aiResponseData = null;
+
+        // Check if there's aiResponse metadata field
+        if (mostRecentAI.aiResponse) {
+            aiResponseData = mostRecentAI.aiResponse;
+            console.log('✅ Loaded AI response from aiResponse field');
+        } else if (mostRecentAI.notes) {
+            // Try to parse the notes field as JSON (fallback method)
+            try {
+                aiResponseData = JSON.parse(mostRecentAI.notes);
+                console.log('✅ Loaded AI response from notes field (parsed as JSON)');
+            } catch (parseError) {
+                // If it's not JSON, treat as string
+                aiResponseData = mostRecentAI.notes;
+                console.log('✅ Loaded AI response from notes field (as string)');
+            }
+        }
+
+        if (aiResponseData) {
+            console.log('🎯 Displaying saved AI analysis');
+
+            // Update findings count with the stored count from when this analysis was generated
+            if (mostRecentAI.findingsUsedCount !== undefined) {
+                this.updateFindingsMetricForAIResponse(mostRecentAI.findingsUsedCount);
+                console.log(`📊 Using stored findings count: ${mostRecentAI.findingsUsedCount} findings`);
+            } else {
+                // Fallback for older AI responses without stored count
+                console.log('⚠️ No stored findings count, using current manual findings count as fallback');
+                this.updateFindingsMetric();
+            }
+
+            this.displayAIResult(aiResponseData);
+        } else {
+            console.warn('⚠️ Found AI finding but could not extract response data');
         }
     }
 
@@ -297,6 +371,9 @@ class ProductDetails {
 
         // Update research counters
         this.updateResearchCounters(product);
+
+        // Update findings metric for AI analysis section
+        this.updateFindingsMetric();
 
         // Store references
         this.findings = product.findings || [];
@@ -399,11 +476,18 @@ class ProductDetails {
     }
 
     updateResearchCounters(product) {
-        const findingsCount = (product.findings || []).length;
+        if (!product) return;
+
+        // Count only manual findings (not AI-generated ones)
+        const manualFindingsCount = (product.findings || []).filter(finding => !finding.isAIGenerated).length;
         const trendsCount = (product.trendValidation || []).length;
 
-        this.updateElement('findings-count', findingsCount);
-        this.updateElement('trends-count', trendsCount);
+        // Update counters in UI
+        const findingsCountEl = document.getElementById('findings-count');
+        const trendsCountEl = document.getElementById('trends-count');
+
+        if (findingsCountEl) findingsCountEl.textContent = manualFindingsCount;
+        if (trendsCountEl) trendsCountEl.textContent = trendsCount;
     }
 
     updateResearchPreviews() {
@@ -504,7 +588,7 @@ class ProductDetails {
         console.log('Current image index:', this.currentImageIndex);
         console.log('Current image URL:', currentImageUrl);
         console.log('All images:', this.images);
-        
+
         if (!currentImageUrl) {
             console.log('Current image URL not available');
             if (window.dialogSystem) {
@@ -519,16 +603,16 @@ class ProductDetails {
 
         // Encode the image URL for Google's reverse image search
         const encodedImageUrl = encodeURIComponent(currentImageUrl);
-        
+
         // Try Google Lens first (newer, better interface)
         let reverseSearchUrl = `https://lens.google.com/uploadbyurl?url=${encodedImageUrl}`;
-        
+
         // Fallback to traditional Google reverse image search if needed
         // Alternative: https://www.google.com/searchbyimage?image_url=${encodedImageUrl}
-        
+
         console.log('Opening reverse image search for:', currentImageUrl);
         console.log('Search URL:', reverseSearchUrl);
-        
+
         try {
             window.open(reverseSearchUrl, '_blank');
         } catch (error) {
@@ -817,12 +901,15 @@ ${remainingLines}</span>
     populateFindingsListContent(container) {
         if (!container) return;
 
-        if (!this.findings || this.findings.length === 0) {
+        // Filter out AI-generated findings from the Research Findings display
+        const manualFindings = this.findings.filter(finding => !finding.isAIGenerated);
+
+        if (!manualFindings || manualFindings.length === 0) {
             container.innerHTML = '<div class="empty-message">No findings yet. Add your first finding!</div>';
             return;
         }
 
-        container.innerHTML = this.findings.map(finding => `
+        container.innerHTML = manualFindings.map(finding => `
             <div class="research-item">
                 <div class="research-item-header">
                     <strong>${finding.store || 'Unknown Store'} - ${finding.price || 'No price'}</strong>
@@ -1027,7 +1114,7 @@ ${remainingLines}</span>
 
     async generateAIPrompt() {
         try {
-            const prompt = this.createResearchPrompt(this.currentProduct);
+            const prompt = this.generateAIResearchPrompt(this.currentProduct);
 
             if (navigator.clipboard) {
                 await navigator.clipboard.writeText(prompt);
@@ -1048,32 +1135,781 @@ ${remainingLines}</span>
         }
     }
 
-    createResearchPrompt(product) {
-        const findings = product.findings || [];
-        const trends = product.trendValidation || [];
+    generateAIResearchPrompt(product) {
+        if (!product) {
+            return "Error: No product data provided for analysis.";
+        }
 
-        return `# Product Research Analysis
+        const { name, price, categories, dropi_description, findings } = product;
 
-**Product:** ${product.name}
-**Price:** ${product.price}
-**Status:** ${product.status}
+        // Format price safely
+        let formattedPrice = 'N/A';
+        if (price !== null && price !== undefined) {
+            try {
+                const numericPrice = typeof price === 'string' ? parseFloat(price.replace(/[^\d.]/g, '')) : price;
+                if (!isNaN(numericPrice)) {
+                    formattedPrice = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(numericPrice);
+                } else {
+                    formattedPrice = String(price);
+                }
+            } catch (error) {
+                formattedPrice = String(price);
+            }
+        }
 
-## Research Findings (${findings.length} total)
-${findings.length > 0 ? findings.map(f => `- ${f.store}: ${f.price} (${f.match}) - ${f.notes || 'No notes'}`).join('\n') : 'No findings yet'}
+        const category = Array.isArray(categories) ? categories.join(', ') : (categories || 'N/A');
 
-## Trend Analysis (${trends.length} total)
-${trends.length > 0 ? trends.map(t => `- ${t.platform}: ${t.trend_score} (${t.search_volume}) - ${t.notes || 'No notes'}`).join('\n') : 'No trends yet'}
+        // Analyze findings data quality - only count manual findings for analysis
+        const manualFindings = Array.isArray(findings) ? findings.filter(f => !f.isAIGenerated) : [];
+        const findingsCount = manualFindings.length;
+        let findingsAnalysis = '';
+        let dataQualityNote = '';
 
-## AI Analysis Request
-Please analyze this product data and provide:
-1. Market opportunity assessment
-2. Competitive landscape analysis  
-3. Pricing recommendations
-4. Risk factors to consider
-5. Next steps for research
+        if (findingsCount === 0) {
+            findingsAnalysis = 'No se encontraron comparaciones de mercado.';
+            dataQualityNote = '⚠️ DATOS INSUFICIENTES: Sin comparaciones de mercado. Análisis basado solo en información del proveedor.';
+        } else {
+            // Create detailed findings summary using only manual findings
+            findingsAnalysis = manualFindings.map((f, i) => {
+                const store = f.store || 'Tienda desconocida';
+                const itemPrice = f.price || 'Sin precio';
+                const sellerType = f.sellerType || 'N/A';
+                const rating = f.rating || 'N/A';
+                const reviewCount = f.review_count || '0';
+                const shippingCost = f.shippingCost || 'N/A';
+                const deliveryTime = f.deliveryTime || 'N/A';
+                const match = f.match || 'N/A';
 
-Focus on actionable insights for dropshipping success.`;
+                return `${i + 1}. ${store}
+- Precio: ${itemPrice}
+- Coincidencia: ${match}
+- Reseñas: ${rating} (${reviewCount})
+- Envío: ${shippingCost} / Entrega: ${deliveryTime}
+- Vendedor: ${sellerType}`;
+            }).join('\n\n');
+
+            // Data quality assessment
+            if (findingsCount < 3) {
+                dataQualityNote = `⚠️ DATOS LIMITADOS: Solo ${findingsCount} comparaciones encontradas. Se recomienda agregar más research findings para un análisis más preciso.`;
+            } else if (findingsCount < 6) {
+                dataQualityNote = `✅ DATOS BÁSICOS: ${findingsCount} comparaciones disponibles. Análisis confiable, pero se puede mejorar con más datos.`;
+            } else {
+                dataQualityNote = `🎯 DATOS COMPLETOS: ${findingsCount} comparaciones disponibles. Análisis basado en datos robustos.`;
+            }
+        }
+
+        // Generate the enhanced AI prompt
+        const promptText = `Eres un experto en análisis de productos para dropshipping en el mercado colombiano.
+
+Actúas como asistente de investigación para la tienda **ComfyTech**, que vende exclusivamente a través de una tienda Shopify. ComfyTech busca productos con al menos **2× de margen de ganancia bruto** (precio de venta ≥ 2× precio del proveedor), aunque márgenes menores pueden considerarse si el producto tiene ventajas notables o alta viralidad.
+
+Tu tarea es analizar el siguiente producto y compararlo con las referencias encontradas en marketplaces (MercadoLibre, Amazon, etc). No recomiendes vender en esas plataformas; úsalas solo como referencia para definir una estrategia de posicionamiento en Shopify.
+
+INFORMACIÓN DEL PRODUCTO:
+- Nombre: ${name || 'Sin nombre'}
+- Precio del proveedor: ${formattedPrice}
+- Categoría: ${category}
+
+Descripción del proveedor:
+${dropi_description || '(sin descripción)'}
+
+ANÁLISIS DE MERCADO:
+${dataQualityNote}
+
+Comparaciones encontradas (${findingsCount} findings):
+${findingsAnalysis}
+
+${findingsCount < 3 ? `
+RECOMENDACIÓN PARA MEJORAR EL ANÁLISIS:
+Para obtener un análisis más preciso, se recomienda:
+- Buscar el producto en MercadoLibre, Amazon, Éxito, Falabella
+- Agregar al menos 3-5 comparaciones de diferentes plataformas
+- Incluir información de precios, reseñas, y tiempos de entrega
+- Verificar la calidad de las imágenes y coincidencia del producto
+` : ''}
+
+IMPORTANTE: Responde ÚNICAMENTE con un objeto JSON válido (sin texto adicional) con esta estructura exacta:
+
+{
+  "competition_level": "Alta/Media/Baja",
+  "margin_estimate": "X.XX×",
+  "meets_margin_target": true/false,
+  "should_sell": true/false,
+  "justification": "Justificación breve en español",
+  "marketing_suggestions": [
+    "Sugerencia 1",
+    "Sugerencia 2", 
+    "Sugerencia 3"
+  ],
+  "target_audience": [
+    "Segmento 1",
+    "Segmento 2",
+    "Segmento 3"
+  ],
+  "data_confidence": "Alta/Media/Baja"
+}
+
+Reglas:
+- competition_level: Solo "Alta", "Media" o "Baja"
+- margin_estimate: Formato "X.XX×" (ej: "2.50×", "1.80×")
+- meets_margin_target: true si margin_estimate ≥ 2.00×, false si < 2.00×
+- should_sell: true/false basado en margen, competencia, viralidad Y calidad de datos
+- justification: Máximo 150 caracteres, menciona la calidad de datos si es relevante
+- marketing_suggestions: Exactamente 3 sugerencias, máximo 80 caracteres cada una
+- target_audience: Exactamente 3 segmentos, máximo 60 caracteres cada uno
+- data_confidence: "Alta" si ≥6 findings, "Media" si 3-5 findings, "Baja" si <3 findings
+
+NOTA: Si los datos son insuficientes (<3 findings), indica en la justificación que se necesita más investigación de mercado.`;
+
+        return String(promptText).trim();
     }
+
+
+    async sendPromptToOpenAI(prompt) {
+        // WARNING: This functionality should be delegated to the external API
+        // for security reasons. API keys should not be exposed in frontend code.
+        // TODO: Move this to the backend API at https://dropi-research-api.onrender.com
+
+        const apiKey = window.environmentConfig?.getOpenAIKey();
+        if (!apiKey) {
+            throw new Error('OpenAI API key not configured. Use window.setOpenAIKey("your-key") in development.');
+        }
+
+        // Validate prompt is a string
+        if (typeof prompt !== 'string') {
+            console.error('❌ Prompt is not a string:', typeof prompt, prompt);
+            throw new Error(`Invalid prompt type: expected string, got ${typeof prompt}`);
+        }
+
+        if (!prompt.trim()) {
+            throw new Error('Prompt cannot be empty');
+        }
+
+        console.log('🤖 Sending prompt to OpenAI:', prompt.substring(0, 100) + '...');
+
+        const requestBody = {
+            model: "gpt-3.5-turbo",
+            messages: [{
+                role: "user",
+                content: prompt
+            }],
+            temperature: 0.4,
+            max_tokens: 1000  // GPT-3.5 Turbo supports up to 4096 tokens
+        };
+
+        console.log('📤 Request body:', JSON.stringify(requestBody, null, 2));
+
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        console.log('📥 Response status:', response.status, response.statusText);
+
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            console.error('❌ OpenAI API Error:', errorData);
+            throw new Error(`Failed to fetch from OpenAI: ${response.status} ${response.statusText}. ${errorData.error?.message || ''}`);
+        }
+
+        const data = await response.json();
+        console.log('✅ OpenAI response received:', data);
+
+        const rawContent = data.choices?.[0]?.message?.content || "(No response)";
+
+        // Try to parse JSON response
+        try {
+            const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+                const jsonContent = jsonMatch[0];
+                const parsedData = JSON.parse(jsonContent);
+                console.log('✅ Successfully parsed JSON response:', parsedData);
+                return parsedData;
+            } else {
+                console.warn('⚠️ No JSON found in response, returning raw content');
+                return rawContent;
+            }
+        } catch (parseError) {
+            console.warn('⚠️ Failed to parse JSON response:', parseError);
+            console.log('Raw response content:', rawContent);
+            return rawContent;
+        }
+    }
+
+    async handleAIResearch(product = null) {
+        // Use provided product or current product
+        const targetProduct = product || this.currentProduct;
+
+        if (!targetProduct) {
+            const errorMsg = 'No product available for AI analysis. Please load a product first.';
+            console.error('❌', errorMsg);
+            this.showAIError(errorMsg);
+            return;
+        }
+
+        console.log('🚀 Starting AI research for product:', targetProduct.id, targetProduct.name);
+
+        try {
+            // Show loading state
+            this.showAILoading();
+
+            console.log('📝 Generating AI research prompt...');
+            const prompt = this.generateAIResearchPrompt(targetProduct);
+
+            if (!prompt || typeof prompt !== 'string') {
+                throw new Error('Failed to generate AI research prompt');
+            }
+
+            console.log('📄 Prompt preview:', prompt.substring(0, 200) + '...');
+
+            console.log('🚀 Sending to OpenAI...');
+            const result = await this.sendPromptToOpenAI(prompt);
+
+            // Update findings count with the exact number of manual findings used for this analysis
+            const manualFindingsCount = (targetProduct.findings || []).filter(finding => !finding.isAIGenerated).length;
+            this.updateFindingsMetricForAIResponse(manualFindingsCount);
+
+            console.log('✅ AI analysis completed successfully');
+            console.log('📖 Result type:', typeof result);
+
+            if (typeof result === 'object') {
+                console.log('📊 Structured JSON result:', result);
+
+                // Validate the structure
+                const isValid = this.validateAIStructure(result);
+                if (!isValid) {
+                    console.warn('⚠️ AI response structure validation failed, but proceeding with display');
+                }
+            } else {
+                console.log('📖 String result length:', result?.length || 0);
+            }
+
+            // Hide loading and display result
+            this.hideAILoading();
+            this.displayAIResult(result);
+
+            // Save AI response as a finding for permanent storage
+            try {
+                await this.saveAIResponseAsFinding(result);
+            } catch (saveError) {
+                console.warn('⚠️ Failed to save AI response as finding:', saveError);
+                // Don't fail the entire process if saving fails
+            }
+
+        } catch (err) {
+            console.error("❌ AI research failed:", err);
+            console.error("❌ Error details:", {
+                message: err.message,
+                stack: err.stack,
+                productData: targetProduct
+            });
+
+            // Hide loading and show error
+            this.hideAILoading();
+            this.showAIError(`Error en el análisis AI: ${err.message}`);
+
+            // Use dialog system if available, otherwise fallback
+            if (window.dialogSystem) {
+                await window.dialogSystem.error(`AI analysis failed: ${err.message}`);
+            } else {
+                this.showError(`AI analysis failed: ${err.message}`);
+            }
+        }
+    }
+
+    validateAIStructure(data) {
+        // Validate the required structure for AI response
+        const requiredFields = [
+            'competition_level',
+            'margin_estimate',
+            'meets_margin_target',
+            'should_sell',
+            'justification',
+            'marketing_suggestions',
+            'target_audience'
+        ];
+
+        const isValid = requiredFields.every(field => data.hasOwnProperty(field));
+
+        if (!isValid) {
+            console.warn('⚠️ AI response missing required fields:',
+                requiredFields.filter(field => !data.hasOwnProperty(field)));
+        }
+
+        // Validate specific field types and constraints
+        if (data.competition_level && !['Alta', 'Media', 'Baja'].includes(data.competition_level)) {
+            console.warn('⚠️ Invalid competition_level value:', data.competition_level);
+        }
+
+        if (data.margin_estimate && !data.margin_estimate.includes('×')) {
+            console.warn('⚠️ Invalid margin_estimate format:', data.margin_estimate);
+        }
+
+        if (typeof data.meets_margin_target !== 'boolean') {
+            console.warn('⚠️ meets_margin_target should be boolean:', data.meets_margin_target);
+        }
+
+        if (typeof data.should_sell !== 'boolean') {
+            console.warn('⚠️ should_sell should be boolean:', data.should_sell);
+        }
+
+        if (data.marketing_suggestions && !Array.isArray(data.marketing_suggestions)) {
+            console.warn('⚠️ marketing_suggestions should be array:', data.marketing_suggestions);
+        }
+
+        if (data.target_audience && !Array.isArray(data.target_audience)) {
+            console.warn('⚠️ target_audience should be array:', data.target_audience);
+        }
+
+        return isValid;
+    }
+
+    displayAIResult(result) {
+        console.log('📊 Displaying AI result:', typeof result, result);
+
+        // Hide loading and error states
+        this.hideAILoading();
+        this.hideAIError();
+
+        // Handle different result types and populate the existing HTML structure
+        if (result === null || result === undefined) {
+            this.showAIError('No se recibió respuesta del análisis AI');
+            return;
+        }
+
+        if (typeof result === 'object' && this.isStructuredAIResponse(result)) {
+            this.populateStructuredResult(result);
+        } else if (typeof result === 'object') {
+            this.populateGenericJSONResult(result);
+        } else {
+            this.populateStringResult(result);
+        }
+
+        // Show the analysis container and hide placeholder
+        this.showAIAnalysis();
+    } populateStructuredResult(data) {
+        // Populate the existing HTML structure with AI analysis data
+        // Note: Findings count is updated separately when AI analysis is generated
+
+        // Update recommendation badge
+        const recommendationBadge = document.getElementById('recommendationBadge');
+        if (recommendationBadge) {
+            if (data.should_sell) {
+                recommendationBadge.textContent = '✅ Recomendado';
+                recommendationBadge.className = 'badge badge-success';
+            } else {
+                recommendationBadge.textContent = '❌ No recomendado';
+                recommendationBadge.className = 'badge badge-danger';
+            }
+            recommendationBadge.style.display = 'inline-flex';
+        }
+
+        // Update competition level
+        const competitionBadge = document.getElementById('competitionBadge');
+        if (competitionBadge && data.competition_level) {
+            competitionBadge.textContent = data.competition_level;
+            const competitionClass = {
+                'Alta': 'badge-danger',
+                'Media': 'badge-warning',
+                'Baja': 'badge-success'
+            }[data.competition_level] || 'badge-secondary';
+            competitionBadge.className = `badge ${competitionClass}`;
+        }
+
+        // Update margin analysis
+        const marginValue = document.getElementById('marginValue');
+        if (marginValue && data.margin_estimate) {
+            marginValue.textContent = data.margin_estimate;
+        }
+
+        const marginTargetBadge = document.getElementById('marginTargetBadge');
+        if (marginTargetBadge) {
+            if (data.meets_margin_target === true) {
+                marginTargetBadge.textContent = '✅ Cumple';
+                marginTargetBadge.className = 'badge badge-success';
+            } else if (data.meets_margin_target === false) {
+                marginTargetBadge.textContent = '⚠️ Bajo';
+                marginTargetBadge.className = 'badge badge-warning';
+            }
+            marginTargetBadge.style.display = 'inline-flex';
+        }
+
+        // Update justification
+        const justificationText = document.getElementById('justificationText');
+        if (justificationText) {
+            justificationText.textContent = data.justification || 'No se proporcionó justificación';
+        }
+
+        // Update marketing suggestions
+        const marketingSuggestions = document.getElementById('marketingSuggestions');
+        if (marketingSuggestions && Array.isArray(data.marketing_suggestions)) {
+            marketingSuggestions.innerHTML = '';
+            if (data.marketing_suggestions.length > 0) {
+                data.marketing_suggestions.slice(0, 3).forEach(suggestion => {
+                    const li = document.createElement('li');
+                    li.textContent = suggestion;
+                    marketingSuggestions.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = 'No hay sugerencias disponibles';
+                marketingSuggestions.appendChild(li);
+            }
+        }
+
+        // Update target audience
+        const targetAudience = document.getElementById('targetAudience');
+        if (targetAudience && Array.isArray(data.target_audience)) {
+            targetAudience.innerHTML = '';
+            if (data.target_audience.length > 0) {
+                data.target_audience.slice(0, 4).forEach(audience => {
+                    const span = document.createElement('span');
+                    span.className = 'audience-tag-compact';
+                    span.textContent = audience;
+                    targetAudience.appendChild(span);
+                });
+            } else {
+                const span = document.createElement('span');
+                span.className = 'audience-tag-compact';
+                span.textContent = 'No definido';
+                targetAudience.appendChild(span);
+            }
+        }
+    }
+
+    updateFindingsMetric() {
+        // Update the findings count and quality indicator - count only manual findings used for analysis
+        const findingsCount = document.getElementById('findingsCount');
+        const findingsQualityBadge = document.getElementById('findingsQualityBadge');
+
+        // Count only manual findings (exclude AI-generated findings)
+        const manualFindingsCount = (this.findings || []).filter(finding => !finding.isAIGenerated).length;
+
+        if (findingsCount) {
+            findingsCount.textContent = manualFindingsCount;
+        }
+
+        if (findingsQualityBadge) {
+            let qualityText = '';
+            let qualityClass = '';
+
+            if (manualFindingsCount === 0) {
+                qualityText = 'Sin datos';
+                qualityClass = 'badge findings-poor';
+            } else if (manualFindingsCount < 3) {
+                qualityText = 'Pocos datos';
+                qualityClass = 'badge findings-poor';
+            } else if (manualFindingsCount < 6) {
+                qualityText = 'Datos básicos';
+                qualityClass = 'badge findings-good';
+            } else {
+                qualityText = 'Datos completos';
+                qualityClass = 'badge findings-excellent';
+            }
+
+            findingsQualityBadge.textContent = qualityText;
+            findingsQualityBadge.className = qualityClass;
+            findingsQualityBadge.style.display = 'inline-flex';
+        }
+    }
+
+    updateFindingsMetricForAIResponse(usedFindingsCount) {
+        // Update the findings count and quality indicator with the exact count used for AI analysis
+        const findingsCount = document.getElementById('findingsCount');
+        const findingsQualityBadge = document.getElementById('findingsQualityBadge');
+
+        if (findingsCount) {
+            findingsCount.textContent = usedFindingsCount;
+        }
+
+        if (findingsQualityBadge) {
+            let qualityText = '';
+            let qualityClass = '';
+
+            if (usedFindingsCount === 0) {
+                qualityText = 'Sin datos';
+                qualityClass = 'badge findings-poor';
+            } else if (usedFindingsCount < 3) {
+                qualityText = 'Pocos datos';
+                qualityClass = 'badge findings-poor';
+            } else if (usedFindingsCount < 6) {
+                qualityText = 'Datos básicos';
+                qualityClass = 'badge findings-good';
+            } else {
+                qualityText = 'Datos completos';
+                qualityClass = 'badge findings-excellent';
+            }
+
+            findingsQualityBadge.textContent = qualityText;
+            findingsQualityBadge.className = qualityClass;
+            findingsQualityBadge.style.display = 'inline-flex';
+        }
+    }
+
+    populateGenericJSONResult(data) {
+        // For generic JSON, show it in the justification section
+        const justificationText = document.getElementById('justificationText');
+        if (justificationText) {
+            justificationText.innerHTML = `<pre style="font-family: 'Monaco', 'Menlo', 'Consolas', monospace; font-size: 12px; white-space: pre-wrap; margin: 0;">${this.highlightJSON(JSON.stringify(data, null, 2))}</pre>`;
+        }
+
+        // Update title to indicate JSON response
+        const analysisTitle = document.getElementById('analysisTitle');
+        if (analysisTitle) {
+            analysisTitle.textContent = '📄 Respuesta JSON';
+        }
+
+        // Update recommendation badge
+        const recommendationBadge = document.getElementById('recommendationBadge');
+        if (recommendationBadge) {
+            recommendationBadge.textContent = 'Datos estructurados';
+            recommendationBadge.className = 'badge badge-secondary';
+            recommendationBadge.style.display = 'inline-flex';
+        }
+
+        // Hide marketing and audience sections for generic JSON
+        const marketingSuggestions = document.getElementById('marketingSuggestions');
+        const targetAudience = document.getElementById('targetAudience');
+        if (marketingSuggestions) marketingSuggestions.innerHTML = '<li>Ver datos en justificación</li>';
+        if (targetAudience) targetAudience.innerHTML = '<span class="audience-tag-compact">Ver JSON completo</span>';
+    }
+
+    populateStringResult(result) {
+        // For string results, show in justification section
+        const justificationText = document.getElementById('justificationText');
+        if (justificationText) {
+            justificationText.textContent = result;
+        }
+
+        // Update title to indicate text response
+        const analysisTitle = document.getElementById('analysisTitle');
+        if (analysisTitle) {
+            analysisTitle.textContent = '💬 Respuesta AI';
+        }
+
+        // Update recommendation badge
+        const recommendationBadge = document.getElementById('recommendationBadge');
+        if (recommendationBadge) {
+            recommendationBadge.textContent = 'Texto plano';
+            recommendationBadge.className = 'badge badge-secondary';
+            recommendationBadge.style.display = 'inline-flex';
+        }
+
+        // Hide other sections for text response
+        const marketingSuggestions = document.getElementById('marketingSuggestions');
+        const targetAudience = document.getElementById('targetAudience');
+        if (marketingSuggestions) marketingSuggestions.innerHTML = '<li>Ver respuesta completa arriba</li>';
+        if (targetAudience) targetAudience.innerHTML = '<span class="audience-tag-compact">Texto simple</span>';
+    }
+
+    showAIAnalysis() {
+        // Show the analysis container and hide placeholder
+        const analysisContainer = document.getElementById('aiAnalysisContainer');
+        const placeholder = document.getElementById('aiPlaceholder');
+
+        if (analysisContainer) analysisContainer.style.display = 'block';
+        if (placeholder) placeholder.style.display = 'none';
+    }
+
+    showAILoading() {
+        // Show loading state and hide others
+        const loadingState = document.getElementById('aiLoadingState');
+        const analysisContainer = document.getElementById('aiAnalysisContainer');
+        const placeholder = document.getElementById('aiPlaceholder');
+        const errorState = document.getElementById('aiErrorState');
+
+        if (loadingState) loadingState.style.display = 'flex';
+        if (analysisContainer) analysisContainer.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'none';
+        if (errorState) errorState.style.display = 'none';
+    }
+
+    hideAILoading() {
+        // Hide loading state
+        const loadingState = document.getElementById('aiLoadingState');
+        if (loadingState) loadingState.style.display = 'none';
+    }
+
+    showAIError(errorMessage) {
+        // Show error state and hide others
+        const errorState = document.getElementById('aiErrorState');
+        const errorMessageEl = document.getElementById('errorMessage');
+        const analysisContainer = document.getElementById('aiAnalysisContainer');
+        const placeholder = document.getElementById('aiPlaceholder');
+        const loadingState = document.getElementById('aiLoadingState');
+
+        if (errorState) errorState.style.display = 'block';
+        if (errorMessageEl) errorMessageEl.textContent = errorMessage;
+        if (analysisContainer) analysisContainer.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'none';
+        if (loadingState) loadingState.style.display = 'none';
+    }
+
+    hideAIError() {
+        // Hide error state
+        const errorState = document.getElementById('aiErrorState');
+        if (errorState) errorState.style.display = 'none';
+    }
+
+    isStructuredAIResponse(data) {
+        // Check if the data has the expected AI analysis structure
+        const requiredFields = ['competition_level', 'margin_estimate', 'should_sell'];
+        return requiredFields.some(field => data.hasOwnProperty(field));
+    }
+
+    async saveAIResponseAsFinding(aiResult) {
+        // Save AI analysis result as a special finding in the product JSON
+        try {
+            if (!this.currentProduct) {
+                throw new Error('No product available to save AI response');
+            }
+
+            // Calculate how many manual findings were used for this analysis
+            const manualFindingsUsed = (this.currentProduct.findings || []).filter(finding => !finding.isAIGenerated).length;
+
+            // Create a special AI finding
+            const aiFinding = {
+                id: Date.now() + Math.random(), // Unique ID
+                store: 'AI Analysis',
+                price: 'N/A',
+                match: 'AI Generated',
+                stock: 'N/A',
+                link: '',
+                rating: 'N/A',
+                review_count: 'N/A',
+                variant: 'AI Analysis Result',
+                origin: 'OpenAI GPT-4 Turbo',
+                deliveryTime: 'N/A',
+                shippingCost: 'N/A',
+                sellerType: 'AI Assistant',
+                listingType: 'AI Analysis',
+                badges: 'AI Generated',
+                imageQuality: 'N/A',
+                imageMatch: 'N/A',
+                notes: typeof aiResult === 'object' ? JSON.stringify(aiResult, null, 2) : aiResult,
+                timestamp: new Date().toISOString(),
+                isAIGenerated: true, // Special flag to identify AI findings
+                aiResponse: aiResult, // Store the original AI response data for loading
+                findingsUsedCount: manualFindingsUsed // Store the count of manual findings used for this analysis
+            };
+
+            // Add to findings array
+            this.findings.push(aiFinding);
+            this.currentProduct.findings = this.findings;
+
+            // Save to storage
+            await this.saveProductData();
+
+            // Update UI
+            this.updateResearchPreviews();
+            this.updateFindingsMetric();
+
+            console.log('✅ AI response saved as finding:', aiFinding.id);
+            this.showSuccessMessage('AI analysis saved as research finding!');
+
+            return aiFinding;
+
+        } catch (error) {
+            console.error('❌ Error saving AI response as finding:', error);
+            this.showError('Failed to save AI analysis as finding');
+            throw error;
+        }
+    }
+
+    // Removed formatStructuredResult, formatAIAnalysisResult, formatGenericJSONResult, 
+    // formatFallbackResult, formatMarketingSuggestions, formatTargetAudience methods
+    // as they are replaced by direct DOM manipulation methods above
+
+    highlightJSON(jsonString) {
+        // Simple JSON syntax highlighting for better readability
+        return jsonString
+            .replace(/("[\w\s_-]+"):/g, '<span style="color: var(--color-primary); font-weight: 600;">$1</span>:')
+            .replace(/: (".*?")/g, ': <span style="color: var(--color-success);">$1</span>')
+            .replace(/: (true|false)/g, ': <span style="color: var(--color-warning);">$1</span>')
+            .replace(/: (null)/g, ': <span style="color: var(--text-tertiary);">$1</span>')
+            .replace(/: (\d+\.?\d*)/g, ': <span style="color: var(--color-accent);">$1</span>');
+    }
+
+    escapeHtml(text) {
+        // Escape HTML to prevent XSS attacks
+        if (typeof text !== 'string') return String(text || '');
+
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    showAIResultModal(result) {
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+
+        let modalContent;
+        let copyContent;
+
+        if (typeof result === 'object') {
+            // Structured JSON result
+            modalContent = this.formatStructuredResult(result);
+            copyContent = JSON.stringify(result, null, 2);
+        } else {
+            // String result (fallback)
+            const escapedResult = result.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            modalContent = `<pre style="white-space: pre-wrap; font-family: inherit;">${escapedResult}</pre>`;
+            copyContent = result;
+        }
+
+        modal.innerHTML = `
+            <div class="modal-dialog modal-lg">
+                <div class="modal-header">
+                    <h3>Análisis AI - ComfyTech</h3>
+                    <button type="button" class="modal-close-btn" onclick="this.closest('.modal').remove()">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-result-content">
+                        ${modalContent}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="this.closest('.modal').remove()">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="productDetails.copyAIResult(\`${copyContent.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`)">Copy to Clipboard</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        modal.classList.add('active');
+
+        // Initialize lucide icons
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
+
+    async copyAIResult(result) {
+        try {
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(result);
+                this.showSuccessMessage('AI analysis copied to clipboard!');
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = result;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                this.showSuccessMessage('AI analysis copied to clipboard!');
+            }
+        } catch (error) {
+            console.error('Failed to copy AI result:', error);
+            this.showError('Failed to copy to clipboard');
+        }
+    }
+
 
     // CRUD operations for findings and trends
     editFinding(findingId) {
