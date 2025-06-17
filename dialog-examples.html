@@ -113,6 +113,7 @@ LAST UPDATED: 2025-06-16 — Converted to modular architecture
 
     <!-- Scripts -->
     <script src="assets/js/utils/component-loader.js"></script>
+    <script src="assets/js/utils/dialog-system.js"></script>
     <script src="services/path-service.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="assets/js/header.js"></script>
@@ -124,6 +125,9 @@ LAST UPDATED: 2025-06-16 — Converted to modular architecture
 
             // Initialize Lucide icons
             lucide.createIcons();
+
+            // Initialize dialog system
+            window.dialogSystem = new DialogSystem();
 
             // Initialize component loader
             const componentLoader = new ComponentLoader();

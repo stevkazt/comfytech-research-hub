@@ -101,7 +101,7 @@ All HTML files now follow a component-based architecture:
 assets/components/
 ├── header.html                 # Navigation and branding
 ├── footer.html                 # Site footer
-├── mobile-warning.html         # Desktop-only warning
+├── mobile-warning.html         # Large screen optimization warning
 ├── script-loader.html          # Common script imports
 ├── dashboard-welcome.html      # Dashboard welcome section
 ├── dashboard-stats.html        # Statistics cards

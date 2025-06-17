@@ -289,7 +289,7 @@ class ProductDetails {
         // Update status selector
         const statusSelect = document.getElementById('product-status');
         if (statusSelect) {
-            statusSelect.value = product.status || '';
+            statusSelect.value = product.status || 'new';
         }
 
         // Update images
@@ -931,14 +931,18 @@ ${remainingLines}</span>
             console.error('❌ Error updating product status:', error);
             const statusSelect = document.getElementById('product-status');
             if (statusSelect) {
-                statusSelect.value = this.currentProduct.status || '';
+                statusSelect.value = this.currentProduct.status || 'new';
             }
         }
     }
 
     async deleteProduct() {
-        const confirmed = await window.dialogSystem?.confirm('Are you sure you want to delete this product? This action cannot be undone.') ||
-            confirm('Are you sure you want to delete this product? This action cannot be undone.');
+        let confirmed;
+        if (window.dialogSystem) {
+            confirmed = await window.dialogSystem.confirm('Are you sure you want to delete this product? This action cannot be undone.');
+        } else {
+            confirmed = confirm('Are you sure you want to delete this product? This action cannot be undone.');
+        }
 
         if (!confirmed) {
             return;
@@ -1101,8 +1105,12 @@ Focus on actionable insights for dropshipping success.`;
     }
 
     async deleteFinding(findingId) {
-        const confirmed = await window.dialogSystem?.confirm('Are you sure you want to delete this finding?') ||
-            confirm('Are you sure you want to delete this finding?');
+        let confirmed;
+        if (window.dialogSystem) {
+            confirmed = await window.dialogSystem.confirm('Are you sure you want to delete this finding?');
+        } else {
+            confirmed = confirm('Are you sure you want to delete this finding?');
+        }
 
         if (!confirmed) return;
 
@@ -1128,8 +1136,12 @@ Focus on actionable insights for dropshipping success.`;
     }
 
     async deleteTrend(trendId) {
-        const confirmed = await window.dialogSystem?.confirm('Are you sure you want to delete this trend analysis?') ||
-            confirm('Are you sure you want to delete this trend analysis?');
+        let confirmed;
+        if (window.dialogSystem) {
+            confirmed = await window.dialogSystem.confirm('Are you sure you want to delete this trend analysis?');
+        } else {
+            confirmed = confirm('Are you sure you want to delete this trend analysis?');
+        }
 
         if (!confirmed) return;
 
@@ -1206,14 +1218,8 @@ Focus on actionable insights for dropshipping success.`;
 
             console.log(`🔗 Opening Dropi product page: ${dropiUrl}`);
 
-            // Use Electron's shell to open external URL
-            if (window.require) {
-                const { shell } = window.require('electron');
-                shell.openExternal(dropiUrl);
-            } else {
-                // Fallback for non-Electron environment
-                window.open(dropiUrl, '_blank');
-            }
+            // Open external URL in new tab (web-compatible)
+            window.open(dropiUrl, '_blank');
 
             // Show success notification
             if (window.notificationSystem) {
