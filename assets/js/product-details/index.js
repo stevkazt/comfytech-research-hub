@@ -450,6 +450,11 @@ class ProductDetails {
     }
 
     async searchExternal(platform) {
+        // Special handling for image reverse search
+        if (platform === 'image') {
+            return this.performReverseImageSearch();
+        }
+
         const productName = this.currentProduct?.name;
         if (!productName) {
             // Use dialog system instead of alert
@@ -468,7 +473,6 @@ class ProductDetails {
             google: `https://www.google.com/search?q=${query}`,
             mercadolibre: `https://listado.mercadolibre.com.co/${query}`,
             amazon: `https://www.amazon.com/s?k=${query}`,
-            image: `https://www.google.com/search?tbm=isch&q=${query}`,
             trends: `https://trends.google.com/trends/explore?q=${query}`,
             tiktok: `https://ads.tiktok.com/business/creativecenter/inspiration/popular/hashtag/pc/en?search_term=${query}`,
             facebook: `https://www.facebook.com/ads/library/?active_status=all&ad_type=all&country=ALL&q=${query}`,
@@ -478,6 +482,61 @@ class ProductDetails {
 
         if (urls[platform]) {
             window.open(urls[platform], '_blank');
+        }
+    }
+
+    async performReverseImageSearch() {
+        // Check if there are images available
+        if (!this.images || this.images.length === 0) {
+            console.log('No images available for reverse search');
+            if (window.dialogSystem) {
+                await window.dialogSystem.warning('No images available for reverse search');
+            } else if (window.notificationSystem) {
+                window.notificationSystem.warning('No images available for reverse search');
+            } else {
+                alert('No images available for reverse search');
+            }
+            return;
+        }
+
+        // Get the currently displayed main image URL
+        const currentImageUrl = this.images[this.currentImageIndex];
+        console.log('Current image index:', this.currentImageIndex);
+        console.log('Current image URL:', currentImageUrl);
+        console.log('All images:', this.images);
+        
+        if (!currentImageUrl) {
+            console.log('Current image URL not available');
+            if (window.dialogSystem) {
+                await window.dialogSystem.warning('Current image URL not available for search');
+            } else if (window.notificationSystem) {
+                window.notificationSystem.warning('Current image URL not available for search');
+            } else {
+                alert('Current image URL not available for search');
+            }
+            return;
+        }
+
+        // Encode the image URL for Google's reverse image search
+        const encodedImageUrl = encodeURIComponent(currentImageUrl);
+        
+        // Try Google Lens first (newer, better interface)
+        let reverseSearchUrl = `https://lens.google.com/uploadbyurl?url=${encodedImageUrl}`;
+        
+        // Fallback to traditional Google reverse image search if needed
+        // Alternative: https://www.google.com/searchbyimage?image_url=${encodedImageUrl}
+        
+        console.log('Opening reverse image search for:', currentImageUrl);
+        console.log('Search URL:', reverseSearchUrl);
+        
+        try {
+            window.open(reverseSearchUrl, '_blank');
+        } catch (error) {
+            console.error('Error opening reverse image search:', error);
+            // Try fallback URL
+            const fallbackUrl = `https://www.google.com/searchbyimage?image_url=${encodedImageUrl}`;
+            console.log('Trying fallback URL:', fallbackUrl);
+            window.open(fallbackUrl, '_blank');
         }
     }
 
