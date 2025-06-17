@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Settings Dropdown Test</title>
+
+    <!-- Main styles -->
+    <link rel="stylesheet" href="assets/css/main-modular.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header Component -->
+        <div id="header-placeholder"></div>
+
+        <div class="content-section">
+            <h1>Header Settings Dropdown Test</h1>
+            <p>Test the settings dropdown in the header to ensure modals display properly instead of appending to the
+                page.</p>
+
+            <div style="margin: 20px 0; padding: 20px; background: #f3f4f6; border-radius: 8px;">
+                <h2>Test Steps:</h2>
+                <ol>
+                    <li>Click the settings button (gear icon) in the header</li>
+                    <li>Click "Keyboard Shortcuts" - should show a proper modal dialog</li>
+                    <li>Close the dialog and try "About" - should also show a proper modal dialog</li>
+                    <li>Both dialogs should be centered on screen, not appended to the page</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Component Loader -->
+    <script src="assets/js/utils/component-loader.js"></script>
+    <script src="assets/js/utils/dialog-system.js"></script>
+    <script src="dialog-validation.js"></script>
+    <script src="assets/js/header.js"></script>
+
+    <script>
+        // Load and initialize header component
+        async function initializePage() {
+            try {
+                console.log('🚀 Header Test Page Loaded');
+
+                // Initialize Lucide icons
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+
+                // Initialize common components (includes header)
+                const componentLoader = new ComponentLoader();
+                await componentLoader.initializeCommonComponents();
+
+                console.log('✅ Header test page initialized');
+
+            } catch (error) {
+                console.error('❌ Error initializing page:', error);
+            }
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+    </script>
+</body>
+
+</html>

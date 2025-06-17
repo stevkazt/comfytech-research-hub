@@ -121,16 +121,16 @@ class HeaderComponent {
         }
 
         if (viewShortcuts) {
-            viewShortcuts.addEventListener('click', (e) => {
+            viewShortcuts.addEventListener('click', async (e) => {
                 e.preventDefault();
-                this.showKeyboardShortcuts();
+                await this.showKeyboardShortcuts();
             });
         }
 
         if (aboutApp) {
-            aboutApp.addEventListener('click', (e) => {
+            aboutApp.addEventListener('click', async (e) => {
                 e.preventDefault();
-                this.showAboutDialog();
+                await this.showAboutDialog();
             });
         }
     }
@@ -408,7 +408,15 @@ class HeaderComponent {
     /**
      * Show keyboard shortcuts dialog
      */
-    showKeyboardShortcuts() {
+    async showKeyboardShortcuts() {
+        // Ensure dialog system is loaded
+        await this.initializeDialogSystem();
+
+        if (!window.dialogSystem) {
+            console.error('Dialog system not available');
+            return;
+        }
+
         const shortcuts = [
             { key: 'Alt/Cmd + R', action: 'Refresh data' },
             { key: 'Alt/Cmd + 1', action: 'Go to Dashboard' },
@@ -417,87 +425,60 @@ class HeaderComponent {
         ];
 
         const shortcutList = shortcuts.map(s =>
-            `<div class="shortcut-item"><kbd>${s.key}</kbd><span>${s.action}</span></div>`
+            `<div style="display: flex; align-items: center; margin-bottom: 12px;">
+                <kbd style="background: #f3f4f6; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 12px; margin-right: 16px; min-width: 100px; text-align: center;">${s.key}</kbd>
+                <span style="color: #4b5563;">${s.action}</span>
+            </div>`
         ).join('');
 
-        const modal = document.createElement('div');
-        modal.className = 'shortcuts-modal';
-        modal.innerHTML = `
-            <div class="shortcuts-dialog">
-                <div class="shortcuts-header">
-                    <h3>Keyboard Shortcuts</h3>
-                    <button class="close-shortcuts">×</button>
-                </div>
-                <div class="shortcuts-content">
-                    ${shortcutList}
-                </div>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        // Close handlers
-        const closeBtn = modal.querySelector('.close-shortcuts');
-        closeBtn.addEventListener('click', () => modal.remove());
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.remove();
+        await window.dialogSystem.showDialog({
+            type: 'info',
+            title: 'Keyboard Shortcuts',
+            message: shortcutList,
+            buttons: [
+                { text: 'Close', action: 'ok', class: 'primary' }
+            ]
         });
-
-        // Auto-remove on escape
-        const handleEscape = (e) => {
-            if (e.key === 'Escape') {
-                modal.remove();
-                document.removeEventListener('keydown', handleEscape);
-            }
-        };
-        document.addEventListener('keydown', handleEscape);
     }
 
     /**
      * Show about dialog
      */
-    showAboutDialog() {
-        const modal = document.createElement('div');
-        modal.className = 'about-modal';
-        modal.innerHTML = `
-            <div class="about-dialog">
-                <div class="about-header">
-                    <h3>About Dropi Research</h3>
-                    <button class="close-about">×</button>
-                </div>
-                <div class="about-content">
-                    <div class="about-logo">
-                        <i data-lucide="search"></i>
-                        <span>Dropi Research</span>
-                    </div>
-                    <p>Version 2.0</p>
-                    <p>Advanced product research and market analysis tool for e-commerce professionals.</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <strong>${this.productCount}</strong>
-                            <span>Products Analyzed</span>
-                        </div>
-                        <div class="stat-item">
-                            <strong>${this.isOnline ? 'Connected' : 'Offline'}</strong>
-                            <span>Status</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+    async showAboutDialog() {
+        // Ensure dialog system is loaded
+        await this.initializeDialogSystem();
 
-        document.body.appendChild(modal);
-
-        // Initialize Lucide icons if available
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        if (!window.dialogSystem) {
+            console.error('Dialog system not available');
+            return;
         }
 
-        // Close handlers
-        const closeBtn = modal.querySelector('.close-about');
-        closeBtn.addEventListener('click', () => modal.remove());
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.remove();
+        const aboutContent = `<div style="text-align: center;">
+<div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; font-size: 16px; font-weight: 600;">
+<span style="font-size: 20px;">🔍</span>
+<span>Dropi Research</span>
+</div>
+<p style="margin: 4px 0; color: #6b7280; font-weight: 500;">Version 2.0</p>
+<p style="margin: 8px 0; color: #4b5563; font-size: 14px;">Advanced product research and market analysis tool for e-commerce professionals.</p>
+<div style="display: flex; gap: 16px; justify-content: center; margin-top: 12px; padding: 8px; background: #f9fafb; border-radius: 6px;">
+<div style="text-align: center;">
+<div style="font-weight: 600; color: #1f2937;">${this.productCount}</div>
+<div style="font-size: 11px; color: #6b7280;">Products</div>
+</div>
+<div style="text-align: center;">
+<div style="font-weight: 600; color: #1f2937;">${this.isOnline ? 'Online' : 'Offline'}</div>
+<div style="font-size: 11px; color: #6b7280;">Status</div>
+</div>
+</div>
+</div>`;
+
+        await window.dialogSystem.showDialog({
+            type: 'info',
+            title: 'About Dropi Research',
+            message: aboutContent,
+            buttons: [
+                { text: 'Close', action: 'ok', class: 'primary' }
+            ]
         });
     }
 

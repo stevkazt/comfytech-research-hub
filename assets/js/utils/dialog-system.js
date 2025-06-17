@@ -54,10 +54,12 @@ class DialogSystem {
                     padding: 24px;
                     min-width: 320px;
                     max-width: 500px;
+                    max-height: 80vh;
                     width: 90%;
                     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
                     transform: scale(0.95) translateY(-20px);
                     transition: transform 0.2s ease;
+                    overflow-y: auto;
                 }
 
                 .dialog-overlay.active .dialog-modal {
@@ -108,7 +110,8 @@ class DialogSystem {
                     color: #4B5563;
                     line-height: 1.5;
                     margin-bottom: 24px;
-                    white-space: pre-wrap;
+                    max-height: 50vh;
+                    overflow-y: auto;
                 }
 
                 .dialog-input {
