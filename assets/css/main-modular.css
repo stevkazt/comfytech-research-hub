@@ -66,6 +66,7 @@ LAST UPDATED: June 16, 2025 - Transitioned to modular architecture
 @import './components/modals.css';
 @import './components/forms.css';
 @import './components/header.css';
+@import './components/footer.css';
 
 /* ==========================================================================
    4. PAGES (Page-specific styles)

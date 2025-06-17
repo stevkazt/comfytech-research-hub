@@ -1,0 +1,100 @@
+/* ==========================================================================
+   FOOTER COMPONENT STYLES
+   ========================================================================== */
+
+.footer {
+  background: var(--color-neutral-900);
+  color: var(--color-neutral-100);
+  padding: var(--spacing-xl) 0 var(--spacing-lg);
+  margin-top: auto;
+  border-top: 1px solid var(--color-neutral-800);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary-600) 20%,
+    var(--color-primary-600) 80%,
+    transparent
+  );
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.footer-version {
+  color: var(--color-neutral-400);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .footer-version {
+    text-align: right;
+  }
+}
+
+/* Dark theme adjustments (if needed) */
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: var(--color-neutral-900);
+    border-top-color: var(--color-neutral-700);
+  }
+}
+
+/* Hover effects for interactive elements */
+.footer a {
+  color: var(--color-neutral-200);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover {
+  color: var(--color-primary-400);
+}
+
+/* Animation for footer appearance */
+.footer {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
