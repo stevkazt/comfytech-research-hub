@@ -1,0 +1,74 @@
+<!-- Product Controls Component -->
+<!-- 
+FILE: product-controls.html (50 lines)
+PURPOSE: Search, filter, and action controls for product viewer
+SECTIONS:
+1-15: Search section with input and type selector
+16-30: Filter and sort controls section  
+31-40: Action buttons section
+41-50: Responsive mobile toggle controls
+IMPROVEMENTS:
+- Logical grouping for better UX
+- Mobile-first responsive design
+- Clear visual hierarchy
+- Accessible structure with labels
+LAST UPDATED: 2025-06-16 — Restructured for better usability
+-->
+<div class="product-controls">
+    <!-- Search Section -->
+    <div class="controls-section search-section">
+        <div class="search-group">
+            <label for="searchInput" class="sr-only">Search products</label>
+            <input type="text" id="searchInput" class="form-control search-input" placeholder="Search products..."
+                aria-label="Search products">
+            <label for="searchType" class="sr-only">Search type</label>
+            <select id="searchType" class="form-control search-type" aria-label="Search type">
+                <option value="name">By Name</option>
+                <option value="id">By ID</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Filter & Sort Section -->
+    <div class="controls-section filter-section">
+        <div class="filter-group">
+            <label for="statusFilter" class="sr-only">Filter by status</label>
+            <select id="statusFilter" class="form-control status-filter" aria-label="Filter by status">
+                <option value="all">All Status</option>
+                <option value="worth">✅ Worth Selling</option>
+                <option value="skip">❌ Skip</option>
+                <option value="research">❓ In Research</option>
+                <option value="new">⚪ New</option>
+            </select>
+
+            <label for="sortSelect" class="sr-only">Sort products</label>
+            <select id="sortSelect" class="form-control sort-select" aria-label="Sort products">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+                <option value="date-newest">Date Added (Newest)</option>
+                <option value="date-oldest">Date Added (Oldest)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Action Buttons Section -->
+    <div class="controls-section actions-section">
+        <button id="addProductBtn" class="btn btn-primary" aria-label="Add new product">
+            <i data-lucide="plus" aria-hidden="true"></i>
+            <span class="btn-text">Add Product</span>
+        </button>
+
+        <button id="refreshBtn" class="btn btn-secondary" aria-label="Refresh product list">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+            <span class="btn-text">Refresh</span>
+        </button>
+    </div>
+
+    <!-- Mobile Toggle for Filters (hidden by default) -->
+    <button class="mobile-filter-toggle d-md-none" id="mobileFilterToggle" aria-label="Toggle filters">
+        <i data-lucide="filter" aria-hidden="true"></i>
+        <span>Filters</span>
+    </button>
+</div>

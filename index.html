@@ -1,0 +1,187 @@
+<!--
+FILE: index.html (120 lines)
+PURPOSE: Dashboard page with modular components
+SECTIONS:
+1-15: HTML head and meta
+16-25: Mobile warning component
+26-35: Header component placeholder
+36-85: Main content sections (welcome, stats, features, getting started)
+86-120: Scripts and initialization
+KEY FUNCTIONS:
+- Dashboard class for stats management
+- Component loading and initialization
+LAST UPDATED: 2025-06-16 — Converted to modular architecture
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>Dashboard - Dropi Research</title>
+    <link rel="stylesheet" href="assets/css/main-modular.css">
+</head>
+
+<body>
+    <!-- Mobile Warning Component -->
+    <div id="mobile-warning-placeholder">
+        <!-- Mobile warning will be loaded here -->
+    </div>
+
+    <!-- Header Component -->
+    <div id="header-placeholder">
+        <!-- Header will be loaded here -->
+    </div>
+
+    <main class="page-container">
+        <div class="content-section">
+            <!-- Welcome Section Component -->
+            <div id="dashboard-welcome-placeholder">
+                <!-- Welcome section will be loaded here -->
+            </div>
+
+            <!-- Stats Section Component -->
+            <div id="dashboard-stats-placeholder">
+                <!-- Stats section will be loaded here -->
+            </div>
+
+            <!-- Features Section Component -->
+            <div id="dashboard-features-placeholder">
+                <!-- Features section will be loaded here -->
+            </div>
+
+            <!-- Getting Started Component -->
+            <div id="dashboard-getting-started-placeholder">
+                <!-- Getting started section will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder">
+        <!-- Footer content will be loaded here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils/component-loader.js"></script>
+    <script src="services/path-service.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="assets/js/utils/api-client.js"></script>
+    <script src="assets/js/header.js"></script>
+
+    <script>
+        // Dashboard functionality
+        class Dashboard {
+            constructor() {
+                this.componentLoader = new ComponentLoader();
+                this.init();
+            }
+
+            async init() {
+                console.log('🚀 Initializing Dashboard');
+
+                // Load all components first
+                await this.loadAllComponents();
+
+                // Then initialize functionality
+                await this.loadStats();
+                this.setupEventListeners();
+            }
+
+            async loadAllComponents() {
+                console.log('📦 Loading dashboard components...');
+
+                // Load all dashboard components
+                await Promise.all([
+                    this.componentLoader.loadComponent('assets/components/mobile-warning.html', '#mobile-warning-placeholder'),
+                    this.componentLoader.loadComponent('assets/components/dashboard-welcome.html', '#dashboard-welcome-placeholder'),
+                    this.componentLoader.loadComponent('assets/components/dashboard-stats.html', '#dashboard-stats-placeholder'),
+                    this.componentLoader.loadComponent('assets/components/dashboard-features.html', '#dashboard-features-placeholder'),
+                    this.componentLoader.loadComponent('assets/components/dashboard-getting-started.html', '#dashboard-getting-started-placeholder'),
+                    this.componentLoader.loadComponent('assets/components/footer.html', '#footer-placeholder')
+                ]);
+
+                console.log('✅ All dashboard components loaded');
+            }
+
+            setupEventListeners() {
+                const addQuickProductBtn = document.getElementById('addQuickProductBtn');
+                if (addQuickProductBtn) {
+                    addQuickProductBtn.addEventListener('click', () => {
+                        window.location.href = 'product-viewer.html';
+                    });
+                }
+            }
+
+            async loadStats() {
+                try {
+                    console.log('📊 Loading dashboard statistics...');
+
+                    // Load from API only - no caching
+                    const products = await window.apiClient.getProducts('id,status,findings,trendValidation');
+
+                    this.updateStats(products);
+
+                } catch (error) {
+                    console.error('❌ Failed to load stats:', error);
+                    this.showStatsError();
+                }
+            }
+
+            updateStats(products) {
+                const stats = this.calculateStats(products);
+
+                document.getElementById('totalProducts').textContent = stats.total;
+                document.getElementById('worthSellingProducts').textContent = stats.worthSelling;
+                document.getElementById('researchProducts').textContent = stats.inResearch;
+                document.getElementById('totalFindings').textContent = stats.totalFindings;
+            }
+
+            calculateStats(products) {
+                const stats = {
+                    total: products.length,
+                    worthSelling: 0,
+                    inResearch: 0,
+                    totalFindings: 0
+                };
+
+                products.forEach(product => {
+                    if (product.status === 'worth') stats.worthSelling++;
+                    if (product.status === 'research') stats.inResearch++;
+                    if (product.findings && Array.isArray(product.findings)) {
+                        stats.totalFindings += product.findings.length;
+                    }
+                });
+
+                return stats;
+            }
+
+            showStatsError() {
+                document.getElementById('totalProducts').textContent = 'Error';
+                document.getElementById('worthSellingProducts').textContent = 'Error';
+                document.getElementById('researchProducts').textContent = 'Error';
+                document.getElementById('totalFindings').textContent = 'Error';
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', async function () {
+            console.log('🚀 Dashboard Page Loaded');
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Initialize common components (header, footer, etc.)
+            const componentLoader = new ComponentLoader();
+            await componentLoader.initializeCommonComponents();
+
+            // Initialize the dashboard
+            new Dashboard();
+
+            console.log('✅ Dashboard initialized');
+        });
+    </script>
+</body>
+
+</html>

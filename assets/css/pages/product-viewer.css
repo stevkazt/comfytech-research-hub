@@ -1,0 +1,830 @@
+/* ==========================================================================
+   PRODUCT VIEWER STYLES
+   ========================================================================== */
+
+/* Product Grid Layout - Full width within page-container */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  width: 100%;
+}
+
+/* Product Card Component */
+.product-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 420px;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--primary-blue);
+  --card-shadow: var(--card-shadow-hover);
+}
+
+.product-card:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-card);
+}
+
+/* Status Tag */
+.product-card-status {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  z-index: 2;
+  padding: 4px var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+}
+
+.status-tag.status-worth-selling {
+  background: rgba(16, 185, 129, 0.9);
+  color: var(--white);
+}
+
+.status-tag.status-skip {
+  background: rgba(239, 68, 68, 0.9);
+  color: var(--white);
+}
+
+.status-tag.status-research {
+  background: rgba(245, 158, 11, 0.9);
+  color: var(--white);
+}
+
+.status-tag.status-new {
+  background: rgba(107, 114, 128, 0.9);
+  color: var(--white);
+}
+
+/* Image Container - Perfect square aspect ratio for consistency */
+.product-card-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* Creates a perfect square aspect ratio */
+  background: var(--gray-50);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.product-card-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: var(--transition-smooth);
+  border-radius: 0;
+}
+
+.product-card-image i[data-lucide="image-off"] {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+/* Card Content */
+.product-card-content {
+  padding: var(--spacing-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-height: 140px;
+}
+
+.product-card-id {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-card-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.6em;
+  max-height: 2.6em;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.product-card-price {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--accent-teal);
+  margin: var(--spacing-xs) 0;
+  min-height: 1.375rem;
+  display: flex;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.product-card-categories {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 1.25rem;
+  flex-grow: 1;
+}
+
+.product-card-footer {
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.product-card-date {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* Product Controls - Modern Responsive Layout */
+.product-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: flex-start;
+  padding: var(--spacing-lg);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  margin: 0 auto var(--spacing-lg) auto;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  max-width: 1400px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Control Sections - Logical Grouping */
+.controls-section {
+  display: flex;
+  min-width: 0; /* Allow flex items to shrink */
+}
+
+.search-section {
+  flex: 1 1 300px;
+  min-width: 280px;
+  margin-right: var(--spacing-md);
+}
+
+.filter-section {
+  flex: 1 1 320px;
+  min-width: 300px;
+  margin-right: var(--spacing-md);
+}
+
+.actions-section {
+  flex: 0 0 auto;
+  min-width: 200px;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-left: auto;
+}
+
+/* Search Group Styling */
+.search-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  width: 100%;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.search-type {
+  flex-shrink: 0;
+  width: 100px;
+}
+
+/* Filter Group Styling */
+.filter-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  width: 100%;
+  align-items: center;
+}
+
+.status-filter {
+  flex: 1;
+  min-width: 140px;
+}
+
+.sort-select {
+  flex: 1;
+  min-width: 160px;
+}
+
+/* Form Control Base Styles - Higher specificity to override base form styles */
+.product-controls .form-control,
+.product-controls input.form-control,
+.product-controls select.form-control {
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-md) !important;
+  font-size: var(--font-size-sm) !important;
+  background: var(--white) !important;
+  transition: var(--transition-fast);
+  outline: none;
+  height: 44px !important;
+  line-height: 1.4 !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  color: var(--text-primary) !important;
+  vertical-align: middle;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Select Styling - Force override with !important */
+.product-controls select.form-control {
+  cursor: pointer !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+  background-position: right var(--spacing-sm) center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.25em 1.25em !important;
+  padding-right: calc(var(--spacing-md) + 1.75em) !important;
+  /* Ensure consistent text color and alignment */
+  color: var(--text-primary) !important;
+  background-color: var(--white) !important;
+  height: 44px !important;
+  line-height: 1.4 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  /* Prevent text from being cut off */
+  overflow: visible !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+/* Browser-specific fixes for select elements */
+.product-controls select.form-control {
+  /* Standard property first, then browser prefixes */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Ensure consistent rendering across browsers */
+  background-clip: padding-box;
+}
+
+/* Safari-specific select fixes */
+@supports (-webkit-appearance: none) {
+  .product-controls select.form-control {
+    padding-top: calc(var(--spacing-sm) + 1px);
+    padding-bottom: calc(var(--spacing-sm) + 1px);
+  }
+}
+
+/* Firefox-specific select fixes */
+@-moz-document url-prefix() {
+  .product-controls select.form-control {
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    line-height: 1.6;
+  }
+}
+
+/* Input-specific styling */
+.product-controls input.form-control {
+  height: 44px;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Improve select option visibility */
+.product-controls select.form-control option {
+  background-color: var(--white);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+/* Handle selected option styling */
+.product-controls select.form-control option:checked {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+/* Focus States */
+.product-controls .form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+  z-index: 10;
+}
+
+.product-controls .form-control:hover {
+  border-color: var(--border-dark);
+}
+
+/* Button Styling */
+.product-controls .btn {
+  height: 44px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  justify-content: center;
+}
+
+.product-controls .btn-primary {
+  background: var(--color-primary);
+  color: var(--white);
+  border-color: var(--color-primary);
+}
+
+.product-controls .btn-primary:hover {
+  background: var(--color-primary-700);
+  border-color: var(--color-primary-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-controls .btn-secondary {
+  background: var(--white);
+  color: var(--color-neutral-600);
+  border-color: var(--border-medium);
+}
+
+.product-controls .btn-secondary:hover {
+  background: var(--color-neutral-50);
+  border-color: var(--border-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mobile Filter Toggle - Hidden by default */
+.mobile-filter-toggle {
+  display: none;
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+  color: var(--color-neutral-600);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  align-items: center;
+  gap: var(--spacing-xs);
+  z-index: 15;
+}
+
+/* Screen Reader Only Class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-secondary);
+  min-height: 300px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--gray-200);
+  border-top: 3px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-secondary);
+  min-height: 400px;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--gray-400);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-state h3 {
+  font-size: var(--font-size-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.empty-state p {
+  font-size: var(--font-size-base);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* Error State */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  text-align: center;
+  color: var(--error);
+  min-height: 300px;
+}
+
+/* Image Loading States */
+.product-card-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-50) 50%, var(--gray-100) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  z-index: 1;
+}
+
+.product-card-image.loaded::before {
+  display: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Grid Container */
+.product-grid-container {
+  min-height: 400px;
+  position: relative;
+}
+
+.grid-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+/* Tablet Breakpoint - 768px and below */
+@media (max-width: 768px) {
+  .product-controls {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+  
+  .controls-section {
+    width: 100%;
+    min-width: unset;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
+  .search-section,
+  .filter-section,
+  .actions-section {
+    flex: none;
+    width: 100%;
+  }
+  
+  .actions-section {
+    justify-content: center;
+    gap: var(--spacing-sm);
+    order: 1;
+  }
+  
+  .search-section {
+    order: 2;
+  }
+  
+  .filter-section {
+    order: 3;
+  }
+  
+  .actions-section .btn {
+    flex: 1;
+    max-width: 160px;
+    justify-content: center;
+  }
+  
+  /* Hide button text on tablets, keep icons */
+  .btn-text {
+    display: none;
+  }
+}
+
+/* Large Mobile - 600px and below */
+@media (max-width: 600px) {
+  .search-group {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .filter-group {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .search-input,
+  .search-type,
+  .status-filter,
+  .sort-select {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  /* Show button text again on smaller screens for clarity */
+  .btn-text {
+    display: inline;
+  }
+}
+
+/* Mobile Breakpoint - 480px and below */
+@media (max-width: 480px) {
+  .product-controls {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+  }
+  
+  /* Mobile filter toggle becomes visible */
+  .mobile-filter-toggle {
+    display: flex;
+    position: static;
+    margin-bottom: var(--spacing-sm);
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Initially hide filters on mobile */
+  .filter-section {
+    display: none;
+    width: 100%;
+    order: 4;
+  }
+  
+  /* Show filters when toggled (controlled by JavaScript) */
+  .filter-section.mobile-visible {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  .actions-section {
+    order: 2;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .search-section {
+    order: 3;
+  }
+  
+  .actions-section .btn {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: 40px;
+    width: 100%;
+    max-width: none;
+  }
+  
+  /* Ensure all form controls are full width on mobile */
+  .search-input,
+  .search-type,
+  .status-filter,
+  .sort-select {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Animation for mobile filter toggle */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   LOADING STATES AND ANIMATIONS
+   ========================================================================== */
+
+/* ==========================================================================
+   SELECT DROPDOWN ENHANCEMENTS
+   ========================================================================== */
+
+/* Improve select dropdown appearance across browsers */
+.product-controls select.form-control {
+  /* Ensure consistent text color */
+  color: var(--text-primary);
+  background-color: var(--white);
+}
+
+/* Style select options for better visibility */
+.product-controls select.form-control option {
+  background-color: var(--white);
+  color: var(--text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+/* Handle selected option styling */
+.product-controls select.form-control option:checked {
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+/* Improve focus outline for accessibility */
+.product-controls select.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+/* Fix for cross-browser select styling */
+.product-controls select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Ensure proper text truncation in narrow selects */
+.product-controls select.form-control {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Debug helper for text alignment - can be removed in production */
+/* 
+.product-controls select.form-control {
+  border: 2px solid red !important;
+  background-color: yellow !important;
+  color: black !important;
+}
+*/
+
+/* Additional fixes for text visibility */
+.product-controls .form-control:focus {
+  /* Ensure text remains visible when focused */
+  color: var(--text-primary);
+}
+
+.product-controls .form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   CRITICAL FIXES FOR SELECT HEIGHT ISSUE
+   Using maximum specificity to override any conflicting styles
+   ========================================================================== */
+
+/* Ultra-high specificity selector for select elements */
+div.product-controls div.controls-section select.form-control,
+div.product-controls select.form-control.search-type,
+div.product-controls select.form-control.status-filter,
+div.product-controls select.form-control.sort-select {
+  height: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  line-height: 1.4 !important;
+  padding: 10px 16px !important;
+  padding-right: 40px !important;
+  font-size: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  vertical-align: middle !important;
+  
+  /* Force text visibility */
+  color: var(--text-primary) !important;
+  background-color: var(--white) !important;
+  
+  /* Browser-specific resets */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  
+  /* Ensure proper background for dropdown arrow */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+  background-position: right 12px center !important;
+  background-repeat: no-repeat !important;
+  background-size: 20px 20px !important;
+}
+
+/* Force option styling */
+div.product-controls select.form-control option {
+  height: auto !important;
+  min-height: 32px !important;
+  line-height: 1.5 !important;
+  padding: 8px 12px !important;
+  background-color: var(--white) !important;
+  color: var(--text-primary) !important;
+  font-size: 14px !important;
+}

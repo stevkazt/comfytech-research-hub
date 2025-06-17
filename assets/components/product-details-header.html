@@ -1,0 +1,49 @@
+<!-- Product Details Header Component -->
+<!-- 
+FILE: product-details-header.html (22 lines)
+PURPOSE: Header section for product details page
+SECTIONS:
+1-22: Product header with back button, quick actions, and status selector
+-->
+<div class="product-header">
+    <div class="product-header-left">
+        <button id="backToProductsBtn" class="btn btn-secondary">
+            <i data-lucide="arrow-left"></i>
+            Back to Products
+        </button>
+        <div class="product-id-container">
+            <span class="product-id-label">Product ID:</span>
+            <span id="product-id" class="product-id">Loading...</span>
+        </div>
+    </div>
+
+    <div class="product-header-center">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button id="editProductBtn" class="btn btn-primary">
+                <i data-lucide="edit"></i>
+                Edit Product
+            </button>
+            <button id="generatePromptBtn" class="btn btn-secondary">
+                <i data-lucide="sparkles"></i>
+                Generate AI Prompt
+            </button>
+            <button id="deleteProductBtn" class="btn btn-outline btn-danger">
+                <i data-lucide="trash-2"></i>
+                Delete
+            </button>
+        </div>
+    </div>
+
+    <div class="product-header-right">
+        <div class="status-selector-container">
+            <label for="product-status" class="status-label">Status:</label>
+            <select id="product-status" class="status-select">
+                <option value="" selected>⚪ New</option>
+                <option value="research">🔍 Research</option>
+                <option value="worth">✅ Worth Selling</option>
+                <option value="skip">❌ Skip</option>
+            </select>
+        </div>
+    </div>
+</div>

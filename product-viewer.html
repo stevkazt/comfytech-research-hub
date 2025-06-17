@@ -1,0 +1,97 @@
+<!--
+FILE: product-viewer.html (75 lines)
+PURPOSE: Product browser page with modular components
+SECTIONS:
+1-15: HTML head and meta
+16-25: Mobile warning component
+26-35: Header component placeholder
+36-55: Main content sections (controls, grid)
+56-75: Scripts and initialization
+KEY FUNCTIONS:
+- Component loading and initialization
+- Product viewer functionality integration
+LAST UPDATED: 2025-06-16 — Converted to modular architecture
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Browser - Dropi Research</title>
+    <link rel="stylesheet" href="assets/css/main-modular.css">
+</head>
+
+<body>
+    <!-- Mobile Warning Component -->
+    <div id="mobile-warning-placeholder">
+        <!-- Mobile warning will be loaded here -->
+    </div>
+
+    <!-- Header Component -->
+    <div id="header-placeholder">
+        <!-- Header will be loaded here -->
+    </div>
+
+    <main class="page-container">
+        <div class="content-section">
+            <!-- Product Controls Component -->
+            <div id="product-controls-placeholder">
+                <!-- Product controls will be loaded here -->
+            </div>
+
+            <!-- Product Grid Component -->
+            <div id="product-grid-placeholder">
+                <!-- Product grid will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder">
+        <!-- Footer content will be loaded here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils/component-loader.js"></script>
+    <script src="services/path-service.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="assets/js/utils/api-client.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/product-viewer.js"></script>
+
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', async function () {
+            console.log('🚀 Product Viewer Page Loaded');
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Initialize component loader
+            const componentLoader = new ComponentLoader();
+
+            // Load all components
+            console.log('📦 Loading product viewer components...');
+            await Promise.all([
+                componentLoader.loadComponent('assets/components/mobile-warning.html', '#mobile-warning-placeholder'),
+                componentLoader.loadComponent('assets/components/product-controls.html', '#product-controls-placeholder'),
+                componentLoader.loadComponent('assets/components/product-grid.html', '#product-grid-placeholder'),
+                componentLoader.loadComponent('assets/components/footer.html', '#footer-placeholder')
+            ]);
+
+            // Initialize common components (header, notifications, etc.)
+            await componentLoader.initializeCommonComponents();
+
+            // Initialize the product viewer
+            initProductViewer();
+
+            console.log('✅ Product Viewer initialized');
+        });
+    </script>
+</body>
+
+</html>
+
+</html>

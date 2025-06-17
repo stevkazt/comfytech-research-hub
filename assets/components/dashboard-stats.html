@@ -1,0 +1,41 @@
+<!-- Dashboard Stats Component -->
+<!-- 
+FILE: dashboard-stats.html (32 lines)
+PURPOSE: Statistics cards for dashboard
+SECTIONS:
+1-32: Four stat cards with dynamic data
+-->
+<div
+    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-lg); margin-top: var(--spacing-lg);">
+    <div class="card">
+        <div class="card-body text-center">
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">📦</div>
+            <h3 id="totalProducts">Loading...</h3>
+            <p class="text-secondary">Total Products</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body text-center">
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">✅</div>
+            <h3 id="worthSellingProducts">Loading...</h3>
+            <p class="text-secondary">Worth Selling</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body text-center">
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">❓</div>
+            <h3 id="researchProducts">Loading...</h3>
+            <p class="text-secondary">In Research</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body text-center">
+            <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">📋</div>
+            <h3 id="totalFindings">Loading...</h3>
+            <p class="text-secondary">Research Findings</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Controls Debug - Dropi App</title>
+    <link rel="stylesheet" href="assets/css/main-modular.css">
+    <style>
+        body {
+            padding: 2rem;
+            background: var(--color-neutral-50);
+        }
+
+        .debug-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .debug-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+        }
+
+        .debug-title {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Force debug styling to check what's happening */
+        .debug-select {
+            border: 3px solid red !important;
+            background: yellow !important;
+            color: black !important;
+            font-weight: bold !important;
+        }
+
+        .styles-info {
+            background: var(--color-neutral-50);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="debug-container">
+        <h1>Product Controls Debug Page</h1>
+        <p>This page loads the exact same CSS as product-viewer.html to debug the select height issue.</p>
+
+        <div class="debug-section">
+            <h2 class="debug-title">1. Direct Product Controls Component</h2>
+            <div id="product-controls-container">
+                <!-- Product controls will be loaded here -->
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2 class="debug-title">2. Manual Recreation</h2>
+            <div class="product-controls">
+                <!-- Search Section -->
+                <div class="controls-section search-section">
+                    <div class="search-group">
+                        <label for="searchInput" class="sr-only">Search products</label>
+                        <input type="text" id="searchInput" class="form-control search-input"
+                            placeholder="Search products..." aria-label="Search products">
+                        <label for="searchType" class="sr-only">Search type</label>
+                        <select id="searchType" class="form-control search-type" aria-label="Search type">
+                            <option value="name">By Name</option>
+                            <option value="id">By ID</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Filter & Sort Section -->
+                <div class="controls-section filter-section">
+                    <div class="filter-group">
+                        <label for="statusFilter" class="sr-only">Filter by status</label>
+                        <select id="statusFilter" class="form-control status-filter debug-select"
+                            aria-label="Filter by status">
+                            <option value="all">All Status</option>
+                            <option value="worth">✅ Worth Selling</option>
+                            <option value="skip">❌ Skip</option>
+                            <option value="research">❓ In Research</option>
+                            <option value="new">⚪ New</option>
+                        </select>
+
+                        <label for="sortSelect" class="sr-only">Sort products</label>
+                        <select id="sortSelect" class="form-control sort-select debug-select"
+                            aria-label="Sort products">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="price-asc">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                            <option value="date-newest">Date Added (Newest)</option>
+                            <option value="date-oldest">Date Added (Oldest)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Section -->
+                <div class="controls-section actions-section">
+                    <button id="addProductBtn" class="btn btn-primary" aria-label="Add new product">
+                        <i data-lucide="plus" aria-hidden="true"></i>
+                        <span class="btn-text">Add Product</span>
+                    </button>
+
+                    <button id="refreshBtn" class="btn btn-secondary" aria-label="Refresh product list">
+                        <i data-lucide="refresh-cw" aria-hidden="true"></i>
+                        <span class="btn-text">Refresh</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h2 class="debug-title">3. Computed Styles Analysis</h2>
+            <p>Check the console for computed styles of the select elements.</p>
+            <div id="styles-output" class="styles-info">
+                Styles will be logged to console and displayed here...
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/utils/component-loader.js"></script>
+
+    <script>
+        async function loadDebug() {
+            try {
+                const componentLoader = new ComponentLoader();
+
+                // Load product controls into the demo container
+                await componentLoader.loadComponent(
+                    'product-controls',
+                    document.getElementById('product-controls-container')
+                );
+
+                // Initialize Lucide icons
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
+
+                console.log('✅ Product Controls loaded successfully');
+
+                // Analyze styles after load
+                setTimeout(analyzeStyles, 500);
+
+            } catch (error) {
+                console.error('❌ Failed to load debug:', error);
+                document.getElementById('product-controls-container').innerHTML =
+                    '<div class="error-message">Failed to load product controls component</div>';
+            }
+        }
+
+        function analyzeStyles() {
+            const selects = document.querySelectorAll('select.form-control');
+            const stylesOutput = document.getElementById('styles-output');
+            let output = '';
+
+            console.log('=== SELECT ELEMENTS ANALYSIS ===');
+
+            selects.forEach((select, index) => {
+                const styles = window.getComputedStyle(select);
+                const rect = select.getBoundingClientRect();
+
+                const info = {
+                    element: `Select ${index + 1} (${select.id || select.className})`,
+                    height: styles.height,
+                    lineHeight: styles.lineHeight,
+                    padding: styles.padding,
+                    paddingTop: styles.paddingTop,
+                    paddingBottom: styles.paddingBottom,
+                    fontSize: styles.fontSize,
+                    fontFamily: styles.fontFamily,
+                    display: styles.display,
+                    alignItems: styles.alignItems,
+                    boxSizing: styles.boxSizing,
+                    border: styles.border,
+                    actualHeight: `${rect.height}px`,
+                    actualWidth: `${rect.width}px`
+                };
+
+                console.log(info);
+                output += `${info.element}:\n`;
+                Object.entries(info).forEach(([key, value]) => {
+                    if (key !== 'element') {
+                        output += `  ${key}: ${value}\n`;
+                    }
+                });
+                output += '\n';
+            });
+
+            stylesOutput.textContent = output;
+        }
+
+        // Initialize debug when page loads
+        document.addEventListener('DOMContentLoaded', loadDebug);
+    </script>
+</body>
+
+</html>

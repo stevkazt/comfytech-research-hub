@@ -1,0 +1,74 @@
+<!-- Header Component Template -->
+<header class="header">
+    <div class="header-content">
+        <!-- Brand Section -->
+        <div class="brand-section">
+            <div class="logo">
+                <i data-lucide="search" class="logo-icon"></i>
+                <span class="logo-text">Dropi Research</span>
+            </div>
+            <div class="version-badge">v2.0</div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-page="dashboard">
+                        <i data-lucide="home" class="nav-icon"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="product-viewer.html" class="nav-link" data-page="products">
+                        <i data-lucide="package" class="nav-icon"></i>
+                        <span class="nav-text">Products</span>
+                        <span class="nav-count" id="productCount">0</span>
+                    </a>
+                </li>
+                <li class="nav-item" id="productDetailsNav" style="display: none;">
+                    <a href="#" class="nav-link active" data-page="product-details">
+                        <i data-lucide="file-text" class="nav-icon"></i>
+                        <span class="nav-text">Product Details</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Action Section -->
+        <div class="header-actions">
+            <!-- Status Indicator -->
+            <div class="status-indicator" id="statusIndicator">
+                <div class="status-dot online"></div>
+                <span class="status-text">Online</span>
+            </div>
+
+            <!-- Settings Menu -->
+            <div class="dropdown" id="settingsDropdown">
+                <button class="header-btn settings-btn" id="settingsToggle" title="Settings">
+                    <i data-lucide="settings"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item" id="refreshData">
+                        <i data-lucide="refresh-cw"></i>
+                        Refresh Data
+                    </a>
+                    <a href="#" class="dropdown-item" id="viewShortcuts">
+                        <i data-lucide="keyboard"></i>
+                        Keyboard Shortcuts
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item" id="aboutApp">
+                        <i data-lucide="info"></i>
+                        About
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar for Loading States -->
+    <div class="progress-bar" id="headerProgressBar">
+        <div class="progress-fill"></div>
+    </div>
+</header>

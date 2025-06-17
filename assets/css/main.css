@@ -1,0 +1,88 @@
+/* ==========================================================================
+   DROPI APP - MODULAR MAIN STYLESHEET
+   ========================================================================== */
+
+/* 
+MODULAR CSS ARCHITECTURE
+========================
+
+This main.css file imports all modular CSS components for the Dropi Research Application.
+The architecture follows component-based organization for better maintainability,
+performance, and AI understanding.
+
+IMPORT ORDER:
+1. Variables & Design System
+2. Base Styles & Resets
+3. Components (reusable UI elements)
+4. Pages (page-specific styles)
+5. Utils (utilities & helpers)
+
+FILE STRUCTURE:
+/assets/css/
+├── main.css (this file)
+├── variables.css
+├── base.css
+├── components/
+│   ├── buttons.css
+│   ├── cards.css
+│   ├── modals.css
+│   ├── forms.css
+│   └── header.css
+├── pages/
+│   ├── product-viewer.css
+│   ├── product-details.css
+│   └── dashboard.css
+└── utils/
+    ├── notifications.css
+    └── utilities.css
+
+BENEFITS:
+- ✅ AI-friendly modular structure
+- ✅ Better development experience
+- ✅ Improved maintainability
+- ✅ Faster debugging
+- ✅ Selective loading possible
+- ✅ Component isolation
+- ✅ Team collaboration friendly
+
+LAST UPDATED: June 16, 2025 - Transitioned to modular architecture
+*/
+
+/* ==========================================================================
+   1. DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+@import './variables.css';
+
+/* ==========================================================================
+   2. BASE STYLES & RESETS
+   ========================================================================== */
+@import './base.css';
+
+/* ==========================================================================
+   3. COMPONENTS (Reusable UI Elements)
+   ========================================================================== */
+@import './components/buttons.css';
+@import './components/cards.css';
+@import './components/modals.css';
+@import './components/forms.css';
+@import './components/header.css';
+
+/* ==========================================================================
+   4. PAGES (Page-specific styles)
+   ========================================================================== */
+@import './pages/product-viewer.css';
+@import './pages/product-details.css';
+@import './pages/dashboard.css';
+
+/* ==========================================================================
+   5. UTILITIES & HELPERS
+   ========================================================================== */
+@import './utils/notifications.css';
+@import './utils/utilities.css';
+
+/* ==========================================================================
+   GLOBAL OVERRIDES (Use sparingly)
+   ========================================================================== */
+
+/* Any global overrides or legacy compatibility styles go here.
+   Keep this section minimal to maintain modular architecture benefits. */

@@ -1,0 +1,29 @@
+<!-- Dashboard Welcome Section Component -->
+<!-- 
+FILE: dashboard-welcome.html (25 lines)
+PURPOSE: Welcome section for dashboard page
+SECTIONS:
+1-25: Welcome card with main actions
+-->
+<div class="card">
+    <div class="card-body text-center">
+        <h1 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">
+            <i data-lucide="zap" style="margin-right: var(--spacing-sm);"></i>
+            Welcome to Dropi Research
+        </h1>
+        <p style="font-size: var(--font-size-lg); color: var(--text-secondary); margin-bottom: var(--spacing-lg);">
+            Your comprehensive web application for advanced product research and market analysis
+        </p>
+
+        <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+            <a href="product-viewer.html" class="btn btn-primary btn-lg">
+                <i data-lucide="grid-3x3"></i>
+                Browse Products
+            </a>
+            <button id="addQuickProductBtn" class="btn btn-secondary btn-lg">
+                <i data-lucide="plus-circle"></i>
+                Add Product
+            </button>
+        </div>
+    </div>
+</div>
