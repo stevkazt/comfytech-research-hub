@@ -201,3 +201,68 @@
   opacity: 0;
   transform: translateY(-15px) scale(0.94);
 }
+
+/* ============================================== 
+   LEGACY NOTIFICATION SYSTEM FALLBACK
+   ============================================== */
+
+/* Fallback styles for any remaining .notification elements */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #2196f3;
+  min-width: 300px;
+  max-width: 400px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: auto;
+}
+
+.notification.notification-success {
+  border-left-color: #4caf50;
+}
+
+.notification.notification-error {
+  border-left-color: #f44336;
+}
+
+.notification.notification-warning {
+  border-left-color: #ff9800;
+}
+
+.notification.notification-info {
+  border-left-color: #2196f3;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Animation for legacy notifications */
+.notification {
+  animation: legacyNotificationSlideIn 0.3s ease-out forwards;
+}
+
+@keyframes legacyNotificationSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

@@ -1313,53 +1313,25 @@ Focus on actionable insights for dropshipping success.`;
     showSuccessMessage(message) {
         console.log('✅', message);
 
-        // Remove any existing notifications
-        const existing = document.querySelectorAll('.notification');
-        existing.forEach(n => n.remove());
-
-        const notification = document.createElement('div');
-        notification.className = 'notification notification-success';
-        notification.innerHTML = `
-            <i data-lucide="check-circle"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(notification);
-
-        // Auto-remove after 4 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.style.animation = 'notificationSlideOut 0.3s ease-in forwards';
-                setTimeout(() => notification.remove(), 300);
-            }
-        }, 4000);
-
-        lucide.createIcons();
+        // Use the global notification system if available
+        if (window.notificationSystem) {
+            window.notificationSystem.success(message);
+        } else {
+            // Fallback to console log if notification system isn't loaded
+            console.log('SUCCESS:', message);
+        }
     }
 
     showError(message) {
         console.error('❌', message);
 
-        // Remove any existing notifications
-        const existing = document.querySelectorAll('.notification');
-        existing.forEach(n => n.remove());
-
-        const notification = document.createElement('div');
-        notification.className = 'notification notification-error';
-        notification.innerHTML = `
-            <i data-lucide="alert-circle"></i>
-            <span>${message}</span>
-        `;
-        document.body.appendChild(notification);
-
-        // Auto-remove after 6 seconds for errors
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.style.animation = 'notificationSlideOut 0.3s ease-in forwards';
-                setTimeout(() => notification.remove(), 300);
-            }
-        }, 6000);
-
-        lucide.createIcons();
+        // Use the global notification system if available
+        if (window.notificationSystem) {
+            window.notificationSystem.error(message);
+        } else {
+            // Fallback to console log if notification system isn't loaded
+            console.error('ERROR:', message);
+        }
     }
 }
 

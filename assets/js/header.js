@@ -368,28 +368,13 @@ class HeaderComponent {
      * Show notification
      */
     showNotification(message, type = 'info') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i data-lucide="${this.getNotificationIcon(type)}"></i>
-                <span>${message}</span>
-            </div>
-        `;
-
-        // Add to page
-        document.body.appendChild(notification);
-
-        // Initialize Lucide icons if available
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+        // Use the global notification system if available
+        if (window.notificationSystem) {
+            window.notificationSystem.show(message, type);
+        } else {
+            // Fallback to console log if notification system isn't loaded
+            console.log(`${type.toUpperCase()}: ${message}`);
         }
-
-        // Auto remove after 3 seconds
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
     }
 
     /**
