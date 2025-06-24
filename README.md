@@ -1,10 +1,10 @@
-# 🔍 Dropi Research App
+# 🔍 Product Research Hub
 
-A lightweight, modular web application for advanced product research and market analysis tailored for e-commerce professionals and dropshipping businesses.
+A lightweight, modular web application for advanced product research and market analysis tailored for e-commerce professionals and online businesses.
 
 ## 🎯 Project Overview
 
-Dropi Research is a comprehensive tool that enables users to:
+Product Research Hub is a comprehensive tool that enables users to:
 - **Browse and manage products** with advanced filtering and search capabilities
 - **Conduct detailed market research** with integrated external platform searches
 - **Track findings and trends** from multiple marketplaces and social platforms
@@ -44,7 +44,7 @@ Dropi Research is a comprehensive tool that enables users to:
 The application follows a **component-based architecture** for maintainability and scalability:
 
 ```
-dropi-app/
+research-hub/
 ├── 📄 Core Pages
 │   ├── index.html              # Dashboard
 │   ├── product-viewer.html     # Product browser
@@ -78,7 +78,7 @@ dropi-app/
 - **Progressive enhancement** for accessibility
 
 #### Data Layer
-- **RESTful API integration** with https://dropi-research-api.onrender.com
+- **RESTful API integration** with configurable backend endpoints
 - **Local storage fallback** for offline functionality
 - **Data normalization** for consistent formatting
 - **Error handling** with user-friendly messages
@@ -124,7 +124,7 @@ php -S localhost:8000
 ```
 
 ### Configuration
-The app connects to the Dropi Research API by default. To use a different backend:
+The app connects to your configured research API by default. To use a different backend:
 
 1. Update the `baseURL` in `assets/js/utils/api-client.js`
 2. Ensure your API follows the same endpoint structure
@@ -275,7 +275,7 @@ open product-controls-debug.html
 
 ## 📄 License
 
-This project is part of the Dropi Research platform. See project documentation for usage guidelines.
+This is an open-source product research platform. See project documentation for usage guidelines.
 
 ## 🔄 Version History
 
@@ -284,4 +284,4 @@ This project is part of the Dropi Research platform. See project documentation f
 
 ---
 
-*Built with ❤️ for the dropshipping community*
+*Built with ❤️ for the e-commerce community*

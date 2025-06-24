@@ -1,5 +1,5 @@
 /**
- * Path Service - Centralized path management for Dropi Web App
+ * Path Service - Centralized path management for Product Research Hub
  * Provides consistent path resolution across all pages and components
  */
 

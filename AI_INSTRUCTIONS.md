@@ -1,4 +1,4 @@
-# 🤖 AI INSTRUCTIONS — Dropi Web Application
+# 🤖 AI INSTRUCTIONS — Product Research Hub
 
 AI assistant usage and codebase conventions for collaborating with Claude and similar models on this project.
 
@@ -6,7 +6,7 @@ AI assistant usage and codebase conventions for collaborating with Claude and si
 
 ## 🎯 Project Purpose
 
-Dropi Web App is a lightweight HTML/CSS/JS product research tool. All instructions here are designed to:
+Product Research Hub is a lightweight HTML/CSS/JS product research tool. All instructions here are designed to:
 - Help Claude assist with code reliably
 - Keep the project modular and maintainable
 - Reduce context confusion in AI tasks
@@ -161,7 +161,7 @@ All main HTML files now follow this pattern:
 ## ⚙️ API Integration
 
 - Use `window.apiClient` from `/assets/js/utils/api-client.js`
-- All endpoints live under `https://dropi-research-api.onrender.com`
+- All endpoints are configurable through environment settings
 - Store cache in `localStorage` for session durability
 - Implement loading/error UI feedback in all cases
 

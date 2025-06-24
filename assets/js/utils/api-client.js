@@ -1,6 +1,6 @@
 /**
  * FILE: api-client.js (114 lines)
- * PURPOSE: Centralized API communication for Dropi Research App
+ * PURPOSE: Centralized API communication for Product Research Hub
  * SECTIONS:
  * 1-30: Class initialization and configuration
  * 31-70: Core request handling and error management
@@ -92,7 +92,7 @@ class APIClient {
                 (product.categories ? product.categories.split(',').map(c => c.trim()) : []),
             images: Array.isArray(product.images) ? product.images :
                 (product.images ? [product.images] : []),
-            dropi_description: product.description || product.dropi_description || '',
+            description: product.description || product.research_description || '',
             status: product.status || 'new',
             findings: product.findings || [],
             trendValidation: product.trendValidation || []
@@ -107,7 +107,7 @@ class APIClient {
             categories: Array.isArray(product.categories) ? product.categories.join(', ') : (product.categories || ''),
             images: Array.isArray(product.images) && product.images.length ? product.images :
                 (product.image ? [product.image] : []),
-            description: product.dropi_description || product.description || '',
+            description: product.research_description || product.description || '',
             status: product.status || 'new',
             findings: product.findings || [],
             trendValidation: product.trendValidation || [],

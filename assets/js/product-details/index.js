@@ -1140,7 +1140,7 @@ ${remainingLines}</span>
             return "Error: No product data provided for analysis.";
         }
 
-        const { name, price, categories, dropi_description, findings } = product;
+        const { name, price, categories, research_description, findings } = product;
 
         // Format price safely
         let formattedPrice = 'N/A';
@@ -1199,11 +1199,11 @@ ${remainingLines}</span>
         }
 
         // Generate the enhanced AI prompt
-        const promptText = `Eres un experto en análisis de productos para dropshipping en el mercado colombiano.
+        const promptText = `Eres un experto en análisis de productos para e-commerce y ventas online.
 
-Actúas como asistente de investigación para la tienda **ComfyTech**, que vende exclusivamente a través de una tienda Shopify. ComfyTech busca productos con al menos **2× de margen de ganancia bruto** (precio de venta ≥ 2× precio del proveedor), aunque márgenes menores pueden considerarse si el producto tiene ventajas notables o alta viralidad.
+Actúas como asistente de investigación para una tienda online que busca productos con al menos **2× de margen de ganancia bruto** (precio de venta ≥ 2× precio del proveedor), aunque márgenes menores pueden considerarse si el producto tiene ventajas notables o alta viralidad.
 
-Tu tarea es analizar el siguiente producto y compararlo con las referencias encontradas en marketplaces (MercadoLibre, Amazon, etc). No recomiendes vender en esas plataformas; úsalas solo como referencia para definir una estrategia de posicionamiento en Shopify.
+Tu tarea es analizar el siguiente producto y compararlo con las referencias encontradas en marketplaces (MercadoLibre, Amazon, etc). Usa esta información para definir una estrategia de posicionamiento competitivo.
 
 INFORMACIÓN DEL PRODUCTO:
 - Nombre: ${name || 'Sin nombre'}
@@ -1211,7 +1211,7 @@ INFORMACIÓN DEL PRODUCTO:
 - Categoría: ${category}
 
 Descripción del proveedor:
-${dropi_description || '(sin descripción)'}
+${research_description || '(sin descripción)'}
 
 ANÁLISIS DE MERCADO:
 ${dataQualityNote}
@@ -1864,7 +1864,7 @@ NOTA: Si los datos son insuficientes (<3 findings), indica en la justificación 
         modal.innerHTML = `
             <div class="modal-dialog modal-lg">
                 <div class="modal-header">
-                    <h3>Análisis AI - ComfyTech</h3>
+                    <h3>Análisis AI - Product Research</h3>
                     <button type="button" class="modal-close-btn" onclick="this.closest('.modal').remove()">
                         <i data-lucide="x"></i>
                     </button>
@@ -2077,8 +2077,7 @@ NOTA: Si los datos son insuficientes (<3 findings), indica en la justificación 
         const link = document.createElement('a');
         link.href = '#';
         link.textContent = productId;
-        link.className = 'product-id-link';
-        link.title = 'Click to open product in Dropi dashboard';
+        link.className = 'product-id-link'; link.title = 'Click to open product in Dropi dashboard';
 
         // Add click handler to open Dropi product page
         link.addEventListener('click', async (e) => {
@@ -2107,7 +2106,7 @@ NOTA: Si los datos son insuficientes (<3 findings), indica en la justificación 
                 // Use the source_url if it's a Dropi URL
                 dropiUrl = this.currentProduct.source_url;
             } else {
-                // Construct Dropi dashboard URL (updated pattern)
+                // Construct Dropi dashboard URL
                 dropiUrl = `https://app.dropi.co/dashboard/product-details/${productId}/${slug}`;
             }
 

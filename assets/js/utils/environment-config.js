@@ -25,7 +25,7 @@ class EnvironmentConfig {
 
     loadConfig() {
         // Try to load from localStorage (for development)
-        const storedConfig = localStorage.getItem('dropi_env_config');
+        const storedConfig = localStorage.getItem('research_hub_config');
         if (storedConfig) {
             try {
                 const parsed = JSON.parse(storedConfig);
@@ -36,8 +36,8 @@ class EnvironmentConfig {
         }
 
         // Load from window object if available (set by build process)
-        if (window.DROPI_CONFIG) {
-            this.config = { ...this.config, ...window.DROPI_CONFIG };
+        if (window.RESEARCH_HUB_CONFIG) {
+            this.config = { ...this.config, ...window.RESEARCH_HUB_CONFIG };
         }
     }
 
@@ -52,7 +52,7 @@ class EnvironmentConfig {
 
     saveConfig() {
         try {
-            localStorage.setItem('dropi_env_config', JSON.stringify(this.config));
+            localStorage.setItem('research_hub_config', JSON.stringify(this.config));
         } catch (error) {
             console.warn('Failed to save environment config:', error);
         }
