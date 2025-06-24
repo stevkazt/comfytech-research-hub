@@ -441,7 +441,7 @@ class HeaderComponent {
         const aboutContent = `<div style="text-align: center;">
 <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; font-size: 16px; font-weight: 600;">
 <span style="font-size: 20px;">🔍</span>
-<span>Product Research Hub</span>
+<span>Comfytech Research Hub</span>
 </div>
 <p style="margin: 4px 0; color: #6b7280; font-weight: 500;">Version 2.0</p>
 <p style="margin: 8px 0; color: #4b5563; font-size: 14px;">Advanced product research and market analysis tool for e-commerce professionals.</p>
@@ -459,7 +459,7 @@ class HeaderComponent {
 
         await window.dialogSystem.showDialog({
             type: 'info',
-            title: 'About Product Research Hub',
+            title: 'About Comfytech Research Hub',
             message: aboutContent,
             buttons: [
                 { text: 'Close', action: 'ok', class: 'primary' }

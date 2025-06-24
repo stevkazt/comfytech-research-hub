@@ -1,10 +1,10 @@
-# 🔍 Product Research Hub
+# 🔍 Comfytech Research Hub
 
 A lightweight, modular web application for advanced product research and market analysis tailored for e-commerce professionals and online businesses.
 
 ## 🎯 Project Overview
 
-Product Research Hub is a comprehensive tool that enables users to:
+Comfytech Research Hub is a comprehensive tool that enables users to:
 - **Browse and manage products** with advanced filtering and search capabilities
 - **Conduct detailed market research** with integrated external platform searches
 - **Track findings and trends** from multiple marketplaces and social platforms

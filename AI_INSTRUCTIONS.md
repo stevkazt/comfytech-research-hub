@@ -1,4 +1,4 @@
-# 🤖 AI INSTRUCTIONS — Product Research Hub
+# 🤖 AI INSTRUCTIONS — Comfytech Research Hub
 
 AI assistant usage and codebase conventions for collaborating with Claude and similar models on this project.
 
@@ -6,7 +6,7 @@ AI assistant usage and codebase conventions for collaborating with Claude and si
 
 ## 🎯 Project Purpose
 
-Product Research Hub is a lightweight HTML/CSS/JS product research tool. All instructions here are designed to:
+Comfytech Research Hub is a lightweight HTML/CSS/JS product research tool. All instructions here are designed to:
 - Help Claude assist with code reliably
 - Keep the project modular and maintainable
 - Reduce context confusion in AI tasks

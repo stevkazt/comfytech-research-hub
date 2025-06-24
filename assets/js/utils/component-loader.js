@@ -74,7 +74,7 @@ class ComponentLoader {
                         <div class="brand-section">
                             <div class="logo">
                                 <i data-lucide="search" class="logo-icon"></i>
-                                <span class="logo-text">Product Research Hub</span>
+                                <span class="logo-text">Comfytech Research Hub</span>
                             </div>
                         </div>
                     </div>

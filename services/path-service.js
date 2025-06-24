@@ -1,5 +1,5 @@
 /**
- * Path Service - Centralized path management for Product Research Hub
+ * Path Service - Centralized path management for Comfytech Research Hub
  * Provides consistent path resolution across all pages and components
  */
 

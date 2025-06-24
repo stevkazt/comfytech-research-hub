@@ -1,6 +1,6 @@
 /**
  * FILE: api-client.js (114 lines)
- * PURPOSE: Centralized API communication for Product Research Hub
+ * PURPOSE: Centralized API communication for Comfytech Research Hub
  * SECTIONS:
  * 1-30: Class initialization and configuration
  * 31-70: Core request handling and error management
