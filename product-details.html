@@ -1,0 +1,666 @@
+<!--
+FILE: product-details.html (150 lines)
+PURPOSE: Product details page with modular components
+SECTIONS:
+1-15: HTML head and meta
+16-25: Mobile warning component
+26-35: Header component placeholder
+36-120: Main content sections (product header, details, research sections)
+121-150: Scripts and initialization
+KEY FUNCTIONS:
+- Component loading and initialization
+- Product details functionality integration
+LAST UPDATED: 2025-06-16 — Converted to modular architecture
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, initial-scale=1.0">
+    <title>Product Details - Comfytech Research Hub</title>
+    <link rel="stylesheet" href="assets/css/main-modular.css">
+</head>
+
+<body class="product-details-page">
+    <!-- Mobile Warning Component -->
+    <div id="mobile-warning-placeholder">
+        <!-- Mobile warning will be loaded here -->
+    </div>
+
+    <!-- Header Component -->
+    <div id="header-placeholder">
+        <!-- Header will be loaded here -->
+    </div>
+
+    <main class="page-container">
+        <div class="content-section">
+            <!-- Product Header Component -->
+            <div id="product-details-header-placeholder">
+                <!-- Product header will be loaded here -->
+            </div>
+
+            <div class="product-details-layout">
+                <!-- Row 1: Tools Section - Horizontal, Full Width -->
+                <div class="tools-section">
+                    <div class="tools-grid">
+                        <!-- Research Progress -->
+                        <div class="tool-group">
+                            <h4>Research Progress</h4>
+                            <div class="research-counters">
+                                <button class="counter-btn findings-counter" id="viewFindingsBtn">
+                                    <i data-lucide="clipboard-list"></i>
+                                    <span id="findings-count">0</span> Findings
+                                </button>
+                                <button class="counter-btn trends-counter" id="viewTrendsBtn">
+                                    <i data-lucide="trending-up"></i>
+                                    <span id="trends-count">0</span> Trends
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Market Research -->
+                        <div class="tool-group">
+                            <h4>Market Research</h4>
+                            <div class="tool-buttons">
+                                <button id="searchGoogleBtn" class="tool-btn">
+                                    <i data-lucide="search"></i>
+                                    <span>Google</span>
+                                </button>
+                                <button id="searchMLBtn" class="tool-btn">
+                                    <i data-lucide="shopping-cart"></i>
+                                    <span>MercadoLibre</span>
+                                </button>
+                                <button id="searchAmazonBtn" class="tool-btn">
+                                    <i data-lucide="package"></i>
+                                    <span>Amazon</span>
+                                </button>
+                                <button id="searchImageBtn" class="tool-btn">
+                                    <i data-lucide="camera"></i>
+                                    <span>Reverse Image</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Trend Analysis -->
+                        <div class="tool-group">
+                            <h4>Trend Analysis</h4>
+                            <div class="tool-buttons">
+                                <button id="searchTrendsBtn" class="tool-btn">
+                                    <i data-lucide="trending-up"></i>
+                                    <span>Google Trends</span>
+                                </button>
+                                <button id="searchTikTokBtn" class="tool-btn">
+                                    <i data-lucide="video"></i>
+                                    <span>TikTok Ads</span>
+                                </button>
+                                <button id="searchFacebookBtn" class="tool-btn">
+                                    <i data-lucide="facebook"></i>
+                                    <span>Facebook Ads</span>
+                                </button>
+                                <button id="searchInstagramBtn" class="tool-btn">
+                                    <i data-lucide="instagram"></i>
+                                    <span>Instagram</span>
+                                </button>
+                                <button id="searchYouTubeBtn" class="tool-btn">
+                                    <i data-lucide="youtube"></i>
+                                    <span>YouTube</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Product Images (Left) and AI Findings (Right) -->
+                <div class="content-row">
+                    <!-- Product Images Section -->
+                    <div class="product-images-section">
+                        <div class="main-image-container">
+                            <img id="main-image" class="main-image" src="" alt="Product Main Image"
+                                style="display: none;">
+                            <div id="image-placeholder" class="image-placeholder">
+                                <i data-lucide="image"></i>
+                                <span>No images available</span>
+                            </div>
+                        </div>
+                        <div id="image-thumbnails" class="image-thumbnails">
+                            <!-- Thumbnail images will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- AI Research Findings -->
+                    <div id="aiFindingsOutput">
+                        <div class="ai-header">
+                            <h3>🧠 AI Research Findings</h3>
+                            <button id="generatePromptBtn" class="btn btn-secondary btn-sm">
+                                <i data-lucide="brain-circuit"></i>
+                                Generate Analysis
+                            </button>
+                        </div>
+                        <div id="aiFindingsContent">
+                            <!-- Default AI Analysis Layout Structure -->
+                            <div class="ai-structured-result" id="aiAnalysisContainer">
+                                <!-- Header Section -->
+                                <div class="result-header-compact">
+                                    <div class="result-title">
+                                        <h4 id="analysisTitle">🧠 Análisis AI</h4>
+                                        <span id="recommendationBadge" class="badge badge-secondary"
+                                            style="display: none;">
+                                            Pendiente
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Metrics Section -->
+                                <div class="result-metrics-compact">
+                                    <div class="metric-item">
+                                        <span class="metric-label">Competencia:</span>
+                                        <span id="competitionBadge" class="badge badge-secondary">-</span>
+                                    </div>
+
+                                    <div class="metric-item">
+                                        <span class="metric-label">Margen:</span>
+                                        <span id="marginValue" class="metric-value">-</span>
+                                        <span id="marginTargetBadge" class="badge badge-secondary"
+                                            style="display: none;">
+                                            Evaluando
+                                        </span>
+                                    </div>
+
+                                    <div class="metric-item">
+                                        <span class="metric-label">Datos:</span>
+                                        <span id="findingsCount" class="metric-value">0</span>
+                                        <span class="metric-label-small">findings</span>
+                                        <span id="findingsQualityBadge" class="badge badge-secondary"
+                                            style="display: none;">
+                                            Suficiente
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Content Sections -->
+                                <div class="result-content">
+                                    <!-- Justification Section -->
+                                    <div class="result-section-compact">
+                                        <h6>📝 Justificación</h6>
+                                        <p id="justificationText" class="result-text">
+                                            Haz clic en "Generate Analysis" para obtener un análisis detallado del
+                                            potencial de mercado de este producto.
+                                        </p>
+                                    </div>
+
+                                    <!-- Marketing Suggestions Section -->
+                                    <div class="result-section-compact">
+                                        <h6>🎯 Sugerencias de Marketing</h6>
+                                        <ul id="marketingSuggestions" class="marketing-list-compact">
+                                            <li>Análisis en progreso...</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Target Audience Section -->
+                                    <div class="result-section-compact">
+                                        <h6>👥 Público Objetivo</h6>
+                                        <div id="targetAudience" class="audience-tags-compact">
+                                            <span class="audience-tag-compact">Análisis pendiente</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fallback Placeholder (shown when no analysis) -->
+                            <div class="ai-placeholder" id="aiPlaceholder">
+                                <div class="ai-placeholder-icon">
+                                    <i data-lucide="brain-circuit"></i>
+                                </div>
+                                <p class="ai-placeholder-title">No AI Analysis Yet</p>
+                                <p class="ai-placeholder-description">
+                                    Click "Generate Analysis" to get AI-powered insights about this product's market
+                                    potential, competition, and trends.
+                                </p>
+                            </div>
+
+                            <!-- Loading State -->
+                            <div class="ai-loading" id="aiLoadingState" style="display: none;">
+                                <span>Analizando producto con IA...</span>
+                            </div>
+
+                            <!-- Error State -->
+                            <div class="ai-structured-result" id="aiErrorState" style="display: none;">
+                                <div class="result-header-compact">
+                                    <div class="result-title">
+                                        <h4>⚠️ Error en el Análisis</h4>
+                                        <span class="badge badge-danger">Error</span>
+                                    </div>
+                                </div>
+
+                                <div class="ai-json-fallback">
+                                    <span id="errorMessage">Ha ocurrido un error durante el análisis.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3: Product Title Section - Full Width -->
+                <div class="product-title-section">
+                    <h4 id="product-title">Loading Product...</h4>
+                    <div class="product-price-info">
+                        <span class="current-price" id="product-price">Loading...</span>
+                        <div class="price-suggestions">
+                            <span class="price-label">Suggested:</span>
+                            <span id="price-high" class="price-high">-</span>
+                            <span class="price-separator">|</span>
+                            <span id="price-standard" class="price-standard">-</span>
+                            <span class="price-separator">|</span>
+                            <span id="price-low" class="price-low">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden: Full Research Lists (for modals) -->
+            <div id="findings-list" class="hidden">
+                <!-- Research findings will be loaded here -->
+            </div>
+            <div id="trends-list" class="hidden">
+                <!-- Trend validations will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <div class="image-modal-content">
+            <img id="modalImage" src="" alt="Product Image">
+            <div class="image-modal-controls">
+                <button id="closeImageModal" class="image-modal-close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <button id="prevImageBtn" class="image-modal-nav prev">
+                <i data-lucide="chevron-left"></i>
+            </button>
+            <button id="nextImageBtn" class="image-modal-nav next">
+                <i data-lucide="chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Research Findings Modal -->
+    <div id="findingsModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Research Finding</h3>
+                <button type="button" class="modal-close-btn" onclick="productDetails.closeFindingsModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="findingsForm" class="finding-form">
+                    <!-- Basic Product Information -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">🏪 Basic Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Store/Platform</label>
+                                <input type="text" name="store" class="form-control"
+                                    placeholder="Amazon, MercadoLibre, etc.">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Price</label>
+                                <input type="text" name="price" class="form-control" placeholder="$29.99">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Match Quality</label>
+                                <select name="match" class="form-control">
+                                    <option value="">Select match quality...</option>
+                                    <option value="Exact Match">🎯 Exact Match</option>
+                                    <option value="Similar">🔄 Similar</option>
+                                    <option value="Different">❌ Different</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Stock Status</label>
+                                <select name="stock" class="form-control">
+                                    <option value="">Select stock status...</option>
+                                    <option value="In Stock">📦 In Stock</option>
+                                    <option value="Out of Stock">❌ Out of Stock</option>
+                                    <option value="Limited">⚠️ Limited</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Product Name Variant</label>
+                            <input type="text" name="variant" class="form-control"
+                                placeholder="Product variation name...">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Product Link</label>
+                            <input type="url" name="link" class="form-control" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <!-- Reviews & Rating -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">⭐ Reviews & Rating</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Rating (1-5)</label>
+                                <input type="text" name="rating" class="form-control" placeholder="4.5">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Review Count</label>
+                                <input type="text" name="review_count" class="form-control" placeholder="123 reviews">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping & Location -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">🚚 Shipping & Location</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Origin/Country</label>
+                                <select name="origin" class="form-control">
+                                    <option value="">Select origin...</option>
+                                    <option value="China">🇨🇳 China</option>
+                                    <option value="USA">🇺🇸 USA</option>
+                                    <option value="Local">🏠 Local</option>
+                                    <option value="Other">🌍 Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Delivery Time</label>
+                                <input type="text" name="deliveryTime" class="form-control"
+                                    placeholder="2-5 business days">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Shipping Cost</label>
+                            <input type="text" name="shippingCost" class="form-control" placeholder="$5.99 or Free">
+                        </div>
+                    </div>
+
+                    <!-- Seller & Platform Details -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">🏬 Seller & Platform</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Seller Type</label>
+                                <select name="sellerType" class="form-control">
+                                    <option value="">Select seller type...</option>
+                                    <option value="Official Store">🏪 Official Store</option>
+                                    <option value="Third-party">👤 Third-party</option>
+                                    <option value="Unknown">❓ Unknown</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Platform Type</label>
+                                <select name="listingType" class="form-control">
+                                    <option value="">Select platform...</option>
+                                    <option value="Amazon">📦 Amazon</option>
+                                    <option value="Shopify">🛍️ Shopify</option>
+                                    <option value="eBay">🔨 eBay</option>
+                                    <option value="Mercado Libre">🛒 Mercado Libre</option>
+                                    <option value="Exito">🏬 Éxito</option>
+                                    <option value="Falabella">🏢 Falabella</option>
+                                    <option value="Temu">🌟 Temu</option>
+                                    <option value="TikTok">📱 TikTok</option>
+                                    <option value="Facebook">👥 Facebook</option>
+                                    <option value="Other">🔍 Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Product Badges</label>
+                            <select name="badges" class="form-control">
+                                <option value="">Select badges...</option>
+                                <option value="Bestseller">🏆 Bestseller</option>
+                                <option value="Free returns">↩️ Free returns</option>
+                                <option value="Fast shipping">🚀 Fast shipping</option>
+                                <option value="Prime eligible">⭐ Prime eligible</option>
+                                <option value="Choice">✅ Amazon's Choice</option>
+                                <option value="New arrival">🆕 New arrival</option>
+                                <option value="None">⭕ None</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Image Quality Assessment -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">📸 Image Analysis</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Image Quality</label>
+                                <select name="imageQuality" class="form-control">
+                                    <option value="">Select quality...</option>
+                                    <option value="High">🖼️ High Quality</option>
+                                    <option value="Medium">📷 Medium Quality</option>
+                                    <option value="Low">📸 Low Quality</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Image Match</label>
+                                <select name="imageMatch" class="form-control">
+                                    <option value="">Select match type...</option>
+                                    <option value="Same">📸 Same Images</option>
+                                    <option value="Original">🆕 Original Images</option>
+                                    <option value="Similar">🔄 Similar Images</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">📝 Additional Notes</h4>
+                        <div class="form-group full-width">
+                            <label class="form-label">Observations & Comments</label>
+                            <textarea name="notes" class="form-control" rows="4"
+                                placeholder="Add any additional observations, competitor analysis, quality notes, or other relevant details..."></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    onclick="productDetails.closeFindingsModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="productDetails.saveFinding()">Save
+                    Finding</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trend Validation Modal -->
+    <div id="trendModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Trend Analysis</h3>
+                <button type="button" class="modal-close-btn" onclick="productDetails.closeTrendModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="trendForm" class="trend-form">
+                    <div class="form-group">
+                        <label class="form-label">Trend Source</label>
+                        <select name="platform" class="form-control">
+                            <option value="">Select source...</option>
+                            <option value="Google Trends">📈 Google Trends</option>
+                            <option value="Amazon Best Sellers">🏆 Amazon Best Sellers</option>
+                            <option value="TikTok">📱 TikTok</option>
+                            <option value="Instagram">📷 Instagram</option>
+                            <option value="YouTube">📺 YouTube</option>
+                            <option value="Pinterest">📌 Pinterest</option>
+                            <option value="Facebook">👥 Facebook</option>
+                            <option value="Reddit">💬 Reddit</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Trend Score</label>
+                        <select name="trend_score" class="form-control">
+                            <option value="">Select trend status...</option>
+                            <option value="Rising">🚀 Rising</option>
+                            <option value="Stable">📊 Stable</option>
+                            <option value="Declining">📉 Declining</option>
+                            <option value="Seasonal">🌱 Seasonal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Search Volume</label>
+                        <select name="search_volume" class="form-control">
+                            <option value="">Select volume...</option>
+                            <option value="High">🔥 High (10K+/month)</option>
+                            <option value="Medium">⚡ Medium (1K-10K/month)</option>
+                            <option value="Low">🔸 Low (<1K /month)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Competition</label>
+                        <select name="competition" class="form-control">
+                            <option value="">Select competition level...</option>
+                            <option value="High">🔴 High</option>
+                            <option value="Medium">🟡 Medium</option>
+                            <option value="Low">🟢 Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Target Audience</label>
+                        <input type="text" name="target_audience" class="form-control"
+                            placeholder="Young adults, Parents, etc.">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Keywords</label>
+                        <input type="text" name="keywords" class="form-control"
+                            placeholder="Related keywords, hashtags...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Research Link</label>
+                        <input type="url" name="research_link" class="form-control" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea name="notes" class="form-control" rows="3"
+                            placeholder="Trend observations, insights..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    onclick="productDetails.closeTrendModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="productDetails.saveTrend()">Save Trend</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Findings List Modal -->
+    <div id="findingsListModal" class="modal modal-lg">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">📋 Research Findings</h3>
+                <button type="button" class="modal-close-btn" onclick="productDetails.closeFindingsListModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="findingsListContent" class="findings-list-content">
+                    <!-- Findings list will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                    onclick="productDetails.showAddFindingModal(); productDetails.closeFindingsListModal();">
+                    <i data-lucide="plus"></i>
+                    Add New Finding
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trends List Modal -->
+    <div id="trendsListModal" class="modal modal-lg">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">📈 Trend Analysis</h3>
+                <button type="button" class="modal-close-btn" onclick="productDetails.closeTrendsListModal()">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="trendsListContent" class="trends-list-content">
+                    <!-- Trends list will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                    onclick="productDetails.showAddTrendModal(); productDetails.closeTrendsListModal();">
+                    <i data-lucide="plus"></i>
+                    Add New Trend
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder">
+        <!-- Footer content will be loaded here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils/component-loader.js"></script>
+    <script src="services/path-service.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="assets/js/utils/environment-config.js"></script>
+    <script src="assets/js/utils/api-client.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/product-details/index.js"></script>
+
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', async function () {
+            console.log('🚀 Product Details Page Loaded');
+
+            // Set OpenAI API key from environment (development only)
+            if (window.environmentConfig?.isDevelopment()) {
+                // TODO: Set up proper environment variable handling
+                // const openaiKey = process.env.OPENAI_API_KEY || '';
+                // window.setOpenAIKey(openaiKey);
+                console.log('🔑 OpenAI API key should be configured via environment variables');
+            }
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Initialize component loader
+            const componentLoader = new ComponentLoader();
+
+            // Load components
+            console.log('📦 Loading product details components...');
+            await Promise.all([
+                componentLoader.loadComponent('assets/components/mobile-warning.html', '#mobile-warning-placeholder'),
+                componentLoader.loadComponent('assets/components/product-details-header.html', '#product-details-header-placeholder'),
+                componentLoader.loadComponent('assets/components/footer.html', '#footer-placeholder')
+            ]);
+
+            // Initialize common components (header, notifications, etc.)
+            await componentLoader.initializeCommonComponents();
+
+            // Initialize the product details
+            initProductDetails();
+
+            console.log('✅ Product Details initialized');
+        });
+    </script>
+</body>
+
+</html>
