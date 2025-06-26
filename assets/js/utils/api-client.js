@@ -33,12 +33,35 @@ class APIClient {
 
         try {
             console.log(`🌐 API Request: ${config.method || 'GET'} ${url}`);
+            
+            // Log request body for debugging
+            if (config.body) {
+                console.log('📤 Request Body:', JSON.parse(config.body));
+            }
+            
             const response = await fetch(url, config);
 
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error(`❌ API Error ${response.status}:`, errorText);
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                let errorData;
+                
+                try {
+                    errorData = JSON.parse(errorText);
+                } catch (e) {
+                    errorData = { error: errorText };
+                }
+                
+                console.error(`❌ API Error ${response.status}:`, errorData);
+                
+                // Provide more specific error messages
+                if (response.status === 400 && errorData.details) {
+                    const validationErrors = errorData.details.map(d => `${d.field}: ${d.message}`).join(', ');
+                    throw new Error(`Validation Error: ${validationErrors}`);
+                } else if (response.status === 500) {
+                    throw new Error(`Server Error: ${errorData.error || 'Internal server error'}`);
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${errorData.error || response.statusText}`);
+                }
             }
 
             const data = await response.json();
@@ -70,8 +93,25 @@ class APIClient {
     }
 
     async updateProduct(id, productData) {
+        // Validate required fields before normalization
+        if (!id || !productData) {
+            throw new Error('Product ID and data are required');
+        }
+
+        if (!productData.name || productData.name.trim() === '') {
+            throw new Error('Product name is required');
+        }
+
         // Normalize product data for API
         const normalizedData = this.normalizeProductForAPI(productData);
+        
+        // Validate normalized data
+        if (!normalizedData.description) {
+            normalizedData.description = productData.name; // Use name as fallback description
+        }
+
+        console.log('🔧 Updating product with normalized data:', normalizedData);
+        
         return this.request(`/products/${id}`, {
             method: 'PUT',
             body: JSON.stringify(normalizedData)
@@ -86,34 +126,99 @@ class APIClient {
 
     // Data normalization methods
     normalizeProductForAPI(product) {
-        return {
+        // Parse price to number, removing any currency symbols
+        let price = 0;
+        if (product.price) {
+            if (typeof product.price === 'string') {
+                // Remove currency symbols and parse to float
+                const priceStr = product.price.replace(/[$,]/g, '');
+                price = parseFloat(priceStr) || 0;
+            } else if (typeof product.price === 'number') {
+                price = product.price;
+            }
+        }
+
+        // Ensure required fields are present
+        const normalizedData = {
             id: parseInt(product.id),
-            name: product.name || '',
-            price: product.price || '',
+            name: product.name || 'Untitled Product',
+            price: price,
+            description: product.description || product.research_description || '',
             categories: Array.isArray(product.categories) ? product.categories :
                 (product.categories ? product.categories.split(',').map(c => c.trim()) : []),
             images: Array.isArray(product.images) ? product.images :
                 (product.images ? [product.images] : []),
-            description: product.description || product.research_description || '',
-            status: product.status || 'new',
-            findings: product.findings || [],
-            trendValidation: product.trendValidation || []
+            status: product.status || 'unknown'
         };
+
+        // Add optional fields if they exist
+        if (product.brand) normalizedData.brand = product.brand;
+        if (product.sku) normalizedData.sku = product.sku;
+        if (product.stock !== undefined) normalizedData.stock = parseInt(product.stock) || 0;
+        if (product.tags && Array.isArray(product.tags)) normalizedData.tags = product.tags;
+        if (product.metadata) normalizedData.metadata = product.metadata;
+        if (product.dimensions) normalizedData.dimensions = product.dimensions;
+
+        // Store custom fields in metadata to preserve them (serialize complex objects as JSON strings)
+        if (product.findings || product.trendValidation) {
+            normalizedData.metadata = normalizedData.metadata || {};
+            if (product.findings) {
+                normalizedData.metadata.findings = JSON.stringify(product.findings);
+            }
+            if (product.trendValidation) {
+                normalizedData.metadata.trendValidation = JSON.stringify(product.trendValidation);
+            }
+        }
+
+        return normalizedData;
     }
 
     normalizeProductFromAPI(product) {
+        // Extract custom fields from metadata and deserialize if they exist
+        let findings = [];
+        let trendValidation = [];
+        
+        if (product.metadata) {
+            if (product.metadata.findings) {
+                try {
+                    findings = JSON.parse(product.metadata.findings);
+                } catch (e) {
+                    console.warn('Failed to parse findings from metadata:', e);
+                    findings = [];
+                }
+            }
+            if (product.metadata.trendValidation) {
+                try {
+                    trendValidation = JSON.parse(product.metadata.trendValidation);
+                } catch (e) {
+                    console.warn('Failed to parse trendValidation from metadata:', e);
+                    trendValidation = [];
+                }
+            }
+        }
+
+        // Fallback to direct properties if they exist
+        findings = findings.length ? findings : (product.findings || []);
+        trendValidation = trendValidation.length ? trendValidation : (product.trendValidation || []);
+
         return {
             id: product.id,
             name: product.name || 'Untitled Product',
-            price: product.price || 'N/A',
+            price: product.price || 0,
             categories: Array.isArray(product.categories) ? product.categories.join(', ') : (product.categories || ''),
             images: Array.isArray(product.images) && product.images.length ? product.images :
                 (product.image ? [product.image] : []),
             description: product.research_description || product.description || '',
-            status: product.status || 'new',
-            findings: product.findings || [],
-            trendValidation: product.trendValidation || [],
-            scrapedAt: product.scrapedAt || new Date().toISOString()
+            status: product.status || 'unknown',
+            brand: product.brand || '',
+            sku: product.sku || '',
+            stock: product.stock || 0,
+            tags: product.tags || [],
+            metadata: product.metadata || {},
+            dimensions: product.dimensions || {},
+            findings: findings,
+            trendValidation: trendValidation,
+            scrapedAt: product.scrapedAt || product.created_at || new Date().toISOString()
         };
     }
 }
