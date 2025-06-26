@@ -1268,7 +1268,7 @@ NOTA: Si los datos son insuficientes (<3 findings), indica en la justificación 
     async sendPromptToOpenAI(prompt) {
         // WARNING: This functionality should be delegated to the external API
         // for security reasons. API keys should not be exposed in frontend code.
-        // TODO: Move this to the backend API at https://dropi-research-api.onrender.com
+        // TODO: Move this to the backend API at https://comfytech-research-api.onrender.com
 
         const apiKey = window.environmentConfig?.getOpenAIKey();
         if (!apiKey) {

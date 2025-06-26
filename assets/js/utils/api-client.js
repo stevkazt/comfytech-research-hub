@@ -15,10 +15,12 @@
  */
 
 class APIClient {
-    constructor(baseURL = 'https://dropi-research-api.onrender.com') {
+    constructor(baseURL = 'https://comfytech-research-api.onrender.com') {
         this.baseURL = baseURL;
         this.defaultHeaders = {
             'Content-Type': 'application/json',
+            'X-Client-App': 'comfytech-research-web',
+            'X-Client-Version': '1.0.0'
         };
     }
 

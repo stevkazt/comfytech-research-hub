@@ -39,7 +39,7 @@
 
         // API base URL
         api: function (endpoint = '') {
-            return 'https://dropi-research-api.onrender.com' + (endpoint ? '/' + endpoint : '');
+            return 'https://comfytech-research-api.onrender.com' + (endpoint ? '/' + endpoint : '');
         },
 
         // Utility to get base path

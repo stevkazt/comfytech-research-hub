@@ -131,7 +131,13 @@ class ProductViewer {
             this.showLoadingState();
             console.log('🔄 Loading products from API...');
 
-            const response = await axios.get('https://dropi-research-api.onrender.com/products?fields=id,name,price,categories,images,status');
+            const response = await axios.get('https://comfytech-research-api.onrender.com/products?fields=id,name,price,categories,images,status', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Client-App': 'comfytech-research-web',
+                    'X-Client-Version': '1.0.0'
+                }
+            });
             const products = response.data;
 
             console.log('✅ Loaded', products.length, 'products');

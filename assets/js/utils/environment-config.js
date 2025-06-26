@@ -10,7 +10,7 @@ class EnvironmentConfig {
     constructor() {
         this.config = {
             // Default configuration
-            API_BASE_URL: 'https://dropi-research-api.onrender.com',
+            API_BASE_URL: 'https://comfytech-research-api.onrender.com',
             NODE_ENV: 'development',
             DEBUG: true,
 

@@ -233,7 +233,13 @@ class HeaderComponent {
     async loadProductCount() {
         try {
             if (typeof axios !== 'undefined') {
-                const response = await axios.get('https://dropi-research-api.onrender.com/products?fields=id');
+                const response = await axios.get('https://comfytech-research-api.onrender.com/products?fields=id', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Client-App': 'comfytech-research-web',
+                        'X-Client-Version': '1.0.0'
+                    }
+                });
                 this.productCount = response.data.length;
             } else {
                 // Fallback for environments without axios
