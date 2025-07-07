@@ -33,26 +33,26 @@ class APIClient {
 
         try {
             console.log(`🌐 API Request: ${config.method || 'GET'} ${url}`);
-            
+
             // Log request body for debugging
             if (config.body) {
                 console.log('📤 Request Body:', JSON.parse(config.body));
             }
-            
+
             const response = await fetch(url, config);
 
             if (!response.ok) {
                 const errorText = await response.text();
                 let errorData;
-                
+
                 try {
                     errorData = JSON.parse(errorText);
                 } catch (e) {
                     errorData = { error: errorText };
                 }
-                
+
                 console.error(`❌ API Error ${response.status}:`, errorData);
-                
+
                 // Provide more specific error messages
                 if (response.status === 400 && errorData.details) {
                     const validationErrors = errorData.details.map(d => `${d.field}: ${d.message}`).join(', ');
@@ -76,11 +76,24 @@ class APIClient {
     // Product methods
     async getProducts(fields) {
         const query = fields ? `?fields=${fields}` : '';
-        return this.request(`/products${query}`);
+        const response = await this.request(`/products${query}`);
+
+        // Normalize each product in the response
+        if (Array.isArray(response)) {
+            return response.map(product => this.normalizeProductFromAPI(product));
+        } else if (response.products && Array.isArray(response.products)) {
+            return {
+                ...response,
+                products: response.products.map(product => this.normalizeProductFromAPI(product))
+            };
+        }
+
+        return response;
     }
 
     async getProduct(id) {
-        return this.request(`/products/${id}`);
+        const product = await this.request(`/products/${id}`);
+        return this.normalizeProductFromAPI(product);
     }
 
     async createProduct(productData) {
@@ -104,14 +117,14 @@ class APIClient {
 
         // Normalize product data for API
         const normalizedData = this.normalizeProductForAPI(productData);
-        
+
         // Validate normalized data
         if (!normalizedData.description) {
             normalizedData.description = productData.name; // Use name as fallback description
         }
 
         console.log('🔧 Updating product with normalized data:', normalizedData);
-        
+
         return this.request(`/products/${id}`, {
             method: 'PUT',
             body: JSON.stringify(normalizedData)
@@ -177,7 +190,7 @@ class APIClient {
         // Extract custom fields from metadata and deserialize if they exist
         let findings = [];
         let trendValidation = [];
-        
+
         if (product.metadata) {
             if (product.metadata.findings) {
                 try {
